@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220825034809_fixModel")]
+    partial class fixModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,6 +39,7 @@ namespace MyProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdateId")
@@ -91,14 +94,8 @@ namespace MyProject.Migrations
                     b.Property<string>("Section")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShareDenominator")
+                    b.Property<int>("Share")
                         .HasColumnType("int");
-
-                    b.Property<int>("ShareNumerator")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subsection")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdateId")
                         .HasColumnType("nvarchar(max)");

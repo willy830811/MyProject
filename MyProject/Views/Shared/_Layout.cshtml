@@ -22,11 +22,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Houses" asp-action="Index">House</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Houses" asp-action="Index">客戶資料庫</a>
+                        </li>
+@*                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="XXX" asp-action="Index">人事管理</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Departments" asp-action="Index">部門管理</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

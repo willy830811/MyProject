@@ -1,4 +1,5 @@
 ﻿@model MyProject.Models.House
+@using MyProject.Models.Enum
 
 @{
     ViewData["Title"] = "Create";
@@ -28,13 +29,18 @@
                 <span asp-validation-for="Section" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Subsection" class="control-label"></label>
+                <input asp-for="Subsection" class="form-control" />
+                <span asp-validation-for="Subsection" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Number" class="control-label"></label>
                 <input asp-for="Number" class="form-control" />
                 <span asp-validation-for="Number" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RegisterReason" class="control-label"></label>
-                <input asp-for="RegisterReason" class="form-control" />
+                <select asp-for="RegisterReason" asp-items="Html.GetEnumSelectList<RegisterReason>()" class="form-control"></select>
                 <span asp-validation-for="RegisterReason" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,9 +54,14 @@
                 <span asp-validation-for="Area" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Share" class="control-label"></label>
-                <input asp-for="Share" class="form-control" />
-                <span asp-validation-for="Share" class="text-danger"></span>
+                <label asp-for="ShareNumerator" class="control-label"></label>
+                <input asp-for="ShareNumerator" class="form-control" />
+                <span asp-validation-for="ShareNumerator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShareDenominator" class="control-label"></label>
+                <input asp-for="ShareDenominator" class="form-control" />
+                <span asp-validation-for="ShareDenominator" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OwnerId" class="control-label"></label>

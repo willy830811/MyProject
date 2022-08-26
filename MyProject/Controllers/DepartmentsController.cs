@@ -10,87 +10,87 @@ using MyProject.Models;
 
 namespace MyProject.Controllers
 {
-    public class HousesController : Controller
+    public class DepartmentsController : Controller
     {
         private readonly MyProjectContext _context;
 
-        public HousesController(MyProjectContext context)
+        public DepartmentsController(MyProjectContext context)
         {
             _context = context;
         }
 
-        // GET: Houses
+        // GET: Departments
         public async Task<IActionResult> Index()
         {
-              return _context.House != null ? 
-                          View(await _context.House.ToListAsync()) :
-                          Problem("Entity set 'MyProjectContext.House'  is null.");
+              return _context.Department != null ? 
+                          View(await _context.Department.ToListAsync()) :
+                          Problem("Entity set 'MyProjectContext.Department'  is null.");
         }
 
-        // GET: Houses/Details/5
+        // GET: Departments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.House == null)
+            if (id == null || _context.Department == null)
             {
                 return NotFound();
             }
 
-            var house = await _context.House
+            var department = await _context.Department
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (house == null)
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(house);
+            return View(department);
         }
 
-        // GET: Houses/Create
+        // GET: Departments/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Houses/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime,CreateTime,CreateId,UpdateTime,UpdateId")] House house)
+        public async Task<IActionResult> Create([Bind("Id,Name,CreateTime,CreateId,UpdateTime,UpdateId")] Department department)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(house);
+                _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(house);
+            return View(department);
         }
 
-        // GET: Houses/Edit/5
+        // GET: Departments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.House == null)
+            if (id == null || _context.Department == null)
             {
                 return NotFound();
             }
 
-            var house = await _context.House.FindAsync(id);
-            if (house == null)
+            var department = await _context.Department.FindAsync(id);
+            if (department == null)
             {
                 return NotFound();
             }
-            return View(house);
+            return View(department);
         }
 
-        // POST: Houses/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime,CreateTime,CreateId,UpdateTime,UpdateId")] House house)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CreateTime,CreateId,UpdateTime,UpdateId")] Department department)
         {
-            if (id != house.Id)
+            if (id != department.Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace MyProject.Controllers
             {
                 try
                 {
-                    _context.Update(house);
+                    _context.Update(department);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HouseExists(house.Id))
+                    if (!DepartmentExists(department.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace MyProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(house);
+            return View(department);
         }
 
-        // GET: Houses/Delete/5
+        // GET: Departments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.House == null)
+            if (id == null || _context.Department == null)
             {
                 return NotFound();
             }
 
-            var house = await _context.House
+            var department = await _context.Department
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (house == null)
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(house);
+            return View(department);
         }
 
-        // POST: Houses/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.House == null)
+            if (_context.Department == null)
             {
-                return Problem("Entity set 'MyProjectContext.House'  is null.");
+                return Problem("Entity set 'MyProjectContext.Department'  is null.");
             }
-            var house = await _context.House.FindAsync(id);
-            if (house != null)
+            var department = await _context.Department.FindAsync(id);
+            if (department != null)
             {
-                _context.House.Remove(house);
+                _context.Department.Remove(department);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HouseExists(int id)
+        private bool DepartmentExists(int id)
         {
-          return (_context.House?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Department?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

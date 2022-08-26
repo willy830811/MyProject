@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyProject.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyProject.Models
 {
@@ -8,23 +9,18 @@ namespace MyProject.Models
         public string? City { get; set; }
         public string? Region { get; set; }
         public string? Section { get; set; }
+        public string? Subsection { get; set; }
         public string? Number { get; set; }
         public int RegisterReason { get; set; }
         public int Order { get; set; }
         public float Area { get; set; }
-        public int Share { get; set; }
-        public int OwnerId { get; set; }
-
-        [DataType(DataType.Date)]
+        public int ShareNumerator { get; set; }
+        public int ShareDenominator { get; set; }
+        public string? OwnerId { get; set; }
         public DateTime RegisterTime { get; set; }
-
-        [DataType(DataType.Date)]
         public DateTime CreateTime { get; set; }
-
-        public int CreateId { get; set; }
-        [DataType(DataType.Date)]
+        public string? CreateId { get; set; }
         public DateTime UpdateTime { get; set; }
-
-        public int UpdateId { get; set; }
+        public string? UpdateId { get; set; }
     }
 }

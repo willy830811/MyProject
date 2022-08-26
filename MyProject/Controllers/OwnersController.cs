@@ -10,87 +10,87 @@ using MyProject.Models;
 
 namespace MyProject.Controllers
 {
-    public class HousesController : Controller
+    public class OwnersController : Controller
     {
         private readonly MyProjectContext _context;
 
-        public HousesController(MyProjectContext context)
+        public OwnersController(MyProjectContext context)
         {
             _context = context;
         }
 
-        // GET: Houses
+        // GET: Owners
         public async Task<IActionResult> Index()
         {
-              return _context.House != null ? 
-                          View(await _context.House.ToListAsync()) :
-                          Problem("Entity set 'MyProjectContext.House'  is null.");
+              return _context.Owner != null ? 
+                          View(await _context.Owner.ToListAsync()) :
+                          Problem("Entity set 'MyProjectContext.Owner'  is null.");
         }
 
-        // GET: Houses/Details/5
+        // GET: Owners/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.House == null)
+            if (id == null || _context.Owner == null)
             {
                 return NotFound();
             }
 
-            var house = await _context.House
+            var owner = await _context.Owner
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (house == null)
+            if (owner == null)
             {
                 return NotFound();
             }
 
-            return View(house);
+            return View(owner);
         }
 
-        // GET: Houses/Create
+        // GET: Owners/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Houses/Create
+        // POST: Owners/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime,CreateTime,CreateId,UpdateTime,UpdateId")] House house)
+        public async Task<IActionResult> Create([Bind("Id,Name,Relationship,IdNumber,Telephone,Phone,Residence,CreateTime,CreateId,UpdateTime,UpdateId")] Owner owner)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(house);
+                _context.Add(owner);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(house);
+            return View(owner);
         }
 
-        // GET: Houses/Edit/5
+        // GET: Owners/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.House == null)
+            if (id == null || _context.Owner == null)
             {
                 return NotFound();
             }
 
-            var house = await _context.House.FindAsync(id);
-            if (house == null)
+            var owner = await _context.Owner.FindAsync(id);
+            if (owner == null)
             {
                 return NotFound();
             }
-            return View(house);
+            return View(owner);
         }
 
-        // POST: Houses/Edit/5
+        // POST: Owners/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime,CreateTime,CreateId,UpdateTime,UpdateId")] House house)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Relationship,IdNumber,Telephone,Phone,Residence,CreateTime,CreateId,UpdateTime,UpdateId")] Owner owner)
         {
-            if (id != house.Id)
+            if (id != owner.Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace MyProject.Controllers
             {
                 try
                 {
-                    _context.Update(house);
+                    _context.Update(owner);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HouseExists(house.Id))
+                    if (!OwnerExists(owner.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace MyProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(house);
+            return View(owner);
         }
 
-        // GET: Houses/Delete/5
+        // GET: Owners/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.House == null)
+            if (id == null || _context.Owner == null)
             {
                 return NotFound();
             }
 
-            var house = await _context.House
+            var owner = await _context.Owner
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (house == null)
+            if (owner == null)
             {
                 return NotFound();
             }
 
-            return View(house);
+            return View(owner);
         }
 
-        // POST: Houses/Delete/5
+        // POST: Owners/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.House == null)
+            if (_context.Owner == null)
             {
-                return Problem("Entity set 'MyProjectContext.House'  is null.");
+                return Problem("Entity set 'MyProjectContext.Owner'  is null.");
             }
-            var house = await _context.House.FindAsync(id);
-            if (house != null)
+            var owner = await _context.Owner.FindAsync(id);
+            if (owner != null)
             {
-                _context.House.Remove(house);
+                _context.Owner.Remove(owner);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HouseExists(int id)
+        private bool OwnerExists(int id)
         {
-          return (_context.House?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Owner?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

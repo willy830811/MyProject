@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Models;
+using MyProject.Models.Enum;
 
 namespace MyProject.Data
 {
@@ -15,5 +16,9 @@ namespace MyProject.Data
         }
 
         public DbSet<MyProject.Models.House> House { get; set; } = default!;
+
+        public DbSet<MyProject.Models.Department>? Department { get; set; }
+
+        public DbSet<MyProject.Models.Owner>? Owner { get; set; }
     }
 }

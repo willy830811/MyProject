@@ -30,6 +30,12 @@
             @Html.DisplayFor(model => model.Section)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Subsection)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Subsection)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Number)
         </dt>
         <dd class = "col-sm-10">
@@ -54,10 +60,16 @@
             @Html.DisplayFor(model => model.Area)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Share)
+            @Html.DisplayNameFor(model => model.ShareNumerator)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Share)
+            @Html.DisplayFor(model => model.ShareNumerator)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShareDenominator)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShareDenominator)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OwnerId)

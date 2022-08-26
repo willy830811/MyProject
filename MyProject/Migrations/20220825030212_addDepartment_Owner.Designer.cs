@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220825030212_addDepartment_Owner")]
+    partial class addDepartment_Owner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,20 +32,9 @@ namespace MyProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CreateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateTime")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -91,14 +82,8 @@ namespace MyProject.Migrations
                     b.Property<string>("Section")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShareDenominator")
+                    b.Property<int>("Share")
                         .HasColumnType("int");
-
-                    b.Property<int>("ShareNumerator")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subsection")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdateId")
                         .HasColumnType("nvarchar(max)");
@@ -119,12 +104,6 @@ namespace MyProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CreateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("IdNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -142,12 +121,6 @@ namespace MyProject.Migrations
 
                     b.Property<string>("Telephone")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateTime")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
