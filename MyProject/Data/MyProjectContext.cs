@@ -15,10 +15,12 @@ namespace MyProject.Data
         {
         }
 
-        public DbSet<MyProject.Models.House> House { get; set; } = default!;
+        public DbSet<House> House { get; set; } = default!;
 
-        public DbSet<MyProject.Models.Department>? Department { get; set; }
+        public DbSet<Department>? Department { get; set; }
 
-        public DbSet<MyProject.Models.Owner>? Owner { get; set; }
+        public DbSet<Owner>? Owner { get; set; }
+
+        public DbSet<HouseUser>? HouseUser { get; set; }
     }
 }

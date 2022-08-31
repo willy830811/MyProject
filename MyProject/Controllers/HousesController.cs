@@ -7,24 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Models;
+using MyProject.ViewModels;
+using Newtonsoft.Json;
 
 namespace MyProject.Controllers
 {
     public class HousesController : Controller
     {
         private readonly MyProjectContext _context;
+        private readonly ApplicationDbContext _userContext;
 
-        public HousesController(MyProjectContext context)
+        public HousesController(MyProjectContext context, ApplicationDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         // GET: Houses
         public async Task<IActionResult> Index()
         {
-              return _context.House != null ? 
-                          View(await _context.House.ToListAsync()) :
-                          Problem("Entity set 'MyProjectContext.House'  is null.");
+            return _context.House != null ?
+                        View(await _context.House.ToListAsync()) :
+                        Problem("Entity set 'MyProjectContext.House'  is null.");
         }
 
         // GET: Houses/Details/5
@@ -150,14 +154,72 @@ namespace MyProject.Controllers
             {
                 _context.House.Remove(house);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: 
+        public async Task<IActionResult> Access(int id)
+        {
+            TempData["HouseId"] = id;
+            var houseAccessList = new List<HouseAccessViewModel>();
+
+            var selectedUsers = await _context.HouseUser.Where(x => x.HouseId == id).ToListAsync();
+            TempData["OldSelectedUsers"] = JsonConvert.SerializeObject(selectedUsers);
+
+            var users = await _userContext.Users.ToListAsync();
+
+            houseAccessList = users.Select(x => new HouseAccessViewModel { UserId = x.Id, UserName = x.UserName, Checked = (selectedUsers.FindIndex(y => y.UserId == x.Id) != -1) }).ToList();
+
+            return houseAccessList != null ?
+                          View(houseAccessList) :
+                          Problem("Entity set 'Users' is null.");
+        }
+
+        // GET: 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Access(string[] userIds)
+        {
+            var houseId = Convert.ToInt32(TempData["HouseId"]);
+            var oldSelectedUsers = JsonConvert.DeserializeObject<List<HouseUser>>(TempData["OldSelectedUsers"].ToString());
+
+            var userIdsToInsert = userIds is not null ? (
+                oldSelectedUsers is not null ? (
+                    userIds.Where(x => oldSelectedUsers.FindIndex(y => y.UserId == x) == -1).Select(x => new HouseUser { HouseId = houseId, UserId = x })
+                ) : userIds.Select(x => new HouseUser { HouseId = houseId, UserId = x })
+            ) : null;
+            var userIdsToDelete = oldSelectedUsers is not null ? oldSelectedUsers.Where(x => !userIds.Contains(x.UserId)) : null;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (userIdsToDelete is not null)
+                        _context.RemoveRange(userIdsToDelete);
+                    if (userIdsToInsert is not null)
+                        _context.AddRange(userIdsToInsert);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
+
         private bool HouseExists(int id)
         {
-          return (_context.House?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.House?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private bool HouseUserExists(int houseId, string userId)
+        {
+            return (_context.HouseUser?.Any(e => e.HouseId == houseId && e.UserId == userId)).GetValueOrDefault();
         }
     }
 }
