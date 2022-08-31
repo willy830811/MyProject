@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Houses\Test.cshtml" />
+    <Content Remove="Views\Users\Create.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
