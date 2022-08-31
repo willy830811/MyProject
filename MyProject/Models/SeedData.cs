@@ -6,11 +6,11 @@ namespace MyProject.Models
 {
     public class SeedData
     {
-        public static void SeedUsers(UserManager<IdentityUser> userManager)
+        public static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
             if (userManager.FindByNameAsync("willy830811@gmail.com").Result == null)
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = "willy830811@gmail.com",
                     Email = "willy830811@gmail.com",
@@ -30,7 +30,7 @@ namespace MyProject.Models
 
             if (userManager.FindByNameAsync("willy830811@gmail.com").Result == null)
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = "test1@gmail.com",
                     Email = "test1@gmail.com",
@@ -50,7 +50,7 @@ namespace MyProject.Models
 
             if (userManager.FindByNameAsync("willy830811@gmail.com").Result == null)
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = "test2@gmail.com",
                     Email = "test2@gmail.com",
