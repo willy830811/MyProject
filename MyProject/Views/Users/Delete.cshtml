@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MyProject.Models.Enum
+@model MyProject.ViewModels.UserIndexViewModel
+@{
+    ViewData["Title"] = "停權";
+}
+
+<h1>停權</h1>
+
+<h3>是否確定要將此員工停權？</h3>
+<div>
+    <h4>員工管理</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CnName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CnName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EngName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EngName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RoleName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RoleName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="UserId" />
+        <input type="submit" value="提交" class="btn btn-danger" /> |
+        <a asp-action="Index">回上頁</a>
+    </form>
+</div>
+

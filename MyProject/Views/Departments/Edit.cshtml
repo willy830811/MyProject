@@ -1,12 +1,12 @@
 ﻿@model MyProject.Models.Department
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "編輯";
 }
 
-<h1>Edit</h1>
+<h1>編輯</h1>
 
-<h4>Department</h4>
+<h4>部門管理</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,34 +19,14 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreateTime" class="control-label"></label>
-                <input asp-for="CreateTime" class="form-control" />
-                <span asp-validation-for="CreateTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateId" class="control-label"></label>
-                <input asp-for="CreateId" class="form-control" />
-                <span asp-validation-for="CreateId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdateTime" class="control-label"></label>
-                <input asp-for="UpdateTime" class="form-control" />
-                <span asp-validation-for="UpdateTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdateId" class="control-label"></label>
-                <input asp-for="UpdateId" class="form-control" />
-                <span asp-validation-for="UpdateId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="保存" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">回上頁</a>
 </div>
 
 @section Scripts {

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MyProject.Models.Enum
+@model MyProject.ViewModels.UserEditViewModel
+@{
+    ViewData["Title"] = "編輯";
+    var departmentList = (List<Department>)ViewBag.Departments;
+    var departmentSelectListItems = departmentList.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+    var roleList = (List<IdentityRole>)ViewBag.Roles;
+    var roleSelectListItems = roleList.Select(x => new SelectListItem(x.Name, x.Name));
+}
+
+<h1>編輯</h1>
+
+<h4>員工管理</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @*@using (Html.BeginForm("Edit", "Users", FormMethod.Post)) {*@
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UserId" />
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CnName" class="control-label"></label>
+                <input asp-for="CnName" class="form-control" />
+                <span asp-validation-for="CnName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label"></label>
+                <select asp-for="DepartmentId" asp-items="@departmentSelectListItems" class="form-control"></select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleName" class="control-label"></label>
+                <select asp-for="RoleName" asp-items="@roleSelectListItems" class="form-control"></select>
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="保存" class="btn btn-primary" />
+            </div>
+        </form>
+        @*}*@
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">回上頁</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

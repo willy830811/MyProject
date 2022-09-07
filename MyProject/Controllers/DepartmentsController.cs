@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using MyProject.Models;
 
 namespace MyProject.Controllers
 {
+    [Authorize(Roles = "管理者")]
     public class DepartmentsController : Controller
     {
         private readonly MyProjectContext _context;
@@ -56,10 +58,12 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,CreateTime,CreateId,UpdateTime,UpdateId")] Department department)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Department department)
         {
             if (ModelState.IsValid)
             {
+                department.CreateId = User.Identity.Name;
+                department.CreateTime = DateTime.Now;
                 _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,7 +92,7 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CreateTime,CreateId,UpdateTime,UpdateId")] Department department)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Department department)
         {
             if (id != department.Id)
             {
@@ -99,6 +103,8 @@ namespace MyProject.Controllers
             {
                 try
                 {
+                    department.UpdateId = User.Identity.Name;
+                    department.UpdateTime = DateTime.Now;
                     _context.Update(department);
                     await _context.SaveChangesAsync();
                 }

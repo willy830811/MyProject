@@ -5,6 +5,8 @@ namespace MyProject.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string? DepartmentId { get; set; }
+        public string? CnName { get; set; }
+        public string? EngName { get; set; }
+        public int? DepartmentId { get; set; }
     }
 }

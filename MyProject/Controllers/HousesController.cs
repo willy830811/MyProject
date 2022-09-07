@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,7 @@ using Newtonsoft.Json;
 
 namespace MyProject.Controllers
 {
+    [Authorize]
     public class HousesController : Controller
     {
         private readonly MyProjectContext _context;
@@ -26,9 +29,20 @@ namespace MyProject.Controllers
         // GET: Houses
         public async Task<IActionResult> Index()
         {
-            return _context.House != null ?
-                        View(await _context.House.ToListAsync()) :
-                        Problem("Entity set 'MyProjectContext.House'  is null.");
+            var availableHouses = new List<House>();
+
+            if (User.IsInRole("管理者"))
+            {
+                availableHouses = await _context.House.ToListAsync();
+            }
+            else
+            {
+                var houseUsersByUserId = await _context.HouseUser.Where(x => x.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
+                var houses = await _context.House.ToListAsync();
+                availableHouses = houses.Where(x => houseUsersByUserId.FindIndex(y => y.HouseId == x.Id) != -1).ToList();
+            }
+
+            return View(availableHouses);
         }
 
         // GET: Houses/Details/5
@@ -50,6 +64,7 @@ namespace MyProject.Controllers
         }
 
         // GET: Houses/Create
+        [Authorize(Roles = "管理者")]
         public IActionResult Create()
         {
             return View();
@@ -60,10 +75,13 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime,CreateTime,CreateId,UpdateTime,UpdateId")] House house)
+        [Authorize(Roles = "管理者")]
+        public async Task<IActionResult> Create([Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime")] House house)
         {
             if (ModelState.IsValid)
             {
+                house.CreateId = User.Identity.Name;
+                house.CreateTime = DateTime.Now;
                 _context.Add(house);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -72,6 +90,7 @@ namespace MyProject.Controllers
         }
 
         // GET: Houses/Edit/5
+        [Authorize(Roles = "管理者")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.House == null)
@@ -92,7 +111,8 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime,CreateTime,CreateId,UpdateTime,UpdateId")] House house)
+        [Authorize(Roles = "管理者")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime")] House house)
         {
             if (id != house.Id)
             {
@@ -103,6 +123,8 @@ namespace MyProject.Controllers
             {
                 try
                 {
+                    house.UpdateId = User.Identity.Name;
+                    house.UpdateTime = DateTime.Now;
                     _context.Update(house);
                     await _context.SaveChangesAsync();
                 }
@@ -123,6 +145,7 @@ namespace MyProject.Controllers
         }
 
         // GET: Houses/Delete/5
+        [Authorize(Roles = "管理者")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.House == null)
@@ -143,6 +166,7 @@ namespace MyProject.Controllers
         // POST: Houses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "管理者")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.House == null)
@@ -160,6 +184,7 @@ namespace MyProject.Controllers
         }
 
         // GET: 
+        [Authorize(Roles = "管理者")]
         public async Task<IActionResult> Access(int id)
         {
             TempData["HouseId"] = id;
@@ -169,17 +194,26 @@ namespace MyProject.Controllers
             TempData["OldSelectedUsers"] = JsonConvert.SerializeObject(selectedUsers);
 
             var users = await _userContext.Users.ToListAsync();
+            var departments = await _context.Department.ToListAsync();
 
-            houseAccessList = users.Select(x => new HouseAccessViewModel { UserId = x.Id, UserName = x.UserName, Checked = (selectedUsers.FindIndex(y => y.UserId == x.Id) != -1) }).ToList();
+            houseAccessList = users.Select(x => new HouseAccessViewModel {
+                UserId = x.Id,
+                UserName = x.UserName,
+                CnName = x.CnName,
+                EngName = x.EngName,
+                DepartmentName = departments != null ? departments.FirstOrDefault(y => y.Id == x.DepartmentId).Name : null,
+                Checked = selectedUsers.FindIndex(y => y.UserId == x.Id) != -1
+            }).ToList();
 
             return houseAccessList != null ?
-                          View(houseAccessList) :
-                          Problem("Entity set 'Users' is null.");
+                View(houseAccessList) :
+                Problem("Entity set 'Users' is null.");
         }
 
         // GET: 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "管理者")]
         public async Task<IActionResult> Access(string[] userIds)
         {
             var houseId = Convert.ToInt32(TempData["HouseId"]);

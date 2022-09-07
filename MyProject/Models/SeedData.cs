@@ -8,27 +8,27 @@ namespace MyProject.Models
     {
         public static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
-            if (userManager.FindByNameAsync("willy830811@gmail.com").Result == null)
+            if (userManager.FindByNameAsync("test@gmail.com").Result == null)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = "willy830811@gmail.com",
-                    Email = "willy830811@gmail.com",
-                    NormalizedUserName = "WILLY830811@GMAIL.COM",
-                    NormalizedEmail = "WILLY830811@GMAIL.COM"
+                    UserName = "test@gmail.com",
+                    Email = "test@gmail.com",
+                    NormalizedUserName = "TEST@GMAIL.COM",
+                    NormalizedEmail = "TEST@GMAIL.COM"
                 };
 
-                var password = ".Aa123456";
+                var password = "123456";
 
                 var result = userManager.CreateAsync(user, password).Result;
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "最高管理者").Wait();
+                    userManager.AddToRoleAsync(user, "管理者").Wait();
                 }
             }
 
-            if (userManager.FindByNameAsync("willy830811@gmail.com").Result == null)
+            if (userManager.FindByNameAsync("test1@gmail.com").Result == null)
             {
                 var user = new ApplicationUser
                 {
@@ -38,7 +38,7 @@ namespace MyProject.Models
                     NormalizedEmail = "TEST1@GMAIL.COM"
                 };
 
-                var password = ".Aa123456";
+                var password = "123456";
 
                 var result = userManager.CreateAsync(user, password).Result;
 
@@ -48,7 +48,7 @@ namespace MyProject.Models
                 }
             }
 
-            if (userManager.FindByNameAsync("willy830811@gmail.com").Result == null)
+            if (userManager.FindByNameAsync("test2@gmail.com").Result == null)
             {
                 var user = new ApplicationUser
                 {
@@ -58,29 +58,19 @@ namespace MyProject.Models
                     NormalizedEmail = "TEST2@GMAIL.COM"
                 };
 
-                var password = ".Aa123456";
+                var password = "123456";
 
                 var result = userManager.CreateAsync(user, password).Result;
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "組員").Wait();
+                    userManager.AddToRoleAsync(user, "員工").Wait();
                 }
             }
         }
 
         public static void SeedRoles(RoleManager<IdentityRole> roleManager)
         {
-            if (!roleManager.RoleExistsAsync("最高管理者").Result)
-            {
-                var role = new IdentityRole
-                {
-                    Name = "最高管理者"
-                };
-
-                roleManager.CreateAsync(role).Wait();
-            }
-
             if (!roleManager.RoleExistsAsync("管理者").Result)
             {
                 var role = new IdentityRole
