@@ -1,0 +1,497 @@
+﻿@model IEnumerable<MyProject.Models.Property>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CaseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LetterNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SellingPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherPropertyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Use)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherUse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttachedArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SharedArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherAreaDefine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoldArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandSection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingFinishedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Decorate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GasFacility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balcony)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpperGroundFloors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnderGroundFloors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SitDirection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FaceDirection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoadWidth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LightingFace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomCounts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HallCounts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToliteCounts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NeiborCounts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElevatorCounts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElementarySchool)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JuniorHighSchool)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Park)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Market)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusStation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MRTStation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentPeriodFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentPeriodTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OutsideMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Courtyard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManagementFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingEntrance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BringingType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftPillar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftWallCabinet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftLiquorCabinet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftSofa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftHeater)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftBedding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftCooker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftGas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftTV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftFridge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftAirCon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiftOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leader)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Manager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CaseNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LetterNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherPropertyType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Use)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherUse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttachedArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SharedArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherAreaDefine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoldArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandSection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingFinishedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Decorate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GasFacility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balcony)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpperGroundFloors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderGroundFloors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SitDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FaceDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoadWidth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LightingFace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomCounts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HallCounts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToliteCounts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NeiborCounts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElevatorCounts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElementarySchool)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JuniorHighSchool)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Park)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Market)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusStation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MRTStation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentPeriodFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentPeriodTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OutsideMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Courtyard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManagementFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Parking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingEntrance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BringingType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftPillar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftWallCabinet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftLiquorCabinet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftSofa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftHeater)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftBedding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftCooker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftGas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftTV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftFridge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftAirCon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Feature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Leader)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220912090443_property")]
+    partial class property
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,12 +214,6 @@ namespace MyProject.Migrations
                     b.Property<bool?>("Courtyard")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CreateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Decorate")
                         .HasColumnType("nvarchar(max)");
 
@@ -308,8 +304,8 @@ namespace MyProject.Migrations
                     b.Property<float?>("MainArea")
                         .HasColumnType("real");
 
-                    b.Property<int?>("MainMaterial")
-                        .HasColumnType("int");
+                    b.Property<string>("MainMaterial")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("ManagementFee")
                         .HasColumnType("real");
@@ -335,20 +331,14 @@ namespace MyProject.Migrations
                     b.Property<string>("OtherAreaDefine")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OtherMainMaterial")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OtherOutsideMaterial")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OtherPropertyType")
+                    b.Property<string>("OtherType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OtherUse")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OutsideMaterial")
-                        .HasColumnType("int");
+                    b.Property<string>("OutsideMaterial")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Park")
                         .HasColumnType("nvarchar(max)");
@@ -373,9 +363,6 @@ namespace MyProject.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PropertyType")
-                        .HasColumnType("int");
 
                     b.Property<float?>("Rent")
                         .HasColumnType("real");
@@ -416,17 +403,14 @@ namespace MyProject.Migrations
                     b.Property<float?>("TotalArea")
                         .HasColumnType("real");
 
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
+
                     b.Property<int?>("UnderGroundFloors")
                         .HasColumnType("int");
 
                     b.Property<float?>("UnitPrice")
                         .HasColumnType("real");
-
-                    b.Property<string>("UpdateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("UpperGroundFloors")
                         .HasColumnType("int");

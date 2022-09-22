@@ -22,5 +22,7 @@ namespace MyProject.Data
         public DbSet<Owner>? Owner { get; set; }
 
         public DbSet<HouseUser>? HouseUser { get; set; }
+
+        public DbSet<MyProject.Models.Property>? Property { get; set; }
     }
 }
