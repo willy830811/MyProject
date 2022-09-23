@@ -1,20 +1,17 @@
 ﻿@model IEnumerable<MyProject.Models.Property>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "產權資料";
 }
 
-<h1>Index</h1>
+<h1>產權資料</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">新增</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CaseName)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.LetterNumber)
             </th>
@@ -22,12 +19,15 @@
                 @Html.DisplayNameFor(model => model.SellingPrice)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.CaseName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PropertyType)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.OtherPropertyType)
             </th>
             <th>
@@ -148,7 +148,13 @@
                 @Html.DisplayNameFor(model => model.MainMaterial)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.OtherMainMaterial)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.OutsideMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherOutsideMaterial)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Courtyard)
@@ -230,7 +236,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Note)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Leader)
             </th>
@@ -246,6 +252,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.CaseNumber)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateId)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -253,13 +271,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CaseName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.LetterNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SellingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
@@ -267,7 +285,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PropertyType)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.OtherPropertyType)
             </td>
             <td>
@@ -388,7 +406,13 @@
                 @Html.DisplayFor(modelItem => item.MainMaterial)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.OtherMainMaterial)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.OutsideMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherOutsideMaterial)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Courtyard)
@@ -470,7 +494,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Note)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Leader)
             </td>
@@ -487,9 +511,21 @@
                 @Html.DisplayFor(modelItem => item.CaseNumber)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateId)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">詳情</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
             </td>
         </tr>
 }

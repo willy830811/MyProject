@@ -1,23 +1,19 @@
 ﻿@model MyProject.Models.Property
+@using MyProject.Models
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "編輯";
 }
 
-<h1>Edit</h1>
+<h1>編輯</h1>
 
-<h4>Property</h4>
+<h4>產權資料</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="CaseName" class="control-label"></label>
-                <input asp-for="CaseName" class="form-control" />
-                <span asp-validation-for="CaseName" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="LetterNumber" class="control-label"></label>
                 <input asp-for="LetterNumber" class="form-control" />
@@ -29,13 +25,18 @@
                 <span asp-validation-for="SellingPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="CaseName" class="control-label"></label>
+                <input asp-for="CaseName" class="form-control" />
+                <span asp-validation-for="CaseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PropertyType" class="control-label"></label>
-                <input asp-for="PropertyType" class="form-control" />
+                <select asp-for="PropertyType" asp-items="Html.GetEnumSelectList<PropertyType>()" class="form-control"></select>
                 <span asp-validation-for="PropertyType" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Use" class="control-label"></label>
-                <input asp-for="Use" class="form-control" />
+                <select asp-for="Use" asp-items="Html.GetEnumSelectList<Use>()" class="form-control"></select>
                 <span asp-validation-for="Use" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -215,7 +216,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<Status>()" class="form-control"></select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -235,22 +236,34 @@
             </div>
             <div class="form-group">
                 <label asp-for="MainMaterial" class="control-label"></label>
-                <input asp-for="MainMaterial" class="form-control" />
+                <select asp-for="MainMaterial" asp-items="Html.GetEnumSelectList<MainMaterial>()" class="form-control"></select>
                 <span asp-validation-for="MainMaterial" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="OtherMainMaterial" class="control-label"></label>
+                <input asp-for="OtherMainMaterial" class="form-control" />
+                <span asp-validation-for="OtherMainMaterial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="OutsideMaterial" class="control-label"></label>
-                <input asp-for="OutsideMaterial" class="form-control" />
+                <select asp-for="OutsideMaterial" asp-items="Html.GetEnumSelectList<OutsideMaterial>()" class="form-control"></select>
                 <span asp-validation-for="OutsideMaterial" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="OtherOutsideMaterial" class="control-label"></label>
+                <input asp-for="OtherOutsideMaterial" class="form-control" />
+                <span asp-validation-for="OtherOutsideMaterial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Courtyard" class="control-label"></label>
-                <input asp-for="Courtyard" class="form-control" />
+                <input type="radio" asp-for="Courtyard" value="@true" /> 是  
+                <input type="radio" asp-for="Courtyard" value="@false" /> 否
                 <span asp-validation-for="Courtyard" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Guard" class="control-label"></label>
-                <input asp-for="Guard" class="form-control" />
+                <input type="radio" asp-for="Guard" value="@true" /> 是  
+                <input type="radio" asp-for="Guard" value="@false" /> 否
                 <span asp-validation-for="Guard" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -260,7 +273,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Parking" class="control-label"></label>
-                <input asp-for="Parking" class="form-control" />
+                <input type="radio" asp-for="Parking" value="@true" /> 是  
+                <input type="radio" asp-for="Parking" value="@false" /> 否
                 <span asp-validation-for="Parking" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -290,62 +304,72 @@
             </div>
             <div class="form-group">
                 <label asp-for="ParkingEntrance" class="control-label"></label>
-                <input asp-for="ParkingEntrance" class="form-control" />
+                <select asp-for="ParkingEntrance" asp-items="Html.GetEnumSelectList<ParkingEntrance>()" class="form-control"></select>
                 <span asp-validation-for="ParkingEntrance" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ParkingType" class="control-label"></label>
-                <input asp-for="ParkingType" class="form-control" />
+                <select asp-for="ParkingType" asp-items="Html.GetEnumSelectList<ParkingType>()" class="form-control"></select>
                 <span asp-validation-for="ParkingType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BringingType" class="control-label"></label>
-                <input asp-for="BringingType" class="form-control" />
+                <select asp-for="BringingType" asp-items="Html.GetEnumSelectList<BringingType>()" class="form-control"></select>
                 <span asp-validation-for="BringingType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftPillar" class="control-label"></label>
-                <input asp-for="GiftPillar" class="form-control" />
+                @*<input type="checkbox" value="giftPillar" name="gift" @if(@Model.GiftPillar is not null && (bool)@Model.GiftPillar) { @Html.Raw("checked") }>*@
+                <input type="radio" asp-for="GiftPillar" value="@true" /> 有  
+                <input type="radio" asp-for="GiftPillar" value="@false" /> 無
                 <span asp-validation-for="GiftPillar" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftWallCabinet" class="control-label"></label>
-                <input asp-for="GiftWallCabinet" class="form-control" />
+                <input type="radio" asp-for="GiftWallCabinet" value="@true" /> 有  
+                <input type="radio" asp-for="GiftWallCabinet" value="@false" /> 無
                 <span asp-validation-for="GiftWallCabinet" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftLiquorCabinet" class="control-label"></label>
-                <input asp-for="GiftLiquorCabinet" class="form-control" />
+                <input type="radio" asp-for="GiftLiquorCabinet" value="@true" /> 有  
+                <input type="radio" asp-for="GiftLiquorCabinet" value="@false" /> 無
                 <span asp-validation-for="GiftLiquorCabinet" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftPhone" class="control-label"></label>
-                <input asp-for="GiftPhone" class="form-control" />
+                <input type="radio" asp-for="GiftPhone" value="@true" /> 有  
+                <input type="radio" asp-for="GiftPhone" value="@false" /> 無
                 <span asp-validation-for="GiftPhone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftSofa" class="control-label"></label>
-                <input asp-for="GiftSofa" class="form-control" />
+                <input type="radio" asp-for="GiftSofa" value="@true" /> 有  
+                <input type="radio" asp-for="GiftSofa" value="@false" /> 無
                 <span asp-validation-for="GiftSofa" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftHeater" class="control-label"></label>
-                <input asp-for="GiftHeater" class="form-control" />
+                <input type="radio" asp-for="GiftHeater" value="@true" /> 有  
+                <input type="radio" asp-for="GiftHeater" value="@false" /> 無
                 <span asp-validation-for="GiftHeater" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftBedding" class="control-label"></label>
-                <input asp-for="GiftBedding" class="form-control" />
+                <input type="radio" asp-for="GiftBedding" value="@true" /> 有  
+                <input type="radio" asp-for="GiftBedding" value="@false" /> 無
                 <span asp-validation-for="GiftBedding" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftCooker" class="control-label"></label>
-                <input asp-for="GiftCooker" class="form-control" />
+                <input type="radio" asp-for="GiftCooker" value="@true" /> 有  
+                <input type="radio" asp-for="GiftCooker" value="@false" /> 無
                 <span asp-validation-for="GiftCooker" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiftGas" class="control-label"></label>
-                <input asp-for="GiftGas" class="form-control" />
+                <input type="radio" asp-for="GiftGas" value="@true" /> 有  
+                <input type="radio" asp-for="GiftGas" value="@false" /> 無
                 <span asp-validation-for="GiftGas" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -404,14 +428,14 @@
                 <span asp-validation-for="CaseNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="保存" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">回上頁</a>
 </div>
 
 @section Scripts {

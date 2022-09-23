@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using iText.Forms;
-using iText.Forms.Fields;
-using iText.IO.Source;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Models;
-using iText.Html2pdf;
-using iText.Layout.Font;
-using iText.Kernel.Font;
-using iText.Html2pdf.Resolver.Font;
-using iText.IO.Font;
 
 namespace MyProject.Controllers
 {
@@ -31,9 +22,7 @@ namespace MyProject.Controllers
         // GET: Properties
         public async Task<IActionResult> Index()
         {
-              return _context.Property != null ? 
-                          View(await _context.Property.ToListAsync()) :
-                          Problem("Entity set 'MyProjectContext.Property'  is null.");
+              return View(await _context.Property.ToListAsync());
         }
 
         // GET: Properties/Details/5
@@ -65,10 +54,12 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CaseName,LetterNumber,SellingPrice,Address,Type,OtherType,Use,OtherUse,TotalArea,MainArea,AttachedArea,SharedArea,OtherArea,OtherAreaDefine,SettingPrice,HoldArea,LandSection,BuildingFinishedDate,UnitPrice,Decorate,GasFacility,Balcony,BuildingName,UpperGroundFloors,UnderGroundFloors,SitDirection,FaceDirection,RoadWidth,LightingFace,RoomCounts,HallCounts,ToliteCounts,NeiborCounts,ElevatorCounts,ElementarySchool,JuniorHighSchool,Park,Market,BusStation,MRTStation,Status,Rent,RentPeriodFrom,RentPeriodTo,MainMaterial,OutsideMaterial,Courtyard,Guard,ManagementFee,Parking,ParkingArea,Floor,Number,ParkingFee,ParkingPrice,ParkingEntrance,ParkingType,BringingType,GiftPillar,GiftWallCabinet,GiftLiquorCabinet,GiftPhone,GiftSofa,GiftHeater,GiftBedding,GiftCooker,GiftGas,GiftTV,GiftFridge,GiftAirCon,GiftOther,Feature,Note,Leader,Manager,Sales,Phone,CaseNumber")] Property @property)
+        public async Task<IActionResult> Create([Bind("Id,LetterNumber,SellingPrice,CaseName,Address,PropertyType,OtherPropertyType,Use,OtherUse,TotalArea,MainArea,AttachedArea,SharedArea,OtherArea,OtherAreaDefine,SettingPrice,HoldArea,LandSection,BuildingFinishedDate,UnitPrice,Decorate,GasFacility,Balcony,BuildingName,UpperGroundFloors,UnderGroundFloors,SitDirection,FaceDirection,RoadWidth,LightingFace,RoomCounts,HallCounts,ToliteCounts,NeiborCounts,ElevatorCounts,ElementarySchool,JuniorHighSchool,Park,Market,BusStation,MRTStation,Status,Rent,RentPeriodFrom,RentPeriodTo,MainMaterial,OtherMainMaterial,OutsideMaterial,OtherOutsideMaterial,Courtyard,Guard,ManagementFee,Parking,ParkingArea,Floor,Number,ParkingFee,ParkingPrice,ParkingEntrance,ParkingType,BringingType,GiftPillar,GiftWallCabinet,GiftLiquorCabinet,GiftPhone,GiftSofa,GiftHeater,GiftBedding,GiftCooker,GiftGas,GiftTV,GiftFridge,GiftAirCon,GiftOther,Feature,Note,Leader,Manager,Sales,Phone,CaseNumber")] Property @property)
         {
             if (ModelState.IsValid)
             {
+                @property.CreateId = User.Identity.Name;
+                @property.CreateTime = DateTime.Now;
                 _context.Add(@property);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -97,7 +88,7 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CaseName,LetterNumber,SellingPrice,Address,Type,OtherType,Use,OtherUse,TotalArea,MainArea,AttachedArea,SharedArea,OtherArea,OtherAreaDefine,SettingPrice,HoldArea,LandSection,BuildingFinishedDate,UnitPrice,Decorate,GasFacility,Balcony,BuildingName,UpperGroundFloors,UnderGroundFloors,SitDirection,FaceDirection,RoadWidth,LightingFace,RoomCounts,HallCounts,ToliteCounts,NeiborCounts,ElevatorCounts,ElementarySchool,JuniorHighSchool,Park,Market,BusStation,MRTStation,Status,Rent,RentPeriodFrom,RentPeriodTo,MainMaterial,OutsideMaterial,Courtyard,Guard,ManagementFee,Parking,ParkingArea,Floor,Number,ParkingFee,ParkingPrice,ParkingEntrance,ParkingType,BringingType,GiftPillar,GiftWallCabinet,GiftLiquorCabinet,GiftPhone,GiftSofa,GiftHeater,GiftBedding,GiftCooker,GiftGas,GiftTV,GiftFridge,GiftAirCon,GiftOther,Feature,Note,Leader,Manager,Sales,Phone,CaseNumber")] Property @property)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LetterNumber,SellingPrice,CaseName,Address,PropertyType,OtherPropertyType,Use,OtherUse,TotalArea,MainArea,AttachedArea,SharedArea,OtherArea,OtherAreaDefine,SettingPrice,HoldArea,LandSection,BuildingFinishedDate,UnitPrice,Decorate,GasFacility,Balcony,BuildingName,UpperGroundFloors,UnderGroundFloors,SitDirection,FaceDirection,RoadWidth,LightingFace,RoomCounts,HallCounts,ToliteCounts,NeiborCounts,ElevatorCounts,ElementarySchool,JuniorHighSchool,Park,Market,BusStation,MRTStation,Status,Rent,RentPeriodFrom,RentPeriodTo,MainMaterial,OtherMainMaterial,OutsideMaterial,OtherOutsideMaterial,Courtyard,Guard,ManagementFee,Parking,ParkingArea,Floor,Number,ParkingFee,ParkingPrice,ParkingEntrance,ParkingType,BringingType,GiftPillar,GiftWallCabinet,GiftLiquorCabinet,GiftPhone,GiftSofa,GiftHeater,GiftBedding,GiftCooker,GiftGas,GiftTV,GiftFridge,GiftAirCon,GiftOther,Feature,Note,Leader,Manager,Sales,Phone,CaseNumber")] Property @property)
         {
             if (id != @property.Id)
             {
@@ -108,6 +99,8 @@ namespace MyProject.Controllers
             {
                 try
                 {
+                    @property.UpdateId = User.Identity.Name;
+                    @property.UpdateTime = DateTime.Now;
                     _context.Update(@property);
                     await _context.SaveChangesAsync();
                 }
@@ -269,7 +262,7 @@ namespace MyProject.Controllers
                     var enumValue = propertyInfo.GetValue(@property, null);
                     var enumInt = enumValue is not null ? (int)enumValue : 0;
                     var enumConut = 1;
-                    
+
                     while (html.Contains($"${propertyInfo.Name}{enumConut}$"))
                     {
                         if (enumInt == enumConut)
@@ -289,7 +282,7 @@ namespace MyProject.Controllers
                 Content = html,
                 ContentType = "text/html"
             };
-            
+
             //var ms = new MemoryStream();
 
             //var fontProvider = new DefaultFontProvider();
@@ -305,13 +298,13 @@ namespace MyProject.Controllers
             //properties.SetFontProvider(fontProvider);
 
             //HtmlConverter.ConvertToPdf(html, ms, properties);
-            
+
             //return new FileStreamResult(new MemoryStream(ms.ToArray()), "application/pdf");
         }
 
         private bool PropertyExists(int id)
         {
-          return (_context.Property?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.Property.Any(e => e.Id == id);
         }
     }
 }
