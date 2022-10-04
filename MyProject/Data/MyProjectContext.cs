@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Models;
 using MyProject.Models.Enum;
+using MyProject.Models.Items;
 
 namespace MyProject.Data
 {
@@ -24,5 +25,13 @@ namespace MyProject.Data
         public DbSet<HouseUser>? HouseUser { get; set; }
 
         public DbSet<Property>? Property { get; set; }
+
+        public DbSet<RealEstateDetail> RealEstateDetail { get; set; }
+
+        public DbSet<CaseSourse> CaseCourse { get; set; }
+
+        public DbSet<LandInventoryItem> LandInventoryItem { get; set; }
+
+        public DbSet<AppendixItem> AppendixItem { get; set; }
     }
 }

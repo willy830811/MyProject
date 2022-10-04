@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220928103349_RealEstateDetail_2")]
+    partial class RealEstateDetail_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,100 +23,6 @@ namespace MyProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("MyProject.Models.CaseSourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Agent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("BuildRate")
-                        .HasColumnType("real");
-
-                    b.Property<string>("CaseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Environment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Feature")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Hold")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsAerialPhoto")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsCadastralMap")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsCurrentPhotos")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsTranscript")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsUrbanPlanningManual")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsUseSection")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("LandCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Other")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Section")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("SellingAreaInPing")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("SellingAreaInSquareMeter")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Subsection")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("TotalAreaInPing")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("TotalAreaInSquareMeter")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("TotalPrice")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("UnitPrice")
-                        .HasColumnType("real");
-
-                    b.Property<string>("UseSection")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UseStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("ValueAddedTax")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("VolumeRate")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CaseCourse");
-                });
 
             modelBuilder.Entity("MyProject.Models.Department", b =>
                 {
@@ -223,75 +131,6 @@ namespace MyProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HouseUser");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.AppendixItem", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
-
-                    b.Property<string>("Base64")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CaseSourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Format")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseSourseId");
-
-                    b.ToTable("AppendixItem");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.LandInventoryItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<float?>("AreaInPing")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("AreaInSquareMeter")
-                        .HasColumnType("real");
-
-                    b.Property<int?>("CaseSourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Hold")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("PresentValue")
-                        .HasColumnType("real");
-
-                    b.Property<string>("UseSection")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseSourseId");
-
-                    b.ToTable("LandInventoryItem");
                 });
 
             modelBuilder.Entity("MyProject.Models.Owner", b =>
@@ -994,27 +833,6 @@ namespace MyProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RealEstateDetail");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.AppendixItem", b =>
-                {
-                    b.HasOne("MyProject.Models.CaseSourse", null)
-                        .WithMany("AppendixItems")
-                        .HasForeignKey("CaseSourseId");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.LandInventoryItem", b =>
-                {
-                    b.HasOne("MyProject.Models.CaseSourse", null)
-                        .WithMany("LandInventoryItems")
-                        .HasForeignKey("CaseSourseId");
-                });
-
-            modelBuilder.Entity("MyProject.Models.CaseSourse", b =>
-                {
-                    b.Navigation("AppendixItems");
-
-                    b.Navigation("LandInventoryItems");
                 });
 #pragma warning restore 612, 618
         }

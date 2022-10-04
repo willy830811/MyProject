@@ -1,0 +1,791 @@
+﻿@model IEnumerable<MyProject.Models.RealEstateDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ObjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Section)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subsection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RightsScope)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppendicesNames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsLandOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOtherObligee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherObligee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRegisteredManager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisteredManager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOwnership)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnershipType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOtherRights)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherRightsType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsTrust)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrustContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBaseRightsSettingBurden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaseRightsSettingBurdenStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSettingOtherRights)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingOtherRightsType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRestrictingRegistration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestrictingRegistrationType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherRestrictingRegistration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOtherBaseRightsItemBy254)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherBaseRightsItemBy254)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOtherBaseRightsItemRelated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherBaseRightsItemRelated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsUseByConvention)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UseByConventionContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRespectivelyManage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRespectivelyManageBy826)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RespectivelyManageBy826Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RespectivelyManageBy826Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsLend)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentLendStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOccupiedWithoutRights)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OccupiedWithoutRightsStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPublicWay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublicWayPlaceAppendice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublicWayArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UrbanLandSection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonUrbanLandSection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonUrbanLandType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnKnownLandRegulationStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolumeRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsUrbanPlanningManual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DevelopMethodRestrictionsType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherDevelopMethodRestriction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBuildingRestrictedRegion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsFarmLand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildFarmhouseType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FarmLandRegulation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsMountLand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MountLandRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBanningBuildByKeepSoilLaw)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BanningBuildByKeepSoilLawRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRiverRegion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RiverRegionRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDrainFacilityRegion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrainFacilityRegionRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsNationalPark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalParkType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalParkRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDrinkingWaterSource)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrinkingWaterSourceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrinkingWaterSourceRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsWaterProtectionAreaByLaw)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WaterProtectionAreaByLawRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPolutedArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PolutedAreaType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PolutedAreaRestrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsLandValueAddedTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandValueAddedTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsLandTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsStampDuty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StampDuty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOtherTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsConstructionBenefitFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConstructionBenefitFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRegistrationFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSurveyFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOtherProcessingFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherProcessingFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsContractFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOwnershipTransferAgencyFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnershipTransferAgencyFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOtherFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChooseManageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManageMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBreachOfContractPunishment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BreachOfContractPunishment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherTransactionItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurroundingsAppendiceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surroundings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCadastralMapRetest)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCadastralMapRetestAnnouced)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOutOfBoundsBuilding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OutOfBoundsBuildingStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCompulsoryAcquisition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompulsoryAcquisitionArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsElectricityPower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsTapWater)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsGas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDrainer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonInfrastructureReason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RealEstateBroker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Section)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subsection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RightsScope)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppendicesNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLandOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOtherObligee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherObligee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRegisteredManager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisteredManager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOwnership)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnershipType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOtherRights)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherRightsType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsTrust)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrustContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBaseRightsSettingBurden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaseRightsSettingBurdenStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSettingOtherRights)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingOtherRightsType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRestrictingRegistration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestrictingRegistrationType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherRestrictingRegistration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOtherBaseRightsItemBy254)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherBaseRightsItemBy254)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOtherBaseRightsItemRelated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherBaseRightsItemRelated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsUseByConvention)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UseByConventionContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRespectivelyManage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRespectivelyManageBy826)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RespectivelyManageBy826Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RespectivelyManageBy826Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLend)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentLendStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOccupiedWithoutRights)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OccupiedWithoutRightsStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublicWay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicWayPlaceAppendice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicWayArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrbanLandSection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonUrbanLandSection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonUrbanLandType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnKnownLandRegulationStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolumeRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsUrbanPlanningManual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DevelopMethodRestrictionsType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherDevelopMethodRestriction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBuildingRestrictedRegion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFarmLand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildFarmhouseType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FarmLandRegulation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMountLand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MountLandRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBanningBuildByKeepSoilLaw)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BanningBuildByKeepSoilLawRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRiverRegion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RiverRegionRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDrainFacilityRegion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrainFacilityRegionRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsNationalPark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NationalParkType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NationalParkRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDrinkingWaterSource)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrinkingWaterSourceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrinkingWaterSourceRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsWaterProtectionAreaByLaw)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WaterProtectionAreaByLawRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPolutedArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PolutedAreaType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PolutedAreaRestrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLandValueAddedTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandValueAddedTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLandTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStampDuty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StampDuty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOtherTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsConstructionBenefitFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConstructionBenefitFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRegistrationFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSurveyFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurveyFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOtherProcessingFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherProcessingFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsContractFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOwnershipTransferAgencyFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnershipTransferAgencyFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOtherFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChooseManageType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManageMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBreachOfContractPunishment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BreachOfContractPunishment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherTransactionItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurroundingsAppendiceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surroundings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCadastralMapRetest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCadastralMapRetestAnnouced)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOutOfBoundsBuilding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OutOfBoundsBuildingStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCompulsoryAcquisition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompulsoryAcquisitionArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsElectricityPower)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsTapWater)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsGas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDrainer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonInfrastructureReason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RealEstateBroker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

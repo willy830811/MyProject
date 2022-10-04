@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220928092512_RealEstateDetail")]
+    partial class RealEstateDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,100 +23,6 @@ namespace MyProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("MyProject.Models.CaseSourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Agent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("BuildRate")
-                        .HasColumnType("real");
-
-                    b.Property<string>("CaseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Environment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Feature")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Hold")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsAerialPhoto")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsCadastralMap")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsCurrentPhotos")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsTranscript")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsUrbanPlanningManual")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsUseSection")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("LandCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Other")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Section")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("SellingAreaInPing")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("SellingAreaInSquareMeter")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Subsection")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("TotalAreaInPing")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("TotalAreaInSquareMeter")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("TotalPrice")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("UnitPrice")
-                        .HasColumnType("real");
-
-                    b.Property<string>("UseSection")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UseStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("ValueAddedTax")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("VolumeRate")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CaseCourse");
-                });
 
             modelBuilder.Entity("MyProject.Models.Department", b =>
                 {
@@ -223,75 +131,6 @@ namespace MyProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HouseUser");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.AppendixItem", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
-
-                    b.Property<string>("Base64")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CaseSourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Format")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseSourseId");
-
-                    b.ToTable("AppendixItem");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.LandInventoryItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<float?>("AreaInPing")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("AreaInSquareMeter")
-                        .HasColumnType("real");
-
-                    b.Property<int?>("CaseSourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Hold")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("PresentValue")
-                        .HasColumnType("real");
-
-                    b.Property<string>("UseSection")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseSourseId");
-
-                    b.ToTable("LandInventoryItem");
                 });
 
             modelBuilder.Entity("MyProject.Models.Owner", b =>
@@ -625,13 +464,13 @@ namespace MyProject.Migrations
                     b.Property<string>("BreachOfContractPunishment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BuildFarmhouseType")
+                    b.Property<string>("BuildFarmhouseTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("BuildRate")
                         .HasColumnType("real");
 
-                    b.Property<string>("ChooseManageType")
+                    b.Property<string>("ChooseManageTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
@@ -649,13 +488,7 @@ namespace MyProject.Migrations
                     b.Property<float?>("ContractFee")
                         .HasColumnType("real");
 
-                    b.Property<string>("CreateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DevelopMethodRestrictionsType")
+                    b.Property<string>("DevelopMethodRestrictionsTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DrainFacilityRegionRestrictions")
@@ -664,7 +497,7 @@ namespace MyProject.Migrations
                     b.Property<string>("DrinkingWaterSourceRestrictions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DrinkingWaterSourceType")
+                    b.Property<string>("DrinkingWaterSourceTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FarmLandRegulation")
@@ -835,7 +668,7 @@ namespace MyProject.Migrations
                     b.Property<string>("NationalParkRestrictions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NationalParkType")
+                    b.Property<string>("NationalParkTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NonInfrastructureReason")
@@ -874,7 +707,7 @@ namespace MyProject.Migrations
                     b.Property<string>("OtherRestrictingRegistration")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OtherRightsType")
+                    b.Property<string>("OtherRightsTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OtherTax")
@@ -901,7 +734,7 @@ namespace MyProject.Migrations
                     b.Property<string>("PolutedAreaRestrictions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PolutedAreaType")
+                    b.Property<string>("PolutedAreaTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("PublicWayArea")
@@ -928,10 +761,10 @@ namespace MyProject.Migrations
                     b.Property<string>("RespectivelyManageBy826Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RespectivelyManageBy826Type")
+                    b.Property<string>("RespectivelyManageBy826Types")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RestrictingRegistrationType")
+                    b.Property<string>("RestrictingRegistrationTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RightsScope")
@@ -943,7 +776,7 @@ namespace MyProject.Migrations
                     b.Property<string>("Section")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SettingOtherRightsType")
+                    b.Property<string>("SettingOtherRightsTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("StampDuty")
@@ -955,7 +788,7 @@ namespace MyProject.Migrations
                     b.Property<string>("Surroundings")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SurroundingsAppendiceType")
+                    b.Property<string>("SurroundingsAppendiceTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("SurveyFee")
@@ -973,12 +806,6 @@ namespace MyProject.Migrations
                     b.Property<string>("UnKnownLandRegulationStatus")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("UrbanLandSection")
                         .HasColumnType("nvarchar(max)");
 
@@ -994,27 +821,6 @@ namespace MyProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RealEstateDetail");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.AppendixItem", b =>
-                {
-                    b.HasOne("MyProject.Models.CaseSourse", null)
-                        .WithMany("AppendixItems")
-                        .HasForeignKey("CaseSourseId");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.LandInventoryItem", b =>
-                {
-                    b.HasOne("MyProject.Models.CaseSourse", null)
-                        .WithMany("LandInventoryItems")
-                        .HasForeignKey("CaseSourseId");
-                });
-
-            modelBuilder.Entity("MyProject.Models.CaseSourse", b =>
-                {
-                    b.Navigation("AppendixItems");
-
-                    b.Navigation("LandInventoryItems");
                 });
 #pragma warning restore 612, 618
         }

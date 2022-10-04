@@ -22,9 +22,9 @@ namespace MyProject.Models
         public int? Order { get; set; }
         [Display(Name = "面積")]
         public float? Area { get; set; }
-        [Display(Name = "權力範圍")]
+        [Display(Name = "權利範圍")]
         public int? ShareNumerator { get; set; }
-        [Display(Name = "權力範圍")]
+        [Display(Name = "權利範圍")]
         public int? ShareDenominator { get; set; }
         [Display(Name = "所有權人")]
         public string? OwnerId { get; set; }
