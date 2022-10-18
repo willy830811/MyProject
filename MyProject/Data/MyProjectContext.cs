@@ -28,9 +28,7 @@ namespace MyProject.Data
 
         public DbSet<RealEstateDetail> RealEstateDetail { get; set; }
 
-        public DbSet<CaseSourse> CaseCourse { get; set; }
-
-        public DbSet<LandInventoryItem> LandInventoryItem { get; set; }
+        public DbSet<CaseSource> CaseSource { get; set; }
 
         public DbSet<AppendixItem> AppendixItem { get; set; }
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20221012045527_CaseSource_7")]
+    partial class CaseSource_7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,6 +270,54 @@ namespace MyProject.Migrations
                     b.HasIndex("CaseSourceId");
 
                     b.ToTable("AppendixItem");
+                });
+
+            modelBuilder.Entity("MyProject.Models.Items.LandInventoryItem", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+
+                    b.Property<float?>("AreaInPing")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("AreaInSquareMeter")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("CaseSourceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Hold")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("HoldAreaInPing")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("HoldAreaInSquareMeter")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlaceNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("PresentValue")
+                        .HasColumnType("real");
+
+                    b.Property<string>("SectionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UseSection")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseSourceId");
+
+                    b.ToTable("LandInventoryItem");
                 });
 
             modelBuilder.Entity("MyProject.Models.Owner", b =>
@@ -979,6 +1029,15 @@ namespace MyProject.Migrations
                         .HasForeignKey("CaseSourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CaseSource");
+                });
+
+            modelBuilder.Entity("MyProject.Models.Items.LandInventoryItem", b =>
+                {
+                    b.HasOne("MyProject.Models.CaseSource", "CaseSource")
+                        .WithMany()
+                        .HasForeignKey("CaseSourceId");
 
                     b.Navigation("CaseSource");
                 });

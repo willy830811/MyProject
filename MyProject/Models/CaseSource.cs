@@ -1,8 +1,10 @@
 ﻿using MyProject.Models.Items;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace MyProject.Models
 {
-    public class CaseSourse
+    public class CaseSource
     {
         public int Id { get; set; }
         public string? CaseName { get; set; }
@@ -10,6 +12,7 @@ namespace MyProject.Models
         public float? UnitPrice { get; set; }
         public string? Section { get; set; }
         public string? Subsection { get; set; }
+        public string? PlaceNumber { get; set; }
         public int? LandCount { get; set; }
         public float? TotalAreaInSquareMeter { get; set; }
         public float? TotalAreaInPing { get; set; }
@@ -32,7 +35,19 @@ namespace MyProject.Models
         public string? Other { get; set; }
         public string? Agent { get; set; }
         public string? Phone { get; set; }
-        public List<LandInventoryItem>? LandInventoryItems { get; set; }
+
+        [Display(Name = "創建時間")]
+        public DateTime? CreateTime { get; set; }
+
+        [Display(Name = "創建者")]
+        public string? CreateId { get; set; }
+
+        [Display(Name = "更新時間")]
+        public DateTime? UpdateTime { get; set; }
+
+        [Display(Name = "更新者")]
+        public string? UpdateId { get; set; }
+        public string? LandInventories { get; set; }
         public List<AppendixItem>? AppendixItems { get; set; }
     }
 }

@@ -1,2 +1,75 @@
 ﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    function addRow() {
+        var count = $("#event div[id*='LandInventoryItem']").length;
+        console.log(count);
+
+        var landInventoryItemsJson = "";
+
+        for (i = 0; i < count; i++) {
+            var item = "";
+
+            $("#event div[id='LandInventoryItem" + i + "'] input").each(function () {
+
+                item += '"' + $(this).attr('name').split('.')[1] + '":"' + $(this).val() + '",';
+            });
+
+            item = '{' + item.slice(0, -1) + '},';
+
+            console.log(item);
+
+            landInventoryItemsJson += item;
+        }
+
+        landInventoryItemsJson = '[' + landInventoryItemsJson.slice(0, -1) + ']';
+
+        console.log(landInventoryItemsJson);
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AddRow", "CaseSources")',
+            data: { json: landInventoryItemsJson },
+            success: function (result) {
+                $("#event").empty();
+                $("#event").html(result);
+            }
+        })
+    }
+
+    function removeRow(index) {
+        var count = $("#event div[id*='LandInventoryItem']").length;
+        //    console.log(count);
+
+        var landInventoryItemsJson = "";
+
+        for (i = 0; i < count; i++) {
+            var item = "";
+
+            $("#event div[id='LandInventoryItem" + i + "'] input").each(function () {
+
+                item += '"' + $(this).attr('name').split('.')[1] + '":"' + $(this).val() + '",';
+            });
+
+            item = '{' + item.slice(0, -1) + '},';
+
+            console.log(item);
+
+            landInventoryItemsJson += item;
+        }
+
+        landInventoryItemsJson = '[' + landInventoryItemsJson.slice(0, -1) + ']';
+
+        console.log(landInventoryItemsJson);
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("RemoveRow", "CaseSources")',
+            data: { json: landInventoryItemsJson, index: index },
+            success: function (result) {
+                $("#event").empty();
+                $("#event").html(result);
+            }
+        })
+    }
+</script>
