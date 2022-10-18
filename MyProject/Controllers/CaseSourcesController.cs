@@ -128,7 +128,7 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CaseSourceId,CaseName,TotalPrice,UnitPrice,Section,Subsection,LandCount,TotalAreaInSquareMeter,TotalAreaInPing,BuildRate,VolumeRate,Hold,SellingAreaInSquareMeter,SellingAreaInPing,UseSection,UseStatus,Environment,Feature,IsCadastralMap,IsAerialPhoto,IsTranscript,IsUseSection,IsUrbanPlanningManual,IsCurrentPhotos,ValueAddedTax,Other,Agent,Phone")] CaseSource caseSource, List<LandInventoryItem> landInventoryItems)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CaseSourceId,CaseName,TotalPrice,UnitPrice,Section,Subsection,LandCount,TotalAreaInSquareMeter,TotalAreaInPing,BuildRate,VolumeRate,Hold,SellingAreaInSquareMeter,SellingAreaInPing,UseSection,UseStatus,Environment,Feature,IsCadastralMap,IsAerialPhoto,IsTranscript,IsUseSection,IsUrbanPlanningManual,IsCurrentPhotos,ValueAddedTax,Other,Agent,Phone,CreateTime,CreateId")] CaseSource caseSource, List<LandInventoryItem> landInventoryItems)
         {
             if (id != caseSource.Id)
             {

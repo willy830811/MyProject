@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MyProject.Models.CaseSource>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "案源表";
 }
 
-<h1>Index</h1>
+<h1>案源表</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">新增</a>
 </p>
 <table class="table">
     <thead>
@@ -29,63 +29,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LandCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalAreaInSquareMeter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalAreaInPing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BuildRate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolumeRate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hold)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SellingAreaInSquareMeter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SellingAreaInPing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UseSection)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UseStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Environment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Feature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsCadastralMap)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAerialPhoto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsTranscript)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsUseSection)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsUrbanPlanningManual)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsCurrentPhotos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValueAddedTax)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Other)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Agent)
@@ -130,63 +73,6 @@
                 @Html.DisplayFor(modelItem => item.LandCount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalAreaInSquareMeter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalAreaInPing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuildRate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolumeRate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hold)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellingAreaInSquareMeter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellingAreaInPing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UseSection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UseStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Environment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Feature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsCadastralMap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAerialPhoto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsTranscript)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsUseSection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsUrbanPlanningManual)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsCurrentPhotos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValueAddedTax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Other)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Agent)
             </td>
             <td>
@@ -205,9 +91,9 @@
                 @Html.DisplayFor(modelItem => item.UpdateId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">詳情</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
             </td>
         </tr>
 }

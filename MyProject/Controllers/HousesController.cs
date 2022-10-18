@@ -112,7 +112,7 @@ namespace MyProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "管理者")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime")] House house)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Region,Section,Subsection,Number,RegisterReason,Order,Area,ShareNumerator,ShareDenominator,OwnerId,RegisterTime,CreateTime,CreateId")] House house)
         {
             if (id != house.Id)
             {

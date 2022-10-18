@@ -344,7 +344,7 @@ namespace MyProject.Models
                             IsPolutedArea = false,
                             PolutedAreaType = "1,2",
                             PolutedAreaRestrictions = "哈哈",
-                            TransactionType = (TransactionType)2,
+                            TransactionType = (TransactionType)1,
                             TransactionPrice = 123.45f,
                             PaymentMethod = "哈哈",
                             IsLandValueAddedTax = false,

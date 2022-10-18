@@ -1,10 +1,11 @@
 ﻿@model MyProject.ViewModels.CaseSourceLandInventoryItemsViewModel
 
+<label asp-for="@Model.LandInventories" class="control-label"></label>
 @if (Model is not null && Model.LandInventoryItems.Count > 0)
 {
     @for (int i = 0; i < Model.LandInventoryItems.Count(); i++)
     {
-        <div id=@("LandInventoryItem" + i)>
+        <div id=@("LandInventoryItem" + i) class="alert alert-light">
             <label asp-for="@Model.LandInventoryItems[i].SectionName" class="control-label"></label>
             <input asp-for="@Model.LandInventoryItems[i].SectionName" class="form-control" />
             <label asp-for="@Model.LandInventoryItems[i].PlaceNumber" class="control-label"></label>
@@ -21,13 +22,13 @@
             <input asp-for="@Model.LandInventoryItems[i].UseSection" class="form-control" />
             <label asp-for="@Model.LandInventoryItems[i].Note" class="control-label"></label>
             <input asp-for="@Model.LandInventoryItems[i].Note" class="form-control" />
-            <a class="btn btn-primary" onclick="removeRow(@i)">remove row</a>
+            <a class="btn btn-primary" onclick="removeRow(@i)">－</a>
         </div>
     }
 }
 else
 {
-    <div id=@("LandInventoryItem0")>
+    <div id=@("LandInventoryItem0") class="alert alert-light">
         <label asp-for="@Model.LandInventoryItems[0].SectionName" class="control-label"></label>
         <input asp-for="@Model.LandInventoryItems[0].SectionName" class="form-control" />
         <label asp-for="@Model.LandInventoryItems[0].PlaceNumber" class="control-label"></label>
@@ -44,6 +45,6 @@ else
         <input asp-for="@Model.LandInventoryItems[0].UseSection" class="form-control" />
         <label asp-for="@Model.LandInventoryItems[0].Note" class="control-label"></label>
         <input asp-for="@Model.LandInventoryItems[0].Note" class="form-control" />
-        <a class="btn btn-primary" onclick="removeRow(0)">remove row</a>
+        @*<a class="btn btn-primary" onclick="removeRow(0)">－</a>*@
     </div>
 }
