@@ -1,4 +1,5 @@
 ﻿@model MyProject.Models.RealEstateDetail
+@using MyProject.Models
 
 @{
     ViewData["Title"] = "新增";
@@ -59,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsLandOwner" class="control-label"></label>
-                <input asp-for="IsLandOwner" class="form-control" />
+                <input asp-for="IsLandOwner" type="checkbox" />
                 <span asp-validation-for="IsLandOwner" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -69,7 +70,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOtherObligee" class="control-label"></label>
-                <input asp-for="IsOtherObligee" class="form-control" />
+                <input asp-for="IsOtherObligee" type="checkbox" />
                 <span asp-validation-for="IsOtherObligee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -79,7 +80,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsRegisteredManager" class="control-label"></label>
-                <input asp-for="IsRegisteredManager" class="form-control" />
+                <input asp-for="IsRegisteredManager" type="checkbox" />
                 <span asp-validation-for="IsRegisteredManager" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -89,28 +90,33 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOwnership" class="control-label"></label>
-                <input asp-for="IsOwnership" class="form-control" />
+                <input asp-for="IsOwnership" type="checkbox" />
                 <span asp-validation-for="IsOwnership" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OwnershipType" class="control-label"></label>
-                <input asp-for="OwnershipType" class="form-control" />
-                <span asp-validation-for="OwnershipType" class="text-danger"></span>
+                @foreach( var c in System.Enum.GetValues(typeof(OwnershipType)) )
+                {
+                    <input type="radio" asp-for="OwnershipType" value="@((int)c)" class="control-label" />
+                    <span> </span>
+                    <label asp-for="OwnershipType">@c</label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="IsOtherRights" class="control-label"></label>
-                <input asp-for="IsOtherRights" class="form-control" />
+                <input asp-for="IsOtherRights" type="checkbox" />
                 <span asp-validation-for="IsOtherRights" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OtherRightsType" class="control-label"></label>
-                <input asp-for="OtherRightsType" class="form-control" />
-                <span asp-validation-for="OtherRightsType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(OtherRightsType)))
+                {
+                    <label><input type="checkbox" name="otherRightsType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="IsTrust" class="control-label"></label>
-                <input asp-for="IsTrust" class="form-control" />
-                <span asp-validation-for="IsTrust" class="text-danger"></span>
+                <input type="radio" asp-for="IsTrust" value="@true" /> 有
+                <input type="radio" asp-for="IsTrust" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="TrustContent" class="control-label"></label>
@@ -119,8 +125,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsBaseRightsSettingBurden" class="control-label"></label>
-                <input asp-for="IsBaseRightsSettingBurden" class="form-control" />
-                <span asp-validation-for="IsBaseRightsSettingBurden" class="text-danger"></span>
+                <input type="radio" asp-for="IsBaseRightsSettingBurden" value="@true" /> 有
+                <input type="radio" asp-for="IsBaseRightsSettingBurden" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="BaseRightsSettingBurdenStatus" class="control-label"></label>
@@ -129,23 +135,27 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsSettingOtherRights" class="control-label"></label>
-                <input asp-for="IsSettingOtherRights" class="form-control" />
-                <span asp-validation-for="IsSettingOtherRights" class="text-danger"></span>
+                <input type="radio" asp-for="IsSettingOtherRights" value="@true" /> 有
+                <input type="radio" asp-for="IsSettingOtherRights" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="SettingOtherRightsType" class="control-label"></label>
-                <input asp-for="SettingOtherRightsType" class="form-control" />
-                <span asp-validation-for="SettingOtherRightsType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(OtherRightsType)))
+                {
+                    <label><input type="checkbox" name="settingOtherRightsType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="IsRestrictingRegistration" class="control-label"></label>
-                <input asp-for="IsRestrictingRegistration" class="form-control" />
-                <span asp-validation-for="IsRestrictingRegistration" class="text-danger"></span>
+                <input type="radio" asp-for="IsRestrictingRegistration" value="@true" /> 有
+                <input type="radio" asp-for="IsRestrictingRegistration" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="RestrictingRegistrationType" class="control-label"></label>
-                <input asp-for="RestrictingRegistrationType" class="form-control" />
-                <span asp-validation-for="RestrictingRegistrationType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(RestrictingRegistrationType)))
+                {
+                    <label><input type="checkbox" name="restrictingRegistrationType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="OtherRestrictingRegistration" class="control-label"></label>
@@ -154,7 +164,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOtherBaseRightsItemBy254" class="control-label"></label>
-                <input asp-for="IsOtherBaseRightsItemBy254" class="form-control" />
+                <input asp-for="IsOtherBaseRightsItemBy254" type="checkbox" />
                 <span asp-validation-for="IsOtherBaseRightsItemBy254" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -164,7 +174,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOtherBaseRightsItemRelated" class="control-label"></label>
-                <input asp-for="IsOtherBaseRightsItemRelated" class="form-control" />
+                <input asp-for="IsOtherBaseRightsItemRelated" type="checkbox" />
                 <span asp-validation-for="IsOtherBaseRightsItemRelated" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -174,8 +184,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsUseByConvention" class="control-label"></label>
-                <input asp-for="IsUseByConvention" class="form-control" />
-                <span asp-validation-for="IsUseByConvention" class="text-danger"></span>
+                <input type="radio" asp-for="IsUseByConvention" value="@true" /> 有
+                <input type="radio" asp-for="IsUseByConvention" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="UseByConventionContent" class="control-label"></label>
@@ -184,18 +194,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsRespectivelyManage" class="control-label"></label>
-                <input asp-for="IsRespectivelyManage" class="form-control" />
-                <span asp-validation-for="IsRespectivelyManage" class="text-danger"></span>
+                <input type="radio" asp-for="IsRespectivelyManage" value="@true" /> 有
+                <input type="radio" asp-for="IsRespectivelyManage" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsRespectivelyManageBy826" class="control-label"></label>
-                <input asp-for="IsRespectivelyManageBy826" class="form-control" />
-                <span asp-validation-for="IsRespectivelyManageBy826" class="text-danger"></span>
+                <input type="radio" asp-for="IsRespectivelyManageBy826" value="@true" /> 有
+                <input type="radio" asp-for="IsRespectivelyManageBy826" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="RespectivelyManageBy826Type" class="control-label"></label>
-                <input asp-for="RespectivelyManageBy826Type" class="form-control" />
-                <span asp-validation-for="RespectivelyManageBy826Type" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(RespectivelyManageBy826Type)))
+                {
+                    <label><input type="checkbox" name="respectivelyManageBy826Type" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="RespectivelyManageBy826Content" class="control-label"></label>
@@ -204,13 +216,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsRent" class="control-label"></label>
-                <input asp-for="IsRent" class="form-control" />
-                <span asp-validation-for="IsRent" class="text-danger"></span>
+                <input type="radio" asp-for="IsRent" value="@true" /> 有
+                <input type="radio" asp-for="IsRent" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsLend" class="control-label"></label>
-                <input asp-for="IsLend" class="form-control" />
-                <span asp-validation-for="IsLend" class="text-danger"></span>
+                <input type="radio" asp-for="IsLend" value="@true" /> 有
+                <input type="radio" asp-for="IsLend" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="RentLendStatus" class="control-label"></label>
@@ -219,8 +231,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOccupiedWithoutRights" class="control-label"></label>
-                <input asp-for="IsOccupiedWithoutRights" class="form-control" />
-                <span asp-validation-for="IsOccupiedWithoutRights" class="text-danger"></span>
+                <input type="radio" asp-for="IsOccupiedWithoutRights" value="@true" /> 有
+                <input type="radio" asp-for="IsOccupiedWithoutRights" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="OccupiedWithoutRightsStatus" class="control-label"></label>
@@ -229,8 +241,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsPublicWay" class="control-label"></label>
-                <input asp-for="IsPublicWay" class="form-control" />
-                <span asp-validation-for="IsPublicWay" class="text-danger"></span>
+                <input type="radio" asp-for="IsPublicWay" value="@true" /> 有
+                <input type="radio" asp-for="IsPublicWay" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="PublicWayPlaceAppendice" class="control-label"></label>
@@ -274,13 +286,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsUrbanPlanningManual" class="control-label"></label>
-                <input asp-for="IsUrbanPlanningManual" class="form-control" />
+                <input asp-for="IsUrbanPlanningManual" type="checkbox" />
                 <span asp-validation-for="IsUrbanPlanningManual" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DevelopMethodRestrictionsType" class="control-label"></label>
-                <input asp-for="DevelopMethodRestrictionsType" class="form-control" />
-                <span asp-validation-for="DevelopMethodRestrictionsType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(DevelopMethodRestrictionsType)))
+                {
+                    <label><input type="checkbox" name="developMethodRestrictionsType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="OtherDevelopMethodRestriction" class="control-label"></label>
@@ -289,18 +303,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsBuildingRestrictedRegion" class="control-label"></label>
-                <input asp-for="IsBuildingRestrictedRegion" class="form-control" />
-                <span asp-validation-for="IsBuildingRestrictedRegion" class="text-danger"></span>
+                <input type="radio" asp-for="IsBuildingRestrictedRegion" value="@true" /> 有
+                <input type="radio" asp-for="IsBuildingRestrictedRegion" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsFarmLand" class="control-label"></label>
-                <input asp-for="IsFarmLand" class="form-control" />
+                <input asp-for="IsFarmLand" type="checkbox" />
                 <span asp-validation-for="IsFarmLand" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BuildFarmhouseType" class="control-label"></label>
-                <input asp-for="BuildFarmhouseType" class="form-control" />
-                <span asp-validation-for="BuildFarmhouseType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(BuildFarmhouseType)))
+                {
+                    <label><input type="checkbox" name="buildFarmhouseType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="FarmLandRegulation" class="control-label"></label>
@@ -309,8 +325,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsMountLand" class="control-label"></label>
-                <input asp-for="IsMountLand" class="form-control" />
-                <span asp-validation-for="IsMountLand" class="text-danger"></span>
+                <input type="radio" asp-for="IsMountLand" value="@true" /> 有
+                <input type="radio" asp-for="IsMountLand" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="MountLandRestrictions" class="control-label"></label>
@@ -319,8 +335,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsBanningBuildByKeepSoilLaw" class="control-label"></label>
-                <input asp-for="IsBanningBuildByKeepSoilLaw" class="form-control" />
-                <span asp-validation-for="IsBanningBuildByKeepSoilLaw" class="text-danger"></span>
+                <input type="radio" asp-for="IsBanningBuildByKeepSoilLaw" value="@true" /> 有
+                <input type="radio" asp-for="IsBanningBuildByKeepSoilLaw" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="BanningBuildByKeepSoilLawRestrictions" class="control-label"></label>
@@ -329,8 +345,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsRiverRegion" class="control-label"></label>
-                <input asp-for="IsRiverRegion" class="form-control" />
-                <span asp-validation-for="IsRiverRegion" class="text-danger"></span>
+                <input type="radio" asp-for="IsRiverRegion" value="@true" /> 有
+                <input type="radio" asp-for="IsRiverRegion" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="RiverRegionRestrictions" class="control-label"></label>
@@ -339,8 +355,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsDrainFacilityRegion" class="control-label"></label>
-                <input asp-for="IsDrainFacilityRegion" class="form-control" />
-                <span asp-validation-for="IsDrainFacilityRegion" class="text-danger"></span>
+                <input type="radio" asp-for="IsDrainFacilityRegion" value="@true" /> 有
+                <input type="radio" asp-for="IsDrainFacilityRegion" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="DrainFacilityRegionRestrictions" class="control-label"></label>
@@ -349,13 +365,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsNationalPark" class="control-label"></label>
-                <input asp-for="IsNationalPark" class="form-control" />
-                <span asp-validation-for="IsNationalPark" class="text-danger"></span>
+                <input type="radio" asp-for="IsNationalPark" value="@true" /> 有
+                <input type="radio" asp-for="IsNationalPark" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="NationalParkType" class="control-label"></label>
-                <input asp-for="NationalParkType" class="form-control" />
-                <span asp-validation-for="NationalParkType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(NationalParkType)))
+                {
+                    <label><input type="checkbox" name="nationalParkType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="NationalParkRestrictions" class="control-label"></label>
@@ -364,13 +382,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsDrinkingWaterSource" class="control-label"></label>
-                <input asp-for="IsDrinkingWaterSource" class="form-control" />
-                <span asp-validation-for="IsDrinkingWaterSource" class="text-danger"></span>
+                <input type="radio" asp-for="IsDrinkingWaterSource" value="@true" /> 有
+                <input type="radio" asp-for="IsDrinkingWaterSource" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="DrinkingWaterSourceType" class="control-label"></label>
-                <input asp-for="DrinkingWaterSourceType" class="form-control" />
-                <span asp-validation-for="DrinkingWaterSourceType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(DrinkingWaterSourceType)))
+                {
+                    <label><input type="checkbox" name="drinkingWaterSourceType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="DrinkingWaterSourceRestrictions" class="control-label"></label>
@@ -379,8 +399,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsWaterProtectionAreaByLaw" class="control-label"></label>
-                <input asp-for="IsWaterProtectionAreaByLaw" class="form-control" />
-                <span asp-validation-for="IsWaterProtectionAreaByLaw" class="text-danger"></span>
+                <input type="radio" asp-for="IsWaterProtectionAreaByLaw" value="@true" /> 有
+                <input type="radio" asp-for="IsWaterProtectionAreaByLaw" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="WaterProtectionAreaByLawRestrictions" class="control-label"></label>
@@ -389,13 +409,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsPolutedArea" class="control-label"></label>
-                <input asp-for="IsPolutedArea" class="form-control" />
-                <span asp-validation-for="IsPolutedArea" class="text-danger"></span>
+                <input type="radio" asp-for="IsPolutedArea" value="@true" /> 有
+                <input type="radio" asp-for="IsPolutedArea" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="PolutedAreaType" class="control-label"></label>
-                <input asp-for="PolutedAreaType" class="form-control" />
-                <span asp-validation-for="PolutedAreaType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(PolutedAreaType)))
+                {
+                    <label><input type="checkbox" name="polutedAreaType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="PolutedAreaRestrictions" class="control-label"></label>
@@ -403,9 +425,12 @@
                 <span asp-validation-for="PolutedAreaRestrictions" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TransactionType" class="control-label"></label>
-                <input asp-for="TransactionType" class="form-control" />
-                <span asp-validation-for="TransactionType" class="text-danger"></span>
+                @foreach( var c in System.Enum.GetValues(typeof(TransactionType)) )
+                {
+                    <input type="radio" asp-for="TransactionType" value="@((int)c)" class="control-label" />
+                    <span> </span>
+                    <label asp-for="TransactionType">@c</label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="TransactionPrice" class="control-label"></label>
@@ -419,7 +444,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsLandValueAddedTax" class="control-label"></label>
-                <input asp-for="IsLandValueAddedTax" class="form-control" />
+                <input asp-for="IsLandValueAddedTax" type="checkbox" />
                 <span asp-validation-for="IsLandValueAddedTax" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -429,7 +454,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsLandTax" class="control-label"></label>
-                <input asp-for="IsLandTax" class="form-control" />
+                <input asp-for="IsLandTax" type="checkbox" />
                 <span asp-validation-for="IsLandTax" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -439,7 +464,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsStampDuty" class="control-label"></label>
-                <input asp-for="IsStampDuty" class="form-control" />
+                <input asp-for="IsStampDuty" type="checkbox" />
                 <span asp-validation-for="IsStampDuty" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -449,7 +474,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOtherTax" class="control-label"></label>
-                <input asp-for="IsOtherTax" class="form-control" />
+                <input asp-for="IsOtherTax" type="checkbox" />
                 <span asp-validation-for="IsOtherTax" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -459,7 +484,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsConstructionBenefitFee" class="control-label"></label>
-                <input asp-for="IsConstructionBenefitFee" class="form-control" />
+                <input asp-for="IsConstructionBenefitFee" type="checkbox" />
                 <span asp-validation-for="IsConstructionBenefitFee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -469,7 +494,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsRegistrationFee" class="control-label"></label>
-                <input asp-for="IsRegistrationFee" class="form-control" />
+                <input asp-for="IsRegistrationFee" type="checkbox" />
                 <span asp-validation-for="IsRegistrationFee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -479,7 +504,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsSurveyFee" class="control-label"></label>
-                <input asp-for="IsSurveyFee" class="form-control" />
+                <input asp-for="IsSurveyFee" type="checkbox" />
                 <span asp-validation-for="IsSurveyFee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -489,7 +514,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOtherProcessingFee" class="control-label"></label>
-                <input asp-for="IsOtherProcessingFee" class="form-control" />
+                <input asp-for="IsOtherProcessingFee" type="checkbox" />
                 <span asp-validation-for="IsOtherProcessingFee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -499,7 +524,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsContractFee" class="control-label"></label>
-                <input asp-for="IsContractFee" class="form-control" />
+                <input asp-for="IsContractFee" type="checkbox" />
                 <span asp-validation-for="IsContractFee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -509,7 +534,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOwnershipTransferAgencyFee" class="control-label"></label>
-                <input asp-for="IsOwnershipTransferAgencyFee" class="form-control" />
+                <input asp-for="IsOwnershipTransferAgencyFee" type="checkbox" />
                 <span asp-validation-for="IsOwnershipTransferAgencyFee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -519,7 +544,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsOtherFee" class="control-label"></label>
-                <input asp-for="IsOtherFee" class="form-control" />
+                <input asp-for="IsOtherFee" type="checkbox" />
                 <span asp-validation-for="IsOtherFee" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -529,8 +554,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="ChooseManageType" class="control-label"></label>
-                <input asp-for="ChooseManageType" class="form-control" />
-                <span asp-validation-for="ChooseManageType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(ChooseManageType)))
+                {
+                    <label><input type="checkbox" name="chooseManageType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="ManageMethod" class="control-label"></label>
@@ -539,8 +566,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsBreachOfContractPunishment" class="control-label"></label>
-                <input asp-for="IsBreachOfContractPunishment" class="form-control" />
-                <span asp-validation-for="IsBreachOfContractPunishment" class="text-danger"></span>
+                <input type="radio" asp-for="IsBreachOfContractPunishment" value="@true" /> 有
+                <input type="radio" asp-for="IsBreachOfContractPunishment" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="BreachOfContractPunishment" class="control-label"></label>
@@ -554,28 +581,32 @@
             </div>
             <div class="form-group">
                 <label asp-for="SurroundingsAppendiceType" class="control-label"></label>
-                <input asp-for="SurroundingsAppendiceType" class="form-control" />
-                <span asp-validation-for="SurroundingsAppendiceType" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(SurroundingsAppendiceType)))
+                {
+                    <label><input type="checkbox" name="surroundingsAppendiceType" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="Surroundings" class="control-label"></label>
-                <input asp-for="Surroundings" class="form-control" />
-                <span asp-validation-for="Surroundings" class="text-danger"></span>
+                @foreach(var c in System.Enum.GetValues(typeof(Surroundings)))
+                {
+                    <label><input type="checkbox" name="surroundings" value="@((int)c)" class="control-label" />@c </label>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="IsCadastralMapRetest" class="control-label"></label>
-                <input asp-for="IsCadastralMapRetest" class="form-control" />
-                <span asp-validation-for="IsCadastralMapRetest" class="text-danger"></span>
+                <input type="radio" asp-for="IsCadastralMapRetest" value="@true" /> 有
+                <input type="radio" asp-for="IsCadastralMapRetest" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsCadastralMapRetestAnnouced" class="control-label"></label>
-                <input asp-for="IsCadastralMapRetestAnnouced" class="form-control" />
-                <span asp-validation-for="IsCadastralMapRetestAnnouced" class="text-danger"></span>
+                <input type="radio" asp-for="IsCadastralMapRetestAnnouced" value="@true" /> 有
+                <input type="radio" asp-for="IsCadastralMapRetestAnnouced" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsOutOfBoundsBuilding" class="control-label"></label>
-                <input asp-for="IsOutOfBoundsBuilding" class="form-control" />
-                <span asp-validation-for="IsOutOfBoundsBuilding" class="text-danger"></span>
+                <input type="radio" asp-for="IsOutOfBoundsBuilding" value="@true" /> 有
+                <input type="radio" asp-for="IsOutOfBoundsBuilding" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="OutOfBoundsBuildingStatus" class="control-label"></label>
@@ -584,8 +615,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsCompulsoryAcquisition" class="control-label"></label>
-                <input asp-for="IsCompulsoryAcquisition" class="form-control" />
-                <span asp-validation-for="IsCompulsoryAcquisition" class="text-danger"></span>
+                <input type="radio" asp-for="IsCompulsoryAcquisition" value="@true" /> 有
+                <input type="radio" asp-for="IsCompulsoryAcquisition" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="CompulsoryAcquisitionArea" class="control-label"></label>
@@ -594,23 +625,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsElectricityPower" class="control-label"></label>
-                <input asp-for="IsElectricityPower" class="form-control" />
-                <span asp-validation-for="IsElectricityPower" class="text-danger"></span>
+                <input type="radio" asp-for="IsElectricityPower" value="@true" /> 有
+                <input type="radio" asp-for="IsElectricityPower" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsTapWater" class="control-label"></label>
-                <input asp-for="IsTapWater" class="form-control" />
-                <span asp-validation-for="IsTapWater" class="text-danger"></span>
+                <input type="radio" asp-for="IsTapWater" value="@true" /> 有
+                <input type="radio" asp-for="IsTapWater" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsGas" class="control-label"></label>
-                <input asp-for="IsGas" class="form-control" />
-                <span asp-validation-for="IsGas" class="text-danger"></span>
+                <input type="radio" asp-for="IsGas" value="@true" /> 有
+                <input type="radio" asp-for="IsGas" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="IsDrainer" class="control-label"></label>
-                <input asp-for="IsDrainer" class="form-control" />
-                <span asp-validation-for="IsDrainer" class="text-danger"></span>
+                <input type="radio" asp-for="IsDrainer" value="@true" /> 有
+                <input type="radio" asp-for="IsDrainer" value="@false" /> 無
             </div>
             <div class="form-group">
                 <label asp-for="NonInfrastructureReason" class="control-label"></label>

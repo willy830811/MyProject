@@ -2,12 +2,12 @@
 
 @{
     ViewData["Title"] = "附件";
-    var caseSourceId = ViewBag.CaseSourceId;
 }
 
 <h1>附件</h1>
 
 <h4>案源表</h4>
+<h6>案名: @ViewBag.CaseSourceName</h6>
 <hr />
 <table class="table">
     <thead>
@@ -17,6 +17,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Format)
+            </th>
+            <th>
+                預覽
             </th>
             <th></th>
         </tr>
@@ -32,7 +35,10 @@
                     @Html.DisplayFor(modelItem => item.Format)
                 </td>
                 <td>
-                    <a asp-action="AppendixDelete" asp-route-caseSourceId="@caseSourceId" asp-route-id="@item.Id">Delete</a>
+                    <img src="@String.Format("data:image/{0};base64,{1}", item.Format, item.Base64)" />
+                </td>
+                <td>
+                    <a asp-action="AppendixDelete" asp-route-caseSourceId="@ViewBag.CaseSourceId" asp-route-id="@item.Id">刪除</a>
                 </td>
             </tr>
         }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Models;
-using MyProject.Models.Enum;
 using MyProject.Models.Items;
 
 namespace MyProject.Data

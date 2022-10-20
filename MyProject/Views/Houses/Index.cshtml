@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<MyProject.Models.House>
-@using MyProject.Models.Enum
 
 @{
     ViewData["Title"] = "客戶資料";
@@ -10,6 +9,8 @@
 
 <p>
     <a asp-action="Create">新增</a>
+    <span> |</span>
+    <a asp-action="Index" asp-controller="Owners">管理所有權人</a>
 </p>
 <table class="table">
     <thead>
@@ -42,7 +43,7 @@
                 @*@Html.DisplayNameFor(model => model.ShareDenominator)*@權利範圍
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OwnerId)
+                @Html.DisplayNameFor(model => model.Owner.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RegisterTime)
@@ -65,7 +66,6 @@
     <tbody>
         @foreach (var item in Model)
         {
-            var registerReason = (RegisterReason)item.RegisterReason;
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.City)
@@ -83,7 +83,7 @@
                     @Html.DisplayFor(modelItem => item.Number)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => registerReason)
+                    @Html.DisplayFor(modelItem => item.RegisterReason)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Order)
@@ -95,7 +95,7 @@
                     <p>@Html.DisplayFor(modelItem => item.ShareNumerator) / @Html.DisplayFor(modelItem => item.ShareDenominator)</p>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OwnerId)
+                    @Html.DisplayFor(modelItem => item.Owner.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RegisterTime)
@@ -120,7 +120,7 @@
                         <span> |</span>
                         <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
                         <span> |</span>
-                        <a asp-action="Access" asp-route-id="@item.Id">權限管理</a>
+                        <a asp-action="Access" asp-route-id="@item.Id" asp-route-ownerName="@item.Owner?.Name">權限管理</a>
                     }
                 </td>
             </tr>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20221019032642_house_fix_")]
+    partial class house_fix_
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,8 +190,8 @@ namespace MyProject.Migrations
                     b.Property<int?>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")
                         .HasColumnType("nvarchar(max)");
@@ -219,8 +221,6 @@ namespace MyProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("House");
                 });
@@ -669,10 +669,10 @@ namespace MyProject.Migrations
                     b.Property<bool?>("IsCompulsoryAcquisition")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsConstructionBenefitFee")
+                    b.Property<bool?>("IsConstructionBenefitFee")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsContractFee")
+                    b.Property<bool?>("IsContractFee")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsDrainFacilityRegion")
@@ -687,19 +687,19 @@ namespace MyProject.Migrations
                     b.Property<bool?>("IsElectricityPower")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsFarmLand")
+                    b.Property<bool?>("IsFarmLand")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsGas")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsLandOwner")
+                    b.Property<bool?>("IsLandOwner")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsLandTax")
+                    b.Property<bool?>("IsLandTax")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsLandValueAddedTax")
+                    b.Property<bool?>("IsLandValueAddedTax")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsLend")
@@ -714,34 +714,34 @@ namespace MyProject.Migrations
                     b.Property<bool?>("IsOccupiedWithoutRights")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOtherBaseRightsItemBy254")
+                    b.Property<bool?>("IsOtherBaseRightsItemBy254")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOtherBaseRightsItemRelated")
+                    b.Property<bool?>("IsOtherBaseRightsItemRelated")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOtherFee")
+                    b.Property<bool?>("IsOtherFee")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOtherObligee")
+                    b.Property<bool?>("IsOtherObligee")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOtherProcessingFee")
+                    b.Property<bool?>("IsOtherProcessingFee")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOtherRights")
+                    b.Property<bool?>("IsOtherRights")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOtherTax")
+                    b.Property<bool?>("IsOtherTax")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsOutOfBoundsBuilding")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOwnership")
+                    b.Property<bool?>("IsOwnership")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOwnershipTransferAgencyFee")
+                    b.Property<bool?>("IsOwnershipTransferAgencyFee")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsPolutedArea")
@@ -750,10 +750,10 @@ namespace MyProject.Migrations
                     b.Property<bool?>("IsPublicWay")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsRegisteredManager")
+                    b.Property<bool?>("IsRegisteredManager")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsRegistrationFee")
+                    b.Property<bool?>("IsRegistrationFee")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsRent")
@@ -774,10 +774,10 @@ namespace MyProject.Migrations
                     b.Property<bool?>("IsSettingOtherRights")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsStampDuty")
+                    b.Property<bool?>("IsStampDuty")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSurveyFee")
+                    b.Property<bool?>("IsSurveyFee")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsTapWater")
@@ -786,7 +786,7 @@ namespace MyProject.Migrations
                     b.Property<bool?>("IsTrust")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsUrbanPlanningManual")
+                    b.Property<bool?>("IsUrbanPlanningManual")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsUseByConvention")
@@ -972,15 +972,6 @@ namespace MyProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RealEstateDetail");
-                });
-
-            modelBuilder.Entity("MyProject.Models.House", b =>
-                {
-                    b.HasOne("MyProject.Models.Owner", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("MyProject.Models.Items.AppendixItem", b =>

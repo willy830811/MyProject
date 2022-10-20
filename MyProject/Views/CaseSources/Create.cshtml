@@ -101,32 +101,50 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsCadastralMap" class="control-label"></label>
-                <input asp-for="IsCadastralMap" class="form-control" />
+                <div class="form-control">
+                    <input asp-for="IsCadastralMap" type="radio" value="@true" /> 有
+                    <input asp-for="IsCadastralMap" type="radio" value="@false" /> 無
+                </div>
                 <span asp-validation-for="IsCadastralMap" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IsAerialPhoto" class="control-label"></label>
-                <input asp-for="IsAerialPhoto" class="form-control" />
+                <div class="form-control">
+                    <input asp-for="IsAerialPhoto" type="radio" value="@true" /> 有
+                    <input asp-for="IsAerialPhoto" type="radio" value="@false" /> 無
+                </div>
                 <span asp-validation-for="IsAerialPhoto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IsTranscript" class="control-label"></label>
-                <input asp-for="IsTranscript" class="form-control" />
+                <div class="form-control">
+                    <input asp-for="IsTranscript" type="radio" value="@true" /> 有
+                    <input asp-for="IsTranscript" type="radio" value="@false" /> 無
+                </div>
                 <span asp-validation-for="IsTranscript" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IsUseSection" class="control-label"></label>
-                <input asp-for="IsUseSection" class="form-control" />
+                <div class="form-control">
+                    <input asp-for="IsUseSection" type="radio" value="@true" /> 有
+                    <input asp-for="IsUseSection" type="radio" value="@false" /> 無
+                </div>
                 <span asp-validation-for="IsUseSection" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IsUrbanPlanningManual" class="control-label"></label>
-                <input asp-for="IsUrbanPlanningManual" class="form-control" />
+                <div class="form-control">
+                    <input asp-for="IsUrbanPlanningManual" type="radio" value="@true" /> 有
+                    <input asp-for="IsUrbanPlanningManual" type="radio" value="@false" /> 無
+                </div>
                 <span asp-validation-for="IsUrbanPlanningManual" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IsCurrentPhotos" class="control-label"></label>
-                <input asp-for="IsCurrentPhotos" class="form-control" />
+                <div class="form-control">
+                    <input asp-for="IsCurrentPhotos" type="radio" value="@true" /> 有
+                    <input asp-for="IsCurrentPhotos" type="radio" value="@false" /> 無
+                </div>
                 <span asp-validation-for="IsCurrentPhotos" class="text-danger"></span>
             </div>
             <div class="form-group">

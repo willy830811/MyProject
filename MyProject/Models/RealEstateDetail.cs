@@ -37,31 +37,31 @@ namespace MyProject.Models
         public string? AppendicesNames { get; set; }
 
         [Display(Name = "(Y/N)土地所有權人")]
-        public bool? IsLandOwner { get; set; }
+        public bool IsLandOwner { get; set; } = false;
 
         [Display(Name = "土地所有權人")]
         public string? LandOwner { get; set; }
 
         [Display(Name = "(Y/N)他項權利人")]
-        public bool? IsOtherObligee { get; set; }
+        public bool IsOtherObligee { get; set; } = false;
 
         [Display(Name = "他項權利人")]
         public string? OtherObligee { get; set; }
 
         [Display(Name = "(Y/N)登記簿上記載之管理人")]
-        public bool? IsRegisteredManager { get; set; }
+        public bool IsRegisteredManager { get; set; } = false;
 
         [Display(Name = "登記簿上記載之管理人")]
         public string? RegisteredManager { get; set; }
 
         [Display(Name = "(Y/N)所有權")]
-        public bool? IsOwnership { get; set; }
+        public bool IsOwnership { get; set; } = false;
 
         [Display(Name = "所有權種類")]
         public OwnershipType? OwnershipType { get; set; }
 
         [Display(Name = "(Y/N)他項權利")]
-        public bool? IsOtherRights { get; set; }
+        public bool IsOtherRights { get; set; } = false;
 
         [Display(Name = "他項權利種類")]
         public string? OtherRightsType { get; set; }
@@ -94,13 +94,13 @@ namespace MyProject.Models
         public string? OtherRestrictingRegistration { get; set; }
 
         [Display(Name = "(Y/N)其他基地權利事項(依民事訴訟法第254條規定註記)")]
-        public bool? IsOtherBaseRightsItemBy254 { get; set; }
+        public bool IsOtherBaseRightsItemBy254 { get; set; } = false;
 
         [Display(Name = "其他基地權利事項(依民事訴訟法第254條規定註記)")]
         public string? OtherBaseRightsItemBy254 { get; set; }
 
         [Display(Name = "(Y/N)其他基地權利事項(其他相關註記)")]
-        public bool? IsOtherBaseRightsItemRelated { get; set; }
+        public bool IsOtherBaseRightsItemRelated { get; set; } = false;
 
         [Display(Name = "其他基地權利事項(其他相關註記)")]
         public string? OtherBaseRightsItemRelated { get; set; }
@@ -166,7 +166,7 @@ namespace MyProject.Models
         public float? VolumeRate { get; set; }
 
         [Display(Name = "(Y/N)都市計畫說明書")]
-        public bool? IsUrbanPlanningManual { get; set; }
+        public bool IsUrbanPlanningManual { get; set; } = false;
 
         [Display(Name = "開發方式限制")]
         public string? DevelopMethodRestrictionsType { get; set; }
@@ -178,7 +178,7 @@ namespace MyProject.Models
         public bool? IsBuildingRestrictedRegion { get; set; }
 
         [Display(Name = "(Y/N)農業用地")]
-        public bool? IsFarmLand { get; set; }
+        public bool IsFarmLand { get; set; } = false;
 
         [Display(Name = "興建農舍")]
         public string? BuildFarmhouseType { get; set; }
@@ -253,67 +253,67 @@ namespace MyProject.Models
         public string? PaymentMethod { get; set; }
 
         [Display(Name = "(Y/N)土地增值稅")]
-        public bool? IsLandValueAddedTax { get; set; }
+        public bool IsLandValueAddedTax { get; set; } = false;
 
         [Display(Name = "土地增值稅")]
         public float? LandValueAddedTax { get; set; }
 
         [Display(Name = "(Y/N)地價稅")]
-        public bool? IsLandTax { get; set; }
+        public bool IsLandTax { get; set; } = false;
 
         [Display(Name = "地價稅")]
         public float? LandTax { get; set; }
 
         [Display(Name = "(Y/N)印花稅")]
-        public bool? IsStampDuty { get; set; }
+        public bool IsStampDuty { get; set; } = false;
 
         [Display(Name = "印花稅")]
         public float? StampDuty { get; set; }
 
         [Display(Name = "(Y/N)其他稅費")]
-        public bool? IsOtherTax { get; set; }
+        public bool IsOtherTax { get; set; } = false;
 
         [Display(Name = "其他稅費")]
         public string? OtherTax { get; set; }
 
         [Display(Name = "(Y/N)工程受益費")]
-        public bool? IsConstructionBenefitFee { get; set; }
+        public bool IsConstructionBenefitFee { get; set; } = false;
 
         [Display(Name = "工程受益費")]
         public float? ConstructionBenefitFee { get; set; }
 
         [Display(Name = "(Y/N)登記規費")]
-        public bool? IsRegistrationFee { get; set; }
+        public bool IsRegistrationFee { get; set; } = false;
 
         [Display(Name = "登記規費")]
         public float? RegistrationFee { get; set; }
 
         [Display(Name = "(Y/N)公證費")]
-        public bool? IsSurveyFee { get; set; }
+        public bool IsSurveyFee { get; set; } = false;
 
         [Display(Name = "公證費")]
         public float? SurveyFee { get; set; }
 
         [Display(Name = "(Y/N)其他規費")]
-        public bool? IsOtherProcessingFee { get; set; }
+        public bool IsOtherProcessingFee { get; set; } = false;
 
         [Display(Name = "其他規費")]
         public string? OtherProcessingFee { get; set; }
 
         [Display(Name = "(Y/N)簽約費")]
-        public bool? IsContractFee { get; set; }
+        public bool IsContractFee { get; set; } = false;
 
         [Display(Name = "簽約費")]
         public float? ContractFee { get; set; }
 
         [Display(Name = "(Y/N)所有權移轉代辦費")]
-        public bool? IsOwnershipTransferAgencyFee { get; set; }
+        public bool IsOwnershipTransferAgencyFee { get; set; } = false;
 
         [Display(Name = "所有權移轉代辦費")]
         public float? OwnershipTransferAgencyFee { get; set; }
 
         [Display(Name = "(Y/N)其他其他費用")]
-        public bool? IsOtherFee { get; set; }
+        public bool IsOtherFee { get; set; } = false;
 
         [Display(Name = "其他其他費用")]
         public string? OtherFee { get; set; }

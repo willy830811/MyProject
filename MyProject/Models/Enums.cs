@@ -1,5 +1,16 @@
 ﻿namespace MyProject.Models
 {
+    // 客戶資料
+    public enum RegisterReason
+    {
+        買賣,
+        贈與,
+        繼承,
+        分割繼承,
+        土地重劃,
+        其他
+    }
+
     // 產權資料
     public enum PropertyType
     {

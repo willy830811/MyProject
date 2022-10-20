@@ -121,6 +121,22 @@ namespace MyProject.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<MyProjectContext>>()))
             {
+                if (!context.Owner.Any())
+                {
+                    context.Owner.AddRange(
+                        new Owner
+                        {
+                            Name = "老王",
+                            IdNumber = "A123456789",
+                            Telephone = "0912345678",
+                            Phone = "0234567890",
+                            Residence = "台北市大安森林公園涼亭"
+                        }
+                    );
+
+                    context.SaveChanges();
+                }
+
                 if (!context.House.Any())
                 {
                     context.House.AddRange(
@@ -134,7 +150,7 @@ namespace MyProject.Models
                             RegisterReason = 0,
                             Order = 1,
                             Area = 1.23F,
-                            OwnerId = "88",
+                            Owner = context.Owner.FirstOrDefault(x => x.Name == "老王"),
                             RegisterTime = Convert.ToDateTime("2022-01-01 00:00:00")
                         }
                     );
@@ -148,22 +164,6 @@ namespace MyProject.Models
                         new Department
                         {
                             Name = "土城業務部"
-                        }
-                    );
-
-                    context.SaveChanges();
-                }
-
-                if (!context.Owner.Any())
-                {
-                    context.Owner.AddRange(
-                        new Owner
-                        {
-                            Name = "老王",
-                            IdNumber = "A123456789",
-                            Telephone = "0912345678",
-                            Phone = "0234567890",
-                            Residence = "台北市大安森林公園涼亭"
                         }
                     );
 

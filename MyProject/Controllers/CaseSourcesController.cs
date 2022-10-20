@@ -43,7 +43,42 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(caseSource);
+            var caseSourceLandInventoryItemsViewModel = new CaseSourceLandInventoryItemsViewModel
+            {
+                Id = caseSource.Id,
+                CaseName = caseSource.CaseName,
+                TotalPrice = caseSource.TotalPrice,
+                UnitPrice = caseSource.UnitPrice,
+                Section = caseSource.Section,
+                Subsection = caseSource.Subsection,
+                PlaceNumber = caseSource.PlaceNumber,
+                LandCount = caseSource.LandCount,
+                TotalAreaInSquareMeter = caseSource.TotalAreaInSquareMeter,
+                TotalAreaInPing = caseSource.TotalAreaInPing,
+                BuildRate = caseSource.BuildRate,
+                VolumeRate = caseSource.VolumeRate,
+                Hold = caseSource.Hold,
+                SellingAreaInSquareMeter = caseSource.SellingAreaInSquareMeter,
+                SellingAreaInPing = caseSource.SellingAreaInPing,
+                UseSection = caseSource.UseSection,
+                UseStatus = caseSource.UseStatus,
+                Environment = caseSource.Environment,
+                Feature = caseSource.Feature,
+                IsCadastralMap = caseSource.IsCadastralMap,
+                IsAerialPhoto = caseSource.IsAerialPhoto,
+                IsTranscript = caseSource.IsTranscript,
+                IsUseSection = caseSource.IsUseSection,
+                IsUrbanPlanningManual = caseSource.IsUrbanPlanningManual,
+                IsCurrentPhotos = caseSource.IsCurrentPhotos,
+                ValueAddedTax = caseSource.ValueAddedTax,
+                Other = caseSource.Other,
+                Agent = caseSource.Agent,
+                Phone = caseSource.Phone,
+                LandInventoryItems = JsonConvert.DeserializeObject<List<LandInventoryItem>>(caseSource.LandInventories),
+                AppendixItems = caseSource.AppendixItems
+            };
+
+            return View(caseSourceLandInventoryItemsViewModel);
         }
 
         // GET: CaseSources/Create
@@ -215,8 +250,9 @@ namespace MyProject.Controllers
 
         public async Task<IActionResult> AppendixIndex(int id)
         {
-            ViewBag.CaseSourceId = id;
             var caseSouce = await _context.CaseSource.Include(d => d.AppendixItems).FirstOrDefaultAsync(x => x.Id == id);
+            ViewBag.CaseSourceId = id;
+            ViewBag.CaseSourceName = caseSouce.CaseName;
 
             return View(caseSouce.AppendixItems);
         }
@@ -330,33 +366,34 @@ namespace MyProject.Controllers
             }
 
             // 處理List
-            //var originListString = "<tr style='mso-height-source:userset;height:24.05pt'>\r\n<td colspan='2' style='border:1px solid #000000; vertical-align:middle;'>$SectionName$</td>\r\n<td colspan='2' style='border:1px solid #000000; vertical-align:middle;'>$PlaceNumber$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$AreaInSquareMeter$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$AreaInPing$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$Hold$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$HoldAreaInSquareMeter$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$HoldAreaInPing$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$PresentValue$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$UseSection$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$Note$</td>\r\n  \r\n </tr>";
-            //var landInventoryItems = string.Empty;
+            var originString = "<tr style='mso-height-source:userset;height:24.05pt'>\r\n<td colspan='2' style='border:1px solid #000000; vertical-align:middle;'>$SectionName$</td>\r\n<td colspan='2' style='border:1px solid #000000; vertical-align:middle;'>$PlaceNumber$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$AreaInSquareMeter$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$AreaInPing$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$Hold$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$HoldAreaInSquareMeter$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$HoldAreaInPing$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$PresentValue$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$UseSection$</td>\r\n<td style='border:1px solid #000000; vertical-align:middle;'>$Note$</td>\r\n  \r\n </tr>";
+            var landInventoriesString = string.Empty;
+            var landInventoryItems = JsonConvert.DeserializeObject<List<LandInventoryItem>>(caseSource.LandInventories);
 
-            //if (caseSource.LandInventoryItems is not null && caseSource.LandInventoryItems.Count > 0)
-            //{ 
-            //    foreach (var item in caseSource.LandInventoryItems)
-            //    {
-            //        var newListString = originListString.Replace("$SectionName$", item.SectionName)
-            //            .Replace("$PlaceNumber$", item.PlaceNumber)
-            //            .Replace("$AreaInSquareMeter$", item.AreaInSquareMeter.ToString())
-            //            .Replace("$AreaInPing$", item.AreaInPing.ToString())
-            //            .Replace("$Hold$", item.Hold)
-            //            .Replace("$HoldAreaInSquareMeter$", item.HoldAreaInSquareMeter.ToString())
-            //            .Replace("$HoldAreaInPing$", item.HoldAreaInPing.ToString())
-            //            .Replace("$PresentValue$", item.PresentValue.ToString())
-            //            .Replace("$UseSection$", item.UseSection)
-            //            .Replace("$Note$", item.Note);
+            if (landInventoryItems is not null && landInventoryItems.Count > 0)
+            {
+                foreach (var item in landInventoryItems)
+                {
+                    var newString = originString.Replace("$SectionName$", item.SectionName)
+                        .Replace("$PlaceNumber$", item.PlaceNumber)
+                        .Replace("$AreaInSquareMeter$", item.AreaInSquareMeter.ToString())
+                        .Replace("$AreaInPing$", item.AreaInPing.ToString())
+                        .Replace("$Hold$", item.Hold)
+                        .Replace("$HoldAreaInSquareMeter$", item.HoldAreaInSquareMeter.ToString())
+                        .Replace("$HoldAreaInPing$", item.HoldAreaInPing.ToString())
+                        .Replace("$PresentValue$", item.PresentValue.ToString())
+                        .Replace("$UseSection$", item.UseSection)
+                        .Replace("$Note$", item.Note);
 
-            //        landInventoryItems += newListString;
-            //    }
+                    landInventoriesString += newString;
+                }
 
-            //    html = html.Replace("$LandInventoryItems$", landInventoryItems);
-            //}
-            //else
-            //{
-            //    html = html.Replace("$LandInventoryItems$", "");
-            //}
+                html = html.Replace("$LandInventoryItems$", landInventoriesString);
+            }
+            else
+            {
+                html = html.Replace("$LandInventoryItems$", "");
+            }
 
             // 處理附件
             var originAppendixItemsString = "<p height='64'>$Name$</p><img width='595' max-height='842' src=\"data:image/$Format$;base64,$Base64$\">";

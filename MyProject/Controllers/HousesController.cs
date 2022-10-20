@@ -33,12 +33,12 @@ namespace MyProject.Controllers
 
             if (User.IsInRole("管理者"))
             {
-                availableHouses = await _context.House.ToListAsync();
+                availableHouses = await _context.House.Include(d => d.Owner).ToListAsync();
             }
             else
             {
                 var houseUsersByUserId = await _context.HouseUser.Where(x => x.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
-                var houses = await _context.House.ToListAsync();
+                var houses = await _context.House.Include(d => d.Owner).ToListAsync();
                 availableHouses = houses.Where(x => houseUsersByUserId.FindIndex(y => y.HouseId == x.Id) != -1).ToList();
             }
 
@@ -53,7 +53,7 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            var house = await _context.House
+            var house = await _context.House.Include(d => d.Owner)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (house == null)
             {
@@ -67,6 +67,15 @@ namespace MyProject.Controllers
         [Authorize(Roles = "管理者")]
         public IActionResult Create()
         {
+            var ownerItems = _context.Owner.ToList();
+            var selectItems = ownerItems.Select(item => new SelectListItem
+            {
+                Text = item.Name,
+                Value = item.Id.ToString()
+            });
+
+            ViewBag.OwnerItems = selectItems;
+
             return View();
         }
 
@@ -103,6 +112,16 @@ namespace MyProject.Controllers
             {
                 return NotFound();
             }
+
+            var ownerItems = _context.Owner.ToList();
+            var selectItems = ownerItems.Select(item => new SelectListItem
+            {
+                Text = item.Name,
+                Value = item.Id.ToString()
+            });
+
+            ViewBag.OwnerItems = selectItems;
+
             return View(house);
         }
 
@@ -153,7 +172,7 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            var house = await _context.House
+            var house = await _context.House.Include(d => d.Owner)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (house == null)
             {
@@ -185,7 +204,7 @@ namespace MyProject.Controllers
 
         // GET: 
         [Authorize(Roles = "管理者")]
-        public async Task<IActionResult> Access(int id)
+        public async Task<IActionResult> Access(int id, string ownerName)
         {
             TempData["HouseId"] = id;
             var houseAccessList = new List<HouseAccessViewModel>();
@@ -204,6 +223,8 @@ namespace MyProject.Controllers
                 DepartmentName = departments != null ? departments.FirstOrDefault(y => y.Id == x.DepartmentId).Name : null,
                 Checked = selectedUsers.FindIndex(y => y.UserId == x.Id) != -1
             }).ToList();
+
+            ViewBag.OwnerName = ownerName;
 
             return houseAccessList != null ?
                 View(houseAccessList) :

@@ -1,5 +1,4 @@
-﻿using MyProject.Models.Enum;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyProject.Models
 {
@@ -23,7 +22,7 @@ namespace MyProject.Models
         public string? Number { get; set; }
 
         [Display(Name = "登記原因")]
-        public int? RegisterReason { get; set; }
+        public RegisterReason? RegisterReason { get; set; }
 
         [Display(Name = "次序")]
         public int? Order { get; set; }
@@ -38,7 +37,7 @@ namespace MyProject.Models
         public int? ShareDenominator { get; set; }
 
         [Display(Name = "所有權人")]
-        public string? OwnerId { get; set; }
+        public Owner? Owner { get; set; }
 
         [Display(Name = "登記日期")]
         public DateTime? RegisterTime { get; set; }

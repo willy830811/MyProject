@@ -71,10 +71,40 @@
             @Html.DisplayFor(model => model.ShareDenominator)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OwnerId)
+            @Html.DisplayNameFor(model => model.Owner.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OwnerId)
+            @Html.DisplayFor(model => model.Owner.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner.Relationship)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner.Relationship)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner.IdNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner.IdNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner.Telephone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner.Telephone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner.Residence)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner.Residence)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.RegisterTime)

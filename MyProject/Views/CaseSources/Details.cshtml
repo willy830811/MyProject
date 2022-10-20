@@ -1,10 +1,9 @@
-﻿@model MyProject.Models.CaseSource
+﻿@model MyProject.ViewModels.CaseSourceLandInventoryItemsViewModel
 @using Newtonsoft.Json
 @using MyProject.Models.Items
 
 @{
     ViewData["Title"] = "詳情";
-    var listInventoriesJson = JsonConvert.DeserializeObject<IEnumerable<LandInventoryItem>>(Model.LandInventories);
 }
 
 <h1>詳情</h1>
@@ -119,37 +118,37 @@
             @Html.DisplayNameFor(model => model.IsCadastralMap)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCadastralMap)
+            @Html.DisplayName((Model.IsCadastralMap ?? false) ? "是" : "否")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsAerialPhoto)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsAerialPhoto)
+            @Html.DisplayName((Model.IsAerialPhoto ?? false) ? "是" : "否")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsTranscript)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsTranscript)
+            @Html.DisplayName((Model.IsTranscript ?? false) ? "是" : "否")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsUseSection)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsUseSection)
+            @Html.DisplayName((Model.IsUseSection ?? false) ? "是" : "否")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsUrbanPlanningManual)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsUrbanPlanningManual)
+            @Html.DisplayName((Model.IsUrbanPlanningManual ?? false) ? "是" : "否")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsCurrentPhotos)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCurrentPhotos)
+            @Html.DisplayName((Model.IsCurrentPhotos ?? false) ? "是" : "否")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ValueAddedTax)
@@ -175,30 +174,49 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
-
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LandInventories)
-        </dt>
-        <dd class="col-sm-10">
-            <table>
-                <thead>
-                    <tr>
-                        <th>SectionName </th>
-                        <th>PlaceNumber </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in listInventoriesJson)
-                    {
+        
+        @if (Model.LandInventoryItems.Count > 0)
+        {
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.LandInventories)
+            </dt>
+            <dd class="col-sm-10">
+                <table>
+                    <thead>
                         <tr>
-                            <td>@item.SectionName</td>
-                            <td>@item.PlaceNumber</td>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].SectionName)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].PlaceNumber)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].AreaInSquareMeter)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].AreaInPing)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].Hold)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].HoldAreaInSquareMeter)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].HoldAreaInPing)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].PresentValue)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].UseSection)</th>
+                            <th>@Html.DisplayNameFor(model => model.LandInventoryItems[0].Note)</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </dd>
-
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LandInventoryItems)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.SectionName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PlaceNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AreaInSquareMeter)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AreaInPing)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Hold)</td>
+                                <td>@Html.DisplayFor(modelItem => item.HoldAreaInSquareMeter)</td>
+                                <td>@Html.DisplayFor(modelItem => item.HoldAreaInPing)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PresentValue)</td>
+                                <td>@Html.DisplayFor(modelItem => item.UseSection)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </dd>
+        }
+        
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AppendixItems)
         </dt>
