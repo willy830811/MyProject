@@ -15,7 +15,7 @@ namespace MyProject.Controllers
             _context = context;
         }
 
-        public IViewComponentResult InvokeAsync(List<LandInventoryItem>? landInventoryItems)
+        public async Task<IViewComponentResult> InvokeAsync(List<LandInventoryItem>? landInventoryItems)
         {
             if (landInventoryItems is not null)
                 return View("Default", new CaseSourceLandInventoryItemsViewModel() { LandInventoryItems = landInventoryItems });

@@ -30,10 +30,10 @@ namespace MyProject.Models
         [Display(Name = "面積")]
         public float? Area { get; set; }
 
-        [Display(Name = "權利範圍（分子）")]
+        [Display(Name = "權利範圍(分子)")]
         public int? ShareNumerator { get; set; }
 
-        [Display(Name = "權利範圍（分母）")]
+        [Display(Name = "權利範圍(分母)")]
         public int? ShareDenominator { get; set; }
 
         [Display(Name = "所有權人")]

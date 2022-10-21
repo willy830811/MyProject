@@ -29,10 +29,10 @@ namespace MyProject.Models
         [Display(Name = "土地筆數")]
         public int? LandCount { get; set; }
 
-        [Display(Name = "總面積（平方公尺）")]
+        [Display(Name = "總面積(平方公尺)")]
         public float? TotalAreaInSquareMeter { get; set; }
 
-        [Display(Name = "總面積（坪）")]
+        [Display(Name = "總面積(坪)")]
         public float? TotalAreaInPing { get; set; }
 
         [Display(Name = "建蔽率")]
@@ -44,10 +44,10 @@ namespace MyProject.Models
         [Display(Name = "持分")]
         public string? Hold { get; set; }
 
-        [Display(Name = "出售面積（平方公尺）")]
+        [Display(Name = "出售面積(平方公尺)")]
         public float? SellingAreaInSquareMeter { get; set; }
 
-        [Display(Name = "出售面積（坪）")]
+        [Display(Name = "出售面積(坪)")]
         public float? SellingAreaInPing { get; set; }
 
         [Display(Name = "使用分區")]
@@ -62,23 +62,23 @@ namespace MyProject.Models
         [Display(Name = "物件特色／優勢")]
         public string? Feature { get; set; }
 
-        [Display(Name = "(Y/N)地籍圖")]
-        public bool? IsCadastralMap { get; set; }
+        [Display(Name = "地籍圖(Y/N)")]
+        public bool IsCadastralMap { get; set; } = false;
 
-        [Display(Name = "(Y/N)空照圖")]
-        public bool? IsAerialPhoto { get; set; }
+        [Display(Name = "空照圖(Y/N)")]
+        public bool IsAerialPhoto { get; set; } = false;
 
-        [Display(Name = "(Y/N)謄本")]
-        public bool? IsTranscript { get; set; }
+        [Display(Name = "謄本(Y/N)")]
+        public bool IsTranscript { get; set; } = false;
 
-        [Display(Name = "(Y/N)使用分區")]
-        public bool? IsUseSection { get; set; }
+        [Display(Name = "使用分區(Y/N)")]
+        public bool IsUseSection { get; set; } = false;
 
-        [Display(Name = "(Y/N)都市計畫圖")]
-        public bool? IsUrbanPlanningManual { get; set; }
+        [Display(Name = "都市計畫圖(Y/N)")]
+        public bool IsUrbanPlanningManual { get; set; } = false;
 
-        [Display(Name = "(Y/N)現況照片")]
-        public bool? IsCurrentPhotos { get; set; }
+        [Display(Name = "現況照片(Y/N)")]
+        public bool IsCurrentPhotos { get; set; } = false;
 
         [Display(Name = "增值稅概算")]
         public float? ValueAddedTax { get; set; }

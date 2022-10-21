@@ -150,17 +150,17 @@ namespace MyProject.Models
         [Display(Name = "外牆建材(其他)")]
         public string? OtherOutsideMaterial { get; set; }
 
-        [Display(Name = "中庭")]
-        public bool? Courtyard { get; set; }
+        [Display(Name = "(有/無)中庭")]
+        public bool Courtyard { get; set; } = false;
 
-        [Display(Name = "警衛管理")]
-        public bool? Guard { get; set; }
+        [Display(Name = "(有/無)警衛管理")]
+        public bool Guard { get; set; } = false;
 
         [Display(Name = "管理費")]
         public float? ManagementFee { get; set; }
 
-        [Display(Name = "車　位")]
-        public bool? Parking { get; set; }
+        [Display(Name = "(有/無)車位")]
+        public bool Parking { get; set; } = false;
 
         [Display(Name = "車位坪數")]
         public float? ParkingArea { get; set; }
@@ -186,32 +186,32 @@ namespace MyProject.Models
         [Display(Name = "帶看方式")]
         public BringingType? BringingType { get; set; }
 
-        [Display(Name = "附贈設備(固定物)")]
-        public bool? GiftPillar { get; set; }
+        [Display(Name = "附贈設備(固定物)?")]
+        public bool GiftPillar { get; set; }
 
-        [Display(Name = "附贈設備(壁櫃)")]
-        public bool? GiftWallCabinet { get; set; }
+        [Display(Name = "附贈設備(壁櫃)?")]
+        public bool GiftWallCabinet { get; set; }
 
-        [Display(Name = "附贈設備(酒櫃)")]
-        public bool? GiftLiquorCabinet { get; set; }
+        [Display(Name = "附贈設備(酒櫃)?")]
+        public bool GiftLiquorCabinet { get; set; }
 
-        [Display(Name = "附贈設備(電話)")]
-        public bool? GiftPhone { get; set; }
+        [Display(Name = "附贈設備(電話)?")]
+        public bool GiftPhone { get; set; }
 
-        [Display(Name = "附贈設備(沙發組)")]
-        public bool? GiftSofa { get; set; }
+        [Display(Name = "附贈設備(沙發組)?")]
+        public bool GiftSofa { get; set; }
 
-        [Display(Name = "附贈設備(熱水器)")]
-        public bool? GiftHeater { get; set; }
+        [Display(Name = "附贈設備(熱水器)?")]
+        public bool GiftHeater { get; set; }
 
-        [Display(Name = "附贈設備(床組)")]
-        public bool? GiftBedding { get; set; }
+        [Display(Name = "附贈設備(床組)?")]
+        public bool GiftBedding { get; set; }
 
-        [Display(Name = "附贈設備(廚具組)")]
-        public bool? GiftCooker { get; set; }
+        [Display(Name = "附贈設備(廚具組)?")]
+        public bool GiftCooker { get; set; }
 
-        [Display(Name = "附贈設備(天然瓦斯)")]
-        public bool? GiftGas { get; set; }
+        [Display(Name = "附贈設備(天然瓦斯)?")]
+        public bool GiftGas { get; set; }
 
         [Display(Name = "附贈設備(電視)(數量)")]
         public int? GiftTV { get; set; }

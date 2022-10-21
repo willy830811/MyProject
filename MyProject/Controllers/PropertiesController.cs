@@ -237,18 +237,18 @@ namespace MyProject.Controllers
 
                 if (propertyInfo.PropertyType == typeof(bool) || Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(bool))
                 {
-                    var boolValue = (bool?)propertyInfo.GetValue(@property, null);
+                    var boolValue = (bool)propertyInfo.GetValue(@property, null);
                     //html = html.Replace($"${propertyInfo.Name}$", boolValue is not null ? ((bool)boolValue ? "&#x25A0;有 &#x25A1;無" : "&#x25A1;有 &#x25A0;無") : "&#x25A1;有 &#x25A1;無");
-                    if (boolValue is not null)
-                    {
+                    //if (boolValue is not null)
+                    //{
                         html = html.Replace($"${propertyInfo.Name}$", (bool)boolValue ? "&#x25A0;" : "&#x25A1;");
                         html = html.Replace($"$!{propertyInfo.Name}$", (bool)boolValue ? "&#x25A1;" : "&#x25A0;");
-                    }
-                    else
-                    {
-                        html = html.Replace($"${propertyInfo.Name}$", "&#x25A1;");
-                        html = html.Replace($"$!{propertyInfo.Name}$", "&#x25A1;");
-                    }
+                    //}
+                    //else
+                    //{
+                    //    html = html.Replace($"${propertyInfo.Name}$", "&#x25A1;");
+                    //    html = html.Replace($"$!{propertyInfo.Name}$", "&#x25A1;");
+                    //}
                 }
 
                 if (propertyInfo.PropertyType == typeof(DateTime) || Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(DateTime))
