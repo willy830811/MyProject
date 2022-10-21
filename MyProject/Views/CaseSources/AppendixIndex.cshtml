@@ -48,6 +48,7 @@
 @using (Html.BeginForm("AppendixCreate", "CaseSources", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
+        <span>附件名稱: </span>
         <input type="text" name="name" />
         <input type="hidden" value="@ViewBag.CaseSourceId" name="caseSourceId" />
         <input type="file" name="file" />

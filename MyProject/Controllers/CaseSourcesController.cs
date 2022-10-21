@@ -23,9 +23,41 @@ namespace MyProject.Controllers
         }
 
         // GET: CaseSources
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-              return View(await _context.CaseSource.ToListAsync());
+            //ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            var caseSources = from s in _context.CaseSource
+                              select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                caseSources = caseSources.Where(s => s.CaseName.Contains(searchString)
+                || s.Section.Contains(searchString)
+                || s.Subsection.Contains(searchString)
+                || s.Agent.Contains(searchString)
+                || s.Phone.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                //case "name_desc":
+                //    caseSources = caseSources.OrderByDescending(s => s.UserName);
+                //    break;
+                case "Date":
+                    caseSources = caseSources.OrderBy(s => s.CreateTime);
+                    break;
+                case "date_desc":
+                    caseSources = caseSources.OrderByDescending(s => s.CreateTime);
+                    break;
+                default:
+                    caseSources = caseSources.OrderByDescending(s => s.CreateTime);
+                    break;
+            }
+
+            return View(await caseSources.AsNoTracking().ToListAsync());
         }
 
         // GET: CaseSources/Details/5
