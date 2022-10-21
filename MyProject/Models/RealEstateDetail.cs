@@ -175,10 +175,10 @@ namespace MyProject.Models
         public string? OtherDevelopMethodRestriction { get; set; }
 
         [Display(Name = "(Y/N)屬都市計畫法規定之禁限建地區")]
-        public bool? IsBuildingRestrictedRegion { get; set; }
+        public bool IsBuildingRestrictedRegion { get; set; }
 
         [Display(Name = "(Y/N)農業用地")]
-        public bool IsFarmLand { get; set; } = false;
+        public bool? IsFarmLand { get; set; } = false;
 
         [Display(Name = "興建農舍")]
         public string? BuildFarmhouseType { get; set; }

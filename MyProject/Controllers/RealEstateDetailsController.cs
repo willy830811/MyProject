@@ -59,6 +59,19 @@ namespace MyProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                realEstateDetail.OtherRightsType = String.Join(',', otherRightsType);
+                realEstateDetail.SettingOtherRightsType = String.Join(',', settingOtherRightsType);
+                realEstateDetail.RestrictingRegistrationType = String.Join(',', restrictingRegistrationType);
+                realEstateDetail.RespectivelyManageBy826Type = String.Join(',', respectivelyManageBy826Type);
+                realEstateDetail.DevelopMethodRestrictionsType = String.Join(',', developMethodRestrictionsType);
+                realEstateDetail.BuildFarmhouseType = String.Join(',', buildFarmhouseType);
+                realEstateDetail.NationalParkType = String.Join(',', nationalParkType);
+                realEstateDetail.DrinkingWaterSourceType = String.Join(',', drinkingWaterSourceType);
+                realEstateDetail.PolutedAreaType = String.Join(',', polutedAreaType);
+                realEstateDetail.ChooseManageType = String.Join(',', chooseManageType);
+                realEstateDetail.SurroundingsAppendiceType = String.Join(',', surroundingsAppendiceType);
+                realEstateDetail.Surroundings = String.Join(',', surroundings);
+
                 realEstateDetail.CreateId = User.Identity.Name;
                 realEstateDetail.CreateTime = DateTime.Now;
                 _context.Add(realEstateDetail);
@@ -89,7 +102,8 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ObjectName,City,Region,Section,Subsection,PlaceNumber,Area,RightsScope,AppendicesNames,IsLandOwner,LandOwner,IsOtherObligee,OtherObligee,IsRegisteredManager,RegisteredManager,IsOwnership,OwnershipType,IsOtherRights,OtherRightsType,IsTrust,TrustContent,IsBaseRightsSettingBurden,BaseRightsSettingBurdenStatus,IsSettingOtherRights,SettingOtherRightsType,IsRestrictingRegistration,RestrictingRegistrationType,OtherRestrictingRegistration,IsOtherBaseRightsItemBy254,OtherBaseRightsItemBy254,IsOtherBaseRightsItemRelated,OtherBaseRightsItemRelated,IsUseByConvention,UseByConventionContent,IsRespectivelyManage,IsRespectivelyManageBy826,RespectivelyManageBy826Type,RespectivelyManageBy826Content,IsRent,IsLend,RentLendStatus,IsOccupiedWithoutRights,OccupiedWithoutRightsStatus,IsPublicWay,PublicWayPlaceAppendice,PublicWayArea,UrbanLandSection,NonUrbanLandSection,NonUrbanLandType,UnKnownLandRegulationStatus,BuildRate,VolumeRate,IsUrbanPlanningManual,DevelopMethodRestrictionsType,OtherDevelopMethodRestriction,IsBuildingRestrictedRegion,IsFarmLand,BuildFarmhouseType,FarmLandRegulation,IsMountLand,MountLandRestrictions,IsBanningBuildByKeepSoilLaw,BanningBuildByKeepSoilLawRestrictions,IsRiverRegion,RiverRegionRestrictions,IsDrainFacilityRegion,DrainFacilityRegionRestrictions,IsNationalPark,NationalParkType,NationalParkRestrictions,IsDrinkingWaterSource,DrinkingWaterSourceType,DrinkingWaterSourceRestrictions,IsWaterProtectionAreaByLaw,WaterProtectionAreaByLawRestrictions,IsPolutedArea,PolutedAreaType,PolutedAreaRestrictions,TransactionType,TransactionPrice,PaymentMethod,IsLandValueAddedTax,LandValueAddedTax,IsLandTax,LandTax,IsStampDuty,StampDuty,IsOtherTax,OtherTax,IsConstructionBenefitFee,ConstructionBenefitFee,IsRegistrationFee,RegistrationFee,IsSurveyFee,SurveyFee,IsOtherProcessingFee,OtherProcessingFee,IsContractFee,ContractFee,IsOwnershipTransferAgencyFee,OwnershipTransferAgencyFee,IsOtherFee,OtherFee,ChooseManageType,ManageMethod,IsBreachOfContractPunishment,BreachOfContractPunishment,OtherTransactionItem,SurroundingsAppendiceType,Surroundings,IsCadastralMapRetest,IsCadastralMapRetestAnnouced,IsOutOfBoundsBuilding,OutOfBoundsBuildingStatus,IsCompulsoryAcquisition,CompulsoryAcquisitionArea,IsElectricityPower,IsTapWater,IsGas,IsDrainer,NonInfrastructureReason,RealEstateBroker,ContractDate,CreateTime,CreateId")] RealEstateDetail realEstateDetail)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ObjectName,City,Region,Section,Subsection,PlaceNumber,Area,RightsScope,AppendicesNames,IsLandOwner,LandOwner,IsOtherObligee,OtherObligee,IsRegisteredManager,RegisteredManager,IsOwnership,OwnershipType,IsOtherRights,OtherRightsType,IsTrust,TrustContent,IsBaseRightsSettingBurden,BaseRightsSettingBurdenStatus,IsSettingOtherRights,SettingOtherRightsType,IsRestrictingRegistration,RestrictingRegistrationType,OtherRestrictingRegistration,IsOtherBaseRightsItemBy254,OtherBaseRightsItemBy254,IsOtherBaseRightsItemRelated,OtherBaseRightsItemRelated,IsUseByConvention,UseByConventionContent,IsRespectivelyManage,IsRespectivelyManageBy826,RespectivelyManageBy826Type,RespectivelyManageBy826Content,IsRent,IsLend,RentLendStatus,IsOccupiedWithoutRights,OccupiedWithoutRightsStatus,IsPublicWay,PublicWayPlaceAppendice,PublicWayArea,UrbanLandSection,NonUrbanLandSection,NonUrbanLandType,UnKnownLandRegulationStatus,BuildRate,VolumeRate,IsUrbanPlanningManual,DevelopMethodRestrictionsType,OtherDevelopMethodRestriction,IsBuildingRestrictedRegion,IsFarmLand,BuildFarmhouseType,FarmLandRegulation,IsMountLand,MountLandRestrictions,IsBanningBuildByKeepSoilLaw,BanningBuildByKeepSoilLawRestrictions,IsRiverRegion,RiverRegionRestrictions,IsDrainFacilityRegion,DrainFacilityRegionRestrictions,IsNationalPark,NationalParkType,NationalParkRestrictions,IsDrinkingWaterSource,DrinkingWaterSourceType,DrinkingWaterSourceRestrictions,IsWaterProtectionAreaByLaw,WaterProtectionAreaByLawRestrictions,IsPolutedArea,PolutedAreaType,PolutedAreaRestrictions,TransactionType,TransactionPrice,PaymentMethod,IsLandValueAddedTax,LandValueAddedTax,IsLandTax,LandTax,IsStampDuty,StampDuty,IsOtherTax,OtherTax,IsConstructionBenefitFee,ConstructionBenefitFee,IsRegistrationFee,RegistrationFee,IsSurveyFee,SurveyFee,IsOtherProcessingFee,OtherProcessingFee,IsContractFee,ContractFee,IsOwnershipTransferAgencyFee,OwnershipTransferAgencyFee,IsOtherFee,OtherFee,ChooseManageType,ManageMethod,IsBreachOfContractPunishment,BreachOfContractPunishment,OtherTransactionItem,SurroundingsAppendiceType,Surroundings,IsCadastralMapRetest,IsCadastralMapRetestAnnouced,IsOutOfBoundsBuilding,OutOfBoundsBuildingStatus,IsCompulsoryAcquisition,CompulsoryAcquisitionArea,IsElectricityPower,IsTapWater,IsGas,IsDrainer,NonInfrastructureReason,RealEstateBroker,ContractDate,CreateTime,CreateId")] RealEstateDetail realEstateDetail,
+            string[] otherRightsType, string[] settingOtherRightsType, string[] restrictingRegistrationType, string[] respectivelyManageBy826Type, string[] developMethodRestrictionsType, string[] buildFarmhouseType, string[] nationalParkType, string[] drinkingWaterSourceType, string[] polutedAreaType, string[] chooseManageType, string[] surroundingsAppendiceType, string[] surroundings)
         {
             if (id != realEstateDetail.Id)
             {
@@ -100,6 +114,19 @@ namespace MyProject.Controllers
             {
                 try
                 {
+                    realEstateDetail.OtherRightsType = String.Join(',', otherRightsType);
+                    realEstateDetail.SettingOtherRightsType = String.Join(',', settingOtherRightsType);
+                    realEstateDetail.RestrictingRegistrationType = String.Join(',', restrictingRegistrationType);
+                    realEstateDetail.RespectivelyManageBy826Type = String.Join(',', respectivelyManageBy826Type);
+                    realEstateDetail.DevelopMethodRestrictionsType = String.Join(',', developMethodRestrictionsType);
+                    realEstateDetail.BuildFarmhouseType = String.Join(',', buildFarmhouseType);
+                    realEstateDetail.NationalParkType = String.Join(',', nationalParkType);
+                    realEstateDetail.DrinkingWaterSourceType = String.Join(',', drinkingWaterSourceType);
+                    realEstateDetail.PolutedAreaType = String.Join(',', polutedAreaType);
+                    realEstateDetail.ChooseManageType = String.Join(',', chooseManageType);
+                    realEstateDetail.SurroundingsAppendiceType = String.Join(',', surroundingsAppendiceType);
+                    realEstateDetail.Surroundings = String.Join(',', surroundings);
+
                     realEstateDetail.UpdateId = User.Identity.Name;
                     realEstateDetail.UpdateTime = DateTime.Now;
                     _context.Update(realEstateDetail);

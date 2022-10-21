@@ -17,7 +17,7 @@
                 @foreach (var item in Model)
                 {
                     <p>
-                        <input type="checkbox" name="userIds" value="@item.UserId" @if(@item.Checked) { @Html.Raw("checked") }>
+                        <input type="checkbox" name="userIds" value="@item.UserId" @if(item.Checked) { @Html.Raw("checked") }>
                         @Html.DisplayFor(modelItem => item.CnName) @Html.DisplayFor(modelItem => item.EngName) - @Html.DisplayFor(modelItem => item.DepartmentName) (@Html.DisplayFor(modelItem => item.UserName))
                     </p>
                     <br />
