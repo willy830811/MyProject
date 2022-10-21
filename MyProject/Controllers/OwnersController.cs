@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
+using MyProject.Migrations;
 using MyProject.Models;
 
 namespace MyProject.Controllers
@@ -46,25 +47,26 @@ namespace MyProject.Controllers
         }
 
         // GET: Owners/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: Owners/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Relationship,IdNumber,Telephone,Phone,Residence,CreateTime,CreateId,UpdateTime,UpdateId")] Owner owner)
+        public async Task<IActionResult> Create(string name, string relationship, string idNumber, string telephone, string phone, string residence)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(owner);
+                _context.Add(new Owner() { Name = name, Relationship = relationship, IdNumber = idNumber, Telephone = telephone, Phone = phone, Residence = residence, CreateId = User.Identity.Name, CreateTime = DateTime.Now });
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(owner);
+            //return View(owner);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Owners/Edit/5
@@ -88,7 +90,7 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Relationship,IdNumber,Telephone,Phone,Residence,CreateTime,CreateId,UpdateTime,UpdateId")] Owner owner)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Relationship,IdNumber,Telephone,Phone,Residence,CreateTime,CreateId")] Owner owner)
         {
             if (id != owner.Id)
             {
@@ -99,6 +101,8 @@ namespace MyProject.Controllers
             {
                 try
                 {
+                    owner.UpdateId = User.Identity.Name;
+                    owner.UpdateTime = DateTime.Now;
                     _context.Update(owner);
                     await _context.SaveChangesAsync();
                 }
