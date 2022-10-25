@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
+using MyProject.Migrations;
 using MyProject.Models;
 using MyProject.ViewModels;
 
@@ -28,26 +29,22 @@ namespace MyProject.Controllers
         // GET: UserController
         public async Task<IActionResult> Index()
         {
-            var userIndexList = new List<UserIndexViewModel>();
-
             var users = await _userContext.User.ToListAsync();
             var userRoles = await _userContext.UserRoles.ToListAsync();
             var roles = await _userContext.Roles.ToListAsync();
             var departments = await _context.Department.ToListAsync();
 
-            userIndexList = users.Select(x => new UserIndexViewModel
-            {
-                UserId = x.Id,
-                UserName = x.UserName,
-                Email = x.Email,
-                CnName = x.CnName,
-                EngName = x.EngName,
-                DepartmentName = x.DepartmentId is not null ? departments.FirstOrDefault(y => y.Id == x.DepartmentId).Name : null,
-                RoleName = userRoles.FirstOrDefault(y => y.UserId == x.Id) is not null ? roles.FirstOrDefault(z => z.Id == userRoles.FirstOrDefault(y => y.UserId == x.Id).RoleId).Name : null
-            }).ToList();
+            var userViewModels = users.Select(
+                item => new UserViewModel(
+                    item,
+                    users,
+                    item.DepartmentId is not null ? departments.FirstOrDefault(d => d.Id == item.DepartmentId).Name : null,
+                    userRoles.FirstOrDefault(ur => ur.UserId == item.Id) is not null ? roles.FirstOrDefault(r => r.Id == userRoles.FirstOrDefault(ur => ur.UserId == item.Id).RoleId).Name : null
+                )
+            );
 
-            return userIndexList != null ?
-                          View(userIndexList) :
+            return userViewModels != null ?
+                          View(userViewModels) :
                           Problem("Entity set 'MyProjectContext.House'  is null.");
         }
 
@@ -60,52 +57,57 @@ namespace MyProject.Controllers
         // GET: UserController/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
-            var userIndex = new UserEditViewModel();
-
             var user = await _userContext.User.FindAsync(id);
-            //var userRoles = await _userContext.UserRoles.ToListAsync();
-            var roles = await _userContext.Roles.ToListAsync();
-            ViewBag.Roles = roles;
+            var users = await _userContext.User.ToListAsync();
+            var userRoleList = await _userManager.GetRolesAsync(user);
+            ViewBag.Roles = await _userContext.Roles.ToListAsync();
+            ViewBag.Departments = await _context.Department.ToListAsync();
 
-            var departments = await _context.Department.ToListAsync();
-            ViewBag.Departments = departments;
+            var userViewModel = new UserViewModel(
+                user,
+                users,
+                null,
+                userRoleList.Count > 0 ? userRoleList[0] : null
+            );
 
-            //var userRoleList = await _userManager.GetRolesAsync(user);
-            var userRoleList = new string[]
-            {
-                "組長"
-            };
-
-            userIndex = new UserEditViewModel
-            {
-                UserId = user.Id,
-                UserName = user.UserName,
-                CnName = user.CnName,
-                //DepartmentName = departments.FirstOrDefault(y => y.Id == user.DepartmentId).Name,
-                //RoleName = roles.FirstOrDefault(y => y.Id == userRoles.FirstOrDefault(z => z.UserId == user.Id).RoleId).Name
-                DepartmentId = user.DepartmentId,
-                RoleName = userRoleList[0]
-            };
-
-            return View(userIndex);
+            return View(userViewModel);
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserId, UserName, CnName, DepartmentId, RoleName")] UserEditViewModel item)
+        //public async Task<IActionResult> Edit(string id, [Bind("Id, UserName, CnName, DepartmentId, RoleName, CreateTime, CreateId")] UserViewModel item)
+        public async Task<IActionResult> Edit(string id, string userName, string cnName, int departmentId, string roleName, DateTime createTime, string createId)
         {
             var user = await _userContext.User.FirstOrDefaultAsync(x => x.Id == id);
-
-            user.CnName = item.CnName;
-            user.DepartmentId = item.DepartmentId;
-            user.UserName = item.UserName;
+            //user.UserName = item.UserName;
+            //user.NormalizedUserName = item.UserName.ToUpper();
+            //user.CnName = item.CnName;
+            //user.DepartmentId = item.DepartmentId;
+            //user.CreateTime = item.CreateTime;
+            //user.CreateId = item.CreateId;
+            //user.UpdateTime = DateTime.Now;
+            //user.UpdateId = User.Identity.Name;
+            user.UserName = userName;
+            user.NormalizedUserName = userName.ToUpper();
+            user.CnName = cnName;
+            user.DepartmentId = departmentId;
+            user.CreateTime = createTime;
+            user.CreateId = createId;
+            user.UpdateTime = DateTime.Now;
+            user.UpdateId = User.Identity.Name;
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _userManager.AddToRoleAsync(user, item.RoleName).Wait();
+                    _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user)).Wait();
+
+                    //if (item.RoleName is not null)
+                    //    _userManager.AddToRoleAsync(user, item.RoleName).Wait();
+                    if (roleName is not null)
+                        _userManager.AddToRoleAsync(user, roleName).Wait();
+
                     await _userContext.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
@@ -134,7 +136,18 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(user);
+            var users = await _userContext.User.ToListAsync();
+            var userRoleList = await _userManager.GetRolesAsync(user);
+            var departments = await _context.Department.ToListAsync();
+
+            var userViewModel = new UserViewModel(
+                user,
+                users,
+                user.DepartmentId is not null ? departments.FirstOrDefault(y => y.Id == user.DepartmentId).Name : null,
+                userRoleList.Count > 0 ? userRoleList[0] : null
+            );
+
+            return View(userViewModel);
         }
 
         // POST: Houses/Delete/5
@@ -149,7 +162,7 @@ namespace MyProject.Controllers
             var user = await _userContext.Users.FindAsync(id);
             if (user != null)
             {
-                _userManager.RemoveFromRolesAsync(user, new List<string>() { "組長", "員工", "祕書" }).Wait();
+                _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user)).Wait();
             }
 
             await _context.SaveChangesAsync();

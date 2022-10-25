@@ -1,7 +1,10 @@
 ﻿@page
+@using MyProject.Models
 @model RegisterModel
 @{
     ViewData["Title"] = "新增員工";
+    var departmentSelectListItems = Model.Departments.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+    var roleSelectListItems = Model.Roles.Select(x => new SelectListItem(x.Name, x.Name));
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -12,20 +15,44 @@
             @*<h2>Create a new account.</h2>*@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
+            @*<div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Input.UserName"></label>
+                <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+            <div class="form-group">
                 <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+            <div class="form-group">
                 <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.CnName"></label>
+                <input asp-for="Input.CnName" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.CnName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.DepartmentId" class="control-label"></label>
+                <select asp-for="Input.DepartmentId" asp-items="@departmentSelectListItems" class="form-control">
+                    <option value="">請選擇</option>
+                </select>
+                <span asp-validation-for="Input.DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.RoleId" class="control-label"></label>
+                <select asp-for="Input.RoleId" asp-items="@roleSelectListItems" class="form-control">
+                    <option value="">請選擇</option>
+                </select>
+                <span asp-validation-for="Input.RoleId" class="text-danger"></span>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">新增</button>
         </form>
@@ -60,6 +87,10 @@
             }
         </section>
     </div>*@
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Users">回上頁</a>
 </div>
 
 @section Scripts {

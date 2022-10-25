@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyProject.ViewModels.UserIndexViewModel>
+﻿@model IEnumerable<MyProject.ViewModels.UserViewModel>
 
 @{
     ViewData["Title"] = "員工管理";
@@ -16,19 +16,25 @@
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CnName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EngName)
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DepartmentName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateTime)
             </th>
             <th></th>
         </tr>
@@ -40,13 +46,13 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CnName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EngName)
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DepartmentName)
@@ -55,9 +61,15 @@
                 @Html.DisplayFor(modelItem => item.RoleName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UserId">編輯</a> |
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
                 @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.UserId">刪除</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">停權</a>
             </td>
         </tr>
 }

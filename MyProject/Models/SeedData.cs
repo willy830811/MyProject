@@ -11,13 +11,13 @@ namespace MyProject.Models
     {
         public static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
-            if (userManager.FindByNameAsync("test@gmail.com").Result == null)
+            if (userManager.FindByNameAsync("test").Result == null)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = "test@gmail.com",
+                    UserName = "test",
                     Email = "test@gmail.com",
-                    NormalizedUserName = "TEST@GMAIL.COM",
+                    NormalizedUserName = "TEST",
                     NormalizedEmail = "TEST@GMAIL.COM"
                 };
 
@@ -31,13 +31,13 @@ namespace MyProject.Models
                 }
             }
 
-            if (userManager.FindByNameAsync("test1@gmail.com").Result == null)
+            if (userManager.FindByNameAsync("test1").Result == null)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = "test1@gmail.com",
+                    UserName = "test1",
                     Email = "test1@gmail.com",
-                    NormalizedUserName = "TEST1@GMAIL.COM",
+                    NormalizedUserName = "TEST1",
                     NormalizedEmail = "TEST1@GMAIL.COM"
                 };
 
@@ -51,13 +51,13 @@ namespace MyProject.Models
                 }
             }
 
-            if (userManager.FindByNameAsync("test2@gmail.com").Result == null)
+            if (userManager.FindByNameAsync("test2").Result == null)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = "test2@gmail.com",
+                    UserName = "test2",
                     Email = "test2@gmail.com",
-                    NormalizedUserName = "TEST2@GMAIL.COM",
+                    NormalizedUserName = "TEST2",
                     NormalizedEmail = "TEST2@GMAIL.COM"
                 };
 

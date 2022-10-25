@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -30,6 +31,7 @@ namespace MyProject.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        [Display(Name = "帳號")]
         public string Username { get; set; }
 
         /// <summary>
@@ -59,18 +61,27 @@ namespace MyProject.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "手機")]
             public string PhoneNumber { get; set; }
+
+            // 暫時設計成不需驗證
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string EmailAddress { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //
+            var emailAddress = await _userManager.GetEmailAsync(user);
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                //
+                EmailAddress = emailAddress
             };
         }
 
@@ -111,8 +122,20 @@ namespace MyProject.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            //
+            var emailAddress = await _userManager.GetEmailAsync(user);
+            if (Input.EmailAddress != emailAddress)
+            {
+                var setEmailResult = await _userManager.SetEmailAsync(user, Input.EmailAddress);
+                if (!setEmailResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set email.";
+                    return RedirectToPage();
+                }
+            }
+
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "基本資料已更新";
             return RedirectToPage();
         }
     }
