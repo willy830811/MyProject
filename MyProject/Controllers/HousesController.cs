@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
+using MyProject.Migrations;
 using MyProject.Models;
 using MyProject.ViewModels;
 using Newtonsoft.Json;
@@ -29,20 +30,39 @@ namespace MyProject.Controllers
         // GET: Houses
         public async Task<IActionResult> Index()
         {
-            var availableHouses = new List<House>();
+            //var houseViewModels = new List<HouseViewModel>();
+            var users = await _userContext.User.ToListAsync();
+            var owners = await _context.Owner.ToListAsync();
 
             if (User.IsInRole("管理者"))
             {
-                availableHouses = await _context.House.Include(d => d.Owner).ToListAsync();
+                var availableHouses = await _context.House.ToListAsync();
+
+                var houseViewModels = availableHouses.Select(
+                    item => new HouseViewModel(
+                        item,
+                        users,
+                        item.OwnerId is not null ? owners.FirstOrDefault(o => o.Id == item.OwnerId) : null
+                    )
+                );
+
+                return View(houseViewModels);
             }
             else
             {
                 var houseUsersByUserId = await _context.HouseUser.Where(x => x.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
-                var houses = await _context.House.Include(d => d.Owner).ToListAsync();
-                availableHouses = houses.Where(x => houseUsersByUserId.FindIndex(y => y.HouseId == x.Id) != -1).ToList();
-            }
+                var houses = await _context.House.ToListAsync();
+                var availableHouses = houses.Where(x => houseUsersByUserId.FindIndex(y => y.HouseId == x.Id) != -1).ToList();
+                var houseViewModels = (List<HouseViewModel>)availableHouses.Select(
+                    item => new HouseViewModel(
+                        item,
+                        users,
+                        item.OwnerId is not null ? owners.FirstOrDefault(o => o.Id == item.OwnerId) : null
+                    )
+                );
 
-            return View(availableHouses);
+                return View(houseViewModels);
+            }
         }
 
         // GET: Houses/Details/5
@@ -53,14 +73,22 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            var house = await _context.House.Include(d => d.Owner)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var house = await _context.House.FirstOrDefaultAsync(m => m.Id == id);
+
             if (house == null)
             {
                 return NotFound();
             }
 
-            return View(house);
+            var users = await _userContext.User.ToListAsync();
+            var owners = await _context.Owner.ToListAsync();
+            var houseViewModel = new HouseViewModel(
+                house,
+                users,
+                house.OwnerId is not null ? owners.FirstOrDefault(o => o.Id == house.OwnerId) : null
+            );
+
+            return View(houseViewModel);
         }
 
         // GET: Houses/Create
@@ -89,7 +117,7 @@ namespace MyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                house.CreateId = User.Identity.Name;
+                house.CreateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 house.CreateTime = DateTime.Now;
                 _context.Add(house);
                 await _context.SaveChangesAsync();
@@ -142,7 +170,7 @@ namespace MyProject.Controllers
             {
                 try
                 {
-                    house.UpdateId = User.Identity.Name;
+                    house.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     house.UpdateTime = DateTime.Now;
                     _context.Update(house);
                     await _context.SaveChangesAsync();
@@ -172,14 +200,22 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            var house = await _context.House.Include(d => d.Owner)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var house = await _context.House.FirstOrDefaultAsync(m => m.Id == id);
+
             if (house == null)
             {
                 return NotFound();
             }
 
-            return View(house);
+            var users = await _userContext.User.ToListAsync();
+            var owners = await _context.Owner.ToListAsync();
+            var houseViewModel = new HouseViewModel(
+                house,
+                users,
+                house.OwnerId is not null ? owners.FirstOrDefault(o => o.Id == house.OwnerId) : null
+            );
+
+            return View(houseViewModel);
         }
 
         // POST: Houses/Delete/5
@@ -220,7 +256,7 @@ namespace MyProject.Controllers
                 UserName = x.UserName,
                 CnName = x.CnName,
                 EngName = x.EngName,
-                DepartmentName = departments != null ? departments.FirstOrDefault(y => y.Id == x.DepartmentId).Name : null,
+                DepartmentName = departments != null ? departments.FirstOrDefault(y => y.Id == x.DepartmentId)?.Name : null,
                 Checked = selectedUsers.FindIndex(y => y.UserId == x.Id) != -1
             }).ToList();
 

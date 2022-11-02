@@ -7,6 +7,7 @@ using MyProject.Data;
 using MyProject.Migrations;
 using MyProject.Models;
 using MyProject.ViewModels;
+using System.Security.Claims;
 
 namespace MyProject.Controllers
 {
@@ -38,8 +39,8 @@ namespace MyProject.Controllers
                 item => new UserViewModel(
                     item,
                     users,
-                    item.DepartmentId is not null ? departments.FirstOrDefault(d => d.Id == item.DepartmentId).Name : null,
-                    userRoles.FirstOrDefault(ur => ur.UserId == item.Id) is not null ? roles.FirstOrDefault(r => r.Id == userRoles.FirstOrDefault(ur => ur.UserId == item.Id).RoleId).Name : null
+                    item.DepartmentId is not null ? departments.FirstOrDefault(d => d.Id == item.DepartmentId)?.Name : null,
+                    userRoles.FirstOrDefault(ur => ur.UserId == item.Id) is not null ? roles.FirstOrDefault(r => r.Id == userRoles.FirstOrDefault(ur => ur.UserId == item.Id)?.RoleId).Name : null
                 )
             );
 
@@ -76,26 +77,17 @@ namespace MyProject.Controllers
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(string id, [Bind("Id, UserName, CnName, DepartmentId, RoleName, CreateTime, CreateId")] UserViewModel item)
-        public async Task<IActionResult> Edit(string id, string userName, string cnName, int departmentId, string roleName, DateTime createTime, string createId)
+        public async Task<IActionResult> Edit([Bind("Id, UserName, CnName, DepartmentId, CreateTime, CreateId")] ApplicationUser item, string? roleName)
         {
-            var user = await _userContext.User.FirstOrDefaultAsync(x => x.Id == id);
-            //user.UserName = item.UserName;
-            //user.NormalizedUserName = item.UserName.ToUpper();
-            //user.CnName = item.CnName;
-            //user.DepartmentId = item.DepartmentId;
-            //user.CreateTime = item.CreateTime;
-            //user.CreateId = item.CreateId;
-            //user.UpdateTime = DateTime.Now;
-            //user.UpdateId = User.Identity.Name;
-            user.UserName = userName;
-            user.NormalizedUserName = userName.ToUpper();
-            user.CnName = cnName;
-            user.DepartmentId = departmentId;
-            user.CreateTime = createTime;
-            user.CreateId = createId;
+            var user = await _userContext.User.FirstOrDefaultAsync(x => x.Id == item.Id);
+            user.UserName = item.UserName;
+            user.NormalizedUserName = item.UserName.ToUpper();
+            user.CnName = item.CnName;
+            user.DepartmentId = item.DepartmentId;
+            user.CreateTime = item.CreateTime;
+            user.CreateId = item.CreateId;
             user.UpdateTime = DateTime.Now;
-            user.UpdateId = User.Identity.Name;
+            user.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (ModelState.IsValid)
             {
@@ -103,8 +95,6 @@ namespace MyProject.Controllers
                 {
                     _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user)).Wait();
 
-                    //if (item.RoleName is not null)
-                    //    _userManager.AddToRoleAsync(user, item.RoleName).Wait();
                     if (roleName is not null)
                         _userManager.AddToRoleAsync(user, roleName).Wait();
 
@@ -143,7 +133,7 @@ namespace MyProject.Controllers
             var userViewModel = new UserViewModel(
                 user,
                 users,
-                user.DepartmentId is not null ? departments.FirstOrDefault(y => y.Id == user.DepartmentId).Name : null,
+                user.DepartmentId is not null ? departments.FirstOrDefault(y => y.Id == user.DepartmentId)?.Name : null,
                 userRoleList.Count > 0 ? userRoleList[0] : null
             );
 
@@ -163,6 +153,8 @@ namespace MyProject.Controllers
             if (user != null)
             {
                 _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user)).Wait();
+                user.UpdateTime = DateTime.Now;
+                user.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             }
 
             await _context.SaveChangesAsync();

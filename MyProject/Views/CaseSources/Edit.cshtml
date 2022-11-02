@@ -168,7 +168,7 @@
                 <input asp-for="Phone" class="form-control" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
-            <div id="event" class="alert alert-success">
+            <div id="event" class="form-group">
                 @await Component.InvokeAsync("LandInventories", null)
             </div>
             <div class="form-group">

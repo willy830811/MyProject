@@ -1,4 +1,4 @@
-﻿@model MyProject.Models.Property
+﻿@model MyProject.ViewModels.PropertyViewModel
 
 @{
     ViewData["Title"] = "新增";
@@ -337,8 +337,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="GiftLiquorCabinet" class="control-label"></label>
-                <input type="radio" asp-for="GiftPillar" value="@true" /> 有
-                <input type="radio" asp-for="GiftPillar" value="@false" /> 無
+                <input type="radio" asp-for="GiftLiquorCabinet" value="@true" /> 有
+                <input type="radio" asp-for="GiftLiquorCabinet" value="@false" /> 無
                 <span asp-validation-for="GiftLiquorCabinet" class="text-danger"></span>
             </div>
             <div class="form-group">

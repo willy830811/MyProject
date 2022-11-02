@@ -187,31 +187,31 @@ namespace MyProject.Models
         public BringingType? BringingType { get; set; }
 
         [Display(Name = "附贈設備(固定物)?")]
-        public bool GiftPillar { get; set; }
+        public bool GiftPillar { get; set; } = false;
 
         [Display(Name = "附贈設備(壁櫃)?")]
-        public bool GiftWallCabinet { get; set; }
+        public bool GiftWallCabinet { get; set; } = false;
 
         [Display(Name = "附贈設備(酒櫃)?")]
-        public bool GiftLiquorCabinet { get; set; }
+        public bool GiftLiquorCabinet { get; set; } = false;
 
         [Display(Name = "附贈設備(電話)?")]
-        public bool GiftPhone { get; set; }
+        public bool GiftPhone { get; set; } = false;
 
         [Display(Name = "附贈設備(沙發組)?")]
-        public bool GiftSofa { get; set; }
+        public bool GiftSofa { get; set; } = false;
 
         [Display(Name = "附贈設備(熱水器)?")]
-        public bool GiftHeater { get; set; }
+        public bool GiftHeater { get; set; } = false;
 
         [Display(Name = "附贈設備(床組)?")]
-        public bool GiftBedding { get; set; }
+        public bool GiftBedding { get; set; } = false;
 
         [Display(Name = "附贈設備(廚具組)?")]
-        public bool GiftCooker { get; set; }
+        public bool GiftCooker { get; set; } = false;
 
         [Display(Name = "附贈設備(天然瓦斯)?")]
-        public bool GiftGas { get; set; }
+        public bool GiftGas { get; set; } = false;
 
         [Display(Name = "附贈設備(電視)(數量)")]
         public int? GiftTV { get; set; }

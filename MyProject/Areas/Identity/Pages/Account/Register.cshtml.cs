@@ -200,6 +200,8 @@ namespace MyProject.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
+            Roles = await _userContext.Roles.ToListAsync();
+            Departments = await _context.Department.ToListAsync();
             return Page();
         }
 

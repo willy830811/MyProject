@@ -1,28 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Models;
+using MyProject.ViewModels;
 
 namespace MyProject.Controllers
 {
+    [Authorize]
     public class RealEstateDetailsController : Controller
     {
         private readonly MyProjectContext _context;
+        private readonly ApplicationDbContext _userContext;
 
-        public RealEstateDetailsController(MyProjectContext context)
+        public RealEstateDetailsController(MyProjectContext context, ApplicationDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         // GET: RealEstateDetails
         public async Task<IActionResult> Index()
         {
-              return View(await _context.RealEstateDetail.ToListAsync());
+            var realEstateDetail = await _context.RealEstateDetail.ToListAsync();
+
+            var users = await _userContext.User.ToListAsync();
+            var realEstateDetailViewModels = realEstateDetail.Select(item => new RealEstateDetailViewModel(item, users));
+
+            return View(realEstateDetailViewModels);
         }
 
         // GET: RealEstateDetails/Details/5
@@ -40,13 +51,17 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(realEstateDetail);
+            var users = await _userContext.User.ToListAsync();
+            var realEstateDetailViewModel = new RealEstateDetailViewModel(realEstateDetail, users);
+
+            return View(realEstateDetailViewModel);
         }
 
         // GET: RealEstateDetails/Create
         public IActionResult Create()
         {
-            return View();
+            var realEstateDetailViewModel = new RealEstateDetailViewModel();
+            return View(realEstateDetailViewModel);
         }
 
         // POST: RealEstateDetails/Create
@@ -72,7 +87,7 @@ namespace MyProject.Controllers
                 realEstateDetail.SurroundingsAppendiceType = String.Join(',', surroundingsAppendiceType);
                 realEstateDetail.Surroundings = String.Join(',', surroundings);
 
-                realEstateDetail.CreateId = User.Identity.Name;
+                realEstateDetail.CreateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 realEstateDetail.CreateTime = DateTime.Now;
                 _context.Add(realEstateDetail);
                 await _context.SaveChangesAsync();
@@ -94,7 +109,11 @@ namespace MyProject.Controllers
             {
                 return NotFound();
             }
-            return View(realEstateDetail);
+
+            var users = await _userContext.User.ToListAsync();
+            var realEstateDetailViewModel = new RealEstateDetailViewModel(realEstateDetail, users);
+
+            return View(realEstateDetailViewModel);
         }
 
         // POST: RealEstateDetails/Edit/5
@@ -102,7 +121,7 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ObjectName,City,Region,Section,Subsection,PlaceNumber,Area,RightsScope,AppendicesNames,IsLandOwner,LandOwner,IsOtherObligee,OtherObligee,IsRegisteredManager,RegisteredManager,IsOwnership,OwnershipType,IsOtherRights,OtherRightsType,IsTrust,TrustContent,IsBaseRightsSettingBurden,BaseRightsSettingBurdenStatus,IsSettingOtherRights,SettingOtherRightsType,IsRestrictingRegistration,RestrictingRegistrationType,OtherRestrictingRegistration,IsOtherBaseRightsItemBy254,OtherBaseRightsItemBy254,IsOtherBaseRightsItemRelated,OtherBaseRightsItemRelated,IsUseByConvention,UseByConventionContent,IsRespectivelyManage,IsRespectivelyManageBy826,RespectivelyManageBy826Type,RespectivelyManageBy826Content,IsRent,IsLend,RentLendStatus,IsOccupiedWithoutRights,OccupiedWithoutRightsStatus,IsPublicWay,PublicWayPlaceAppendice,PublicWayArea,UrbanLandSection,NonUrbanLandSection,NonUrbanLandType,UnKnownLandRegulationStatus,BuildRate,VolumeRate,IsUrbanPlanningManual,DevelopMethodRestrictionsType,OtherDevelopMethodRestriction,IsBuildingRestrictedRegion,IsFarmLand,BuildFarmhouseType,FarmLandRegulation,IsMountLand,MountLandRestrictions,IsBanningBuildByKeepSoilLaw,BanningBuildByKeepSoilLawRestrictions,IsRiverRegion,RiverRegionRestrictions,IsDrainFacilityRegion,DrainFacilityRegionRestrictions,IsNationalPark,NationalParkType,NationalParkRestrictions,IsDrinkingWaterSource,DrinkingWaterSourceType,DrinkingWaterSourceRestrictions,IsWaterProtectionAreaByLaw,WaterProtectionAreaByLawRestrictions,IsPolutedArea,PolutedAreaType,PolutedAreaRestrictions,TransactionType,TransactionPrice,PaymentMethod,IsLandValueAddedTax,LandValueAddedTax,IsLandTax,LandTax,IsStampDuty,StampDuty,IsOtherTax,OtherTax,IsConstructionBenefitFee,ConstructionBenefitFee,IsRegistrationFee,RegistrationFee,IsSurveyFee,SurveyFee,IsOtherProcessingFee,OtherProcessingFee,IsContractFee,ContractFee,IsOwnershipTransferAgencyFee,OwnershipTransferAgencyFee,IsOtherFee,OtherFee,ChooseManageType,ManageMethod,IsBreachOfContractPunishment,BreachOfContractPunishment,OtherTransactionItem,SurroundingsAppendiceType,Surroundings,IsCadastralMapRetest,IsCadastralMapRetestAnnouced,IsOutOfBoundsBuilding,OutOfBoundsBuildingStatus,IsCompulsoryAcquisition,CompulsoryAcquisitionArea,IsElectricityPower,IsTapWater,IsGas,IsDrainer,NonInfrastructureReason,RealEstateBroker,ContractDate,CreateTime,CreateId")] RealEstateDetail realEstateDetail,
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ObjectName,City,Region,Section,Subsection,PlaceNumber,Area,RightsScope,AppendicesNames,IsLandOwner,LandOwner,IsOtherObligee,OtherObligee,IsRegisteredManager,RegisteredManager,IsOwnership,OwnershipType,IsOtherRights,OtherRightsType,IsTrust,TrustContent,IsBaseRightsSettingBurden,BaseRightsSettingBurdenStatus,IsSettingOtherRights,SettingOtherRightsType,IsRestrictingRegistration,RestrictingRegistrationType,OtherRestrictingRegistration,IsOtherBaseRightsItemBy254,OtherBaseRightsItemBy254,IsOtherBaseRightsItemRelated,OtherBaseRightsItemRelated,IsUseByConvention,UseByConventionContent,IsRespectivelyManage,IsRespectivelyManageBy826,RespectivelyManageBy826Type,RespectivelyManageBy826Content,IsRent,IsLend,RentLendStatus,IsOccupiedWithoutRights,OccupiedWithoutRightsStatus,IsPublicWay,PublicWayPlaceAppendice,PublicWayArea,UrbanLandSection,NonUrbanLandSection,NonUrbanLandType,UnKnownLandRegulationStatus,BuildRate,VolumeRate,IsUrbanPlanningManual,DevelopMethodRestrictionsType,OtherDevelopMethodRestriction,IsBuildingRestrictedRegion,IsFarmLand,BuildFarmhouseType,FarmLandRegulation,IsMountLand,MountLandRestrictions,IsBanningBuildByKeepSoilLaw,BanningBuildByKeepSoilLawRestrictions,IsRiverRegion,RiverRegionRestrictions,IsDrainFacilityRegion,DrainFacilityRegionRestrictions,IsNationalPark,NationalParkType,NationalParkRestrictions,IsDrinkingWaterSource,DrinkingWaterSourceType,DrinkingWaterSourceRestrictions,IsWaterProtectionAreaByLaw,WaterProtectionAreaByLawRestrictions,IsPolutedArea,PolutedAreaType,PolutedAreaRestrictions,TransactionType,TransactionPrice,PaymentMethod,IsLandValueAddedTax,LandValueAddedTax,IsLandTax,LandTax,IsStampDuty,StampDuty,IsOtherTax,OtherTax,IsConstructionBenefitFee,ConstructionBenefitFee,IsRegistrationFee,RegistrationFee,IsSurveyFee,SurveyFee,IsOtherProcessingFee,OtherProcessingFee,IsContractFee,ContractFee,IsOwnershipTransferAgencyFee,OwnershipTransferAgencyFee,IsOtherFee,OtherFee,ChooseManageType,ManageMethod,IsBreachOfContractPunishment,BreachOfContractPunishment,OtherTransactionItem,SurroundingsAppendiceType,Surroundings,IsCadastralMapRetest,IsCadastralMapRetestAnnouced,IsOutOfBoundsBuilding,OutOfBoundsBuildingStatus,IsCompulsoryAcquisition,CompulsoryAcquisitionArea,IsElectricityPower,IsTapWater,IsGas,IsDrainer,NonInfrastructureReason,RealEstateBroker,ContractDate,CreateTime,CreateId")] RealEstateDetailViewModel realEstateDetail,
             string[] otherRightsType, string[] settingOtherRightsType, string[] restrictingRegistrationType, string[] respectivelyManageBy826Type, string[] developMethodRestrictionsType, string[] buildFarmhouseType, string[] nationalParkType, string[] drinkingWaterSourceType, string[] polutedAreaType, string[] chooseManageType, string[] surroundingsAppendiceType, string[] surroundings)
         {
             if (id != realEstateDetail.Id)
@@ -127,7 +146,7 @@ namespace MyProject.Controllers
                     realEstateDetail.SurroundingsAppendiceType = String.Join(',', surroundingsAppendiceType);
                     realEstateDetail.Surroundings = String.Join(',', surroundings);
 
-                    realEstateDetail.UpdateId = User.Identity.Name;
+                    realEstateDetail.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     realEstateDetail.UpdateTime = DateTime.Now;
                     _context.Update(realEstateDetail);
                     await _context.SaveChangesAsync();
@@ -163,7 +182,10 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(realEstateDetail);
+            var users = await _userContext.User.ToListAsync();
+            var realEstateDetailViewModel = new RealEstateDetailViewModel(realEstateDetail, users);
+
+            return View(realEstateDetailViewModel);
         }
 
         // POST: RealEstateDetails/Delete/5
@@ -235,17 +257,9 @@ namespace MyProject.Controllers
                 if (propertyInfo.PropertyType == typeof(bool) || Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(bool))
                 {
                     var boolValue = (bool)propertyInfo.GetValue(realEstateDetail, null);
-                    //html = html.Replace($"${propertyInfo.Name}$", boolValue is not null ? ((bool)boolValue ? "&#x25A0;有 &#x25A1;無" : "&#x25A1;有 &#x25A0;無") : "&#x25A1;有 &#x25A1;無");
-                    //if (boolValue is not null)
-                    //{
-                        html = html.Replace($"${propertyInfo.Name}$", (bool)boolValue ? "&#x25A0;" : "&#x25A1;");
-                        html = html.Replace($"$!{propertyInfo.Name}$", (bool)boolValue ? "&#x25A1;" : "&#x25A0;");
-                    //}
-                    //else
-                    //{
-                    //    html = html.Replace($"${propertyInfo.Name}$", "&#x25A1;");
-                    //    html = html.Replace($"$!{propertyInfo.Name}$", "&#x25A1;");
-                    //}
+
+                    html = html.Replace($"${propertyInfo.Name}$", (bool)boolValue ? "&#x25A0;" : "&#x25A1;");
+                    html = html.Replace($"$!{propertyInfo.Name}$", (bool)boolValue ? "&#x25A1;" : "&#x25A0;");
                 }
 
                 if (propertyInfo.PropertyType == typeof(DateTime) || Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(DateTime))
@@ -269,31 +283,33 @@ namespace MyProject.Controllers
 
                         enumConut++;
                     }
-
-                    //html = html.Replace("$PropertyType1$", "<input type = \"checkbox\" id = \"cbox1\" value = \"first_checkbox\"><label for= \"cbox1\"> This is the first checkbox </label>");
                 }
 
                 if (propertyInfo.PropertyType == typeof(string) && multipleChoiceItems.Contains(propertyInfo.Name))
                 {
-                    var enumArrayString = (string?)(propertyInfo.GetValue(realEstateDetail, null));
+                    var enumArrayString = (string?)propertyInfo.GetValue(realEstateDetail, null);
+                    var enumConut = 1;
 
-                    if (enumArrayString is not null)
+                    if (enumArrayString is not null && enumArrayString.Length > 0)
                     {
-                        var enumArray = enumArrayString.Split(',');
+                        var enumArray = enumArrayString.Split(',').Select(int.Parse).Select(x => x + 1).ToArray();
 
-                        foreach (var enumInt in enumArray)
+                        while (html.Contains($"${propertyInfo.Name}{enumConut}$"))
                         {
-                            var enumConut = 1;
+                            if (Array.Exists(enumArray, x => x == enumConut))
+                                html = html.Replace($"${propertyInfo.Name}{enumConut}$", "&#x25A0;");
+                            else
+                                html = html.Replace($"${propertyInfo.Name}{enumConut}$", "&#x25A1;");
 
-                            while (html.Contains($"${propertyInfo.Name}{enumConut}$"))
-                            {
-                                if (Convert.ToInt32(enumInt) == enumConut)
-                                    html = html.Replace($"${propertyInfo.Name}{enumConut}$", "&#x25A0;");
-                                else
-                                    html = html.Replace($"${propertyInfo.Name}{enumConut}$", "&#x25A1;");
-
-                                enumConut++;
-                            }
+                            enumConut++;
+                        }
+                    }
+                    else
+                    {
+                        while (html.Contains($"${propertyInfo.Name}{enumConut}$"))
+                        {
+                            html = html.Replace($"${propertyInfo.Name}{enumConut}$", "&#x25A1;");
+                            enumConut++;
                         }
                     }
                 }

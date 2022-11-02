@@ -3,8 +3,6 @@
 <script type="text/javascript">
     function addRow() {
         var count = $("#event div[id*='LandInventoryItem']").length;
-        console.log(count);
-
         var landInventoryItemsJson = "";
 
         for (i = 0; i < count; i++) {
@@ -17,14 +15,10 @@
 
             item = '{' + item.slice(0, -1) + '},';
 
-            console.log(item);
-
             landInventoryItemsJson += item;
         }
 
         landInventoryItemsJson = '[' + landInventoryItemsJson.slice(0, -1) + ']';
-
-        console.log(landInventoryItemsJson);
 
         $.ajax({
             type: 'POST',
@@ -39,28 +33,21 @@
 
     function removeRow(index) {
         var count = $("#event div[id*='LandInventoryItem']").length;
-        //    console.log(count);
-
         var landInventoryItemsJson = "";
 
         for (i = 0; i < count; i++) {
             var item = "";
 
             $("#event div[id='LandInventoryItem" + i + "'] input").each(function () {
-
                 item += '"' + $(this).attr('name').split('.')[1] + '":"' + $(this).val() + '",';
             });
 
             item = '{' + item.slice(0, -1) + '},';
 
-            console.log(item);
-
             landInventoryItemsJson += item;
         }
 
         landInventoryItemsJson = '[' + landInventoryItemsJson.slice(0, -1) + ']';
-
-        console.log(landInventoryItemsJson);
 
         $.ajax({
             type: 'POST',

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyProject.Models.House>
+﻿@model IEnumerable<MyProject.ViewModels.HouseViewModel>
 
 @{
     ViewData["Title"] = "客戶資料";
@@ -43,7 +43,22 @@
                 @*@Html.DisplayNameFor(model => model.ShareDenominator)*@權利範圍
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Owner.Name)
+                @Html.DisplayNameFor(model => model.OwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerRelationship)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerIdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerTelephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerResidence)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RegisterTime)
@@ -95,8 +110,23 @@
                     <p>@Html.DisplayFor(modelItem => item.ShareNumerator) / @Html.DisplayFor(modelItem => item.ShareDenominator)</p>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Owner.Name)
+                    @Html.DisplayFor(modelItem => item.OwnerName)
                 </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.OwnerRelationship)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.OwnerIdNumber)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.OwnerTelephone)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.OwnerPhone)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.OwnerResidence)
+                </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.RegisterTime)
                 </td>
@@ -104,13 +134,13 @@
                     @Html.DisplayFor(modelItem => item.CreateTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreateId)
+                    @Html.DisplayFor(modelItem => item.CreateName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UpdateTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UpdateId)
+                    @Html.DisplayFor(modelItem => item.UpdateName)
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id">詳情</a> |
@@ -120,7 +150,7 @@
                         <span> |</span>
                         <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
                         <span> |</span>
-                        <a asp-action="Access" asp-route-id="@item.Id" asp-route-ownerName="@item.Owner?.Name">權限管理</a>
+                        <a asp-action="Access" asp-route-id="@item.Id" asp-route-ownerName="@item.OwnerName">權限管理</a>
                     }
                 </td>
             </tr>

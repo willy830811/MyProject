@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyProject.Models.RealEstateDetail>
+﻿@model IEnumerable<MyProject.ViewModels.RealEstateDetailViewModel>
 
 @{
     ViewData["Title"] = "不動產說明書";
@@ -46,13 +46,13 @@
                 @Html.DisplayNameFor(model => model.CreateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateId)
+                @Html.DisplayNameFor(model => model.CreateName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UpdateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UpdateId)
+                @Html.DisplayNameFor(model => model.UpdateName)
             </th>
             <th></th>
         </tr>
@@ -94,13 +94,13 @@
                 @Html.DisplayFor(modelItem => item.CreateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateId)
+                @Html.DisplayFor(modelItem => item.CreateName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpdateId)
+                @Html.DisplayFor(modelItem => item.UpdateName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |

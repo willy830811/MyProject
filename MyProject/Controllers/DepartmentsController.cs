@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Models;
+using MyProject.ViewModels;
 
 namespace MyProject.Controllers
 {
@@ -15,18 +17,23 @@ namespace MyProject.Controllers
     public class DepartmentsController : Controller
     {
         private readonly MyProjectContext _context;
+        private readonly ApplicationDbContext _userContext;
 
-        public DepartmentsController(MyProjectContext context)
+        public DepartmentsController(MyProjectContext context, ApplicationDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         // GET: Departments
         public async Task<IActionResult> Index()
         {
-              return _context.Department != null ? 
-                          View(await _context.Department.ToListAsync()) :
-                          Problem("Entity set 'MyProjectContext.Department'  is null.");
+            var users = await _userContext.User.ToListAsync();
+            var departments = await _context.Department.ToListAsync();
+
+            var departmentViewModels = departments.Select(item => new DepartmentViewModel(item, users));
+
+            return View(departmentViewModels);
         }
 
         // GET: Departments/Details/5
@@ -44,7 +51,10 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(department);
+            var users = await _userContext.User.ToListAsync();
+            var departmentViewModel = new DepartmentViewModel(department, users);
+
+            return View(departmentViewModel);
         }
 
         // GET: Departments/Create
@@ -62,7 +72,7 @@ namespace MyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                department.CreateId = User.Identity.Name;
+                department.CreateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 department.CreateTime = DateTime.Now;
                 _context.Add(department);
                 await _context.SaveChangesAsync();
@@ -103,7 +113,7 @@ namespace MyProject.Controllers
             {
                 try
                 {
-                    department.UpdateId = User.Identity.Name;
+                    department.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     department.UpdateTime = DateTime.Now;
                     _context.Update(department);
                     await _context.SaveChangesAsync();
@@ -139,7 +149,10 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(department);
+            var users = await _userContext.User.ToListAsync();
+            var departmentViewModel = new DepartmentViewModel(department, users);
+
+            return View(departmentViewModel);
         }
 
         // POST: Departments/Delete/5

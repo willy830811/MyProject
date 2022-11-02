@@ -172,8 +172,6 @@
 
     public enum Surroundings
     {
-        都市計畫地形圖,
-        相關電子地圖,
         公_f私_b有市場,
         超級市場,
         學校,

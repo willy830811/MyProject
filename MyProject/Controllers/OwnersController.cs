@@ -1,31 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Migrations;
 using MyProject.Models;
+using MyProject.ViewModels;
 
 namespace MyProject.Controllers
 {
+    [Authorize]
     public class OwnersController : Controller
     {
         private readonly MyProjectContext _context;
+        private readonly ApplicationDbContext _userContext;
 
-        public OwnersController(MyProjectContext context)
+        public OwnersController(MyProjectContext context, ApplicationDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         // GET: Owners
         public async Task<IActionResult> Index()
         {
-              return _context.Owner != null ? 
-                          View(await _context.Owner.ToListAsync()) :
-                          Problem("Entity set 'MyProjectContext.Owner'  is null.");
+            var users = await _userContext.User.ToListAsync();
+            var owners = await _context.Owner.ToListAsync();
+
+            var ownerViewModels = owners.Select(item => new OwnerViewModel(item, users, null));
+
+            return View(ownerViewModels);
         }
 
         // GET: Owners/Details/5
@@ -43,7 +52,10 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(owner);
+            var users = await _userContext.User.ToListAsync();
+            var ownerViewModel = new OwnerViewModel(owner, users, null);
+
+            return View(ownerViewModel);
         }
 
         // GET: Owners/Create
@@ -61,7 +73,7 @@ namespace MyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(new Owner() { Name = name, Relationship = relationship, IdNumber = idNumber, Telephone = telephone, Phone = phone, Residence = residence, CreateId = User.Identity.Name, CreateTime = DateTime.Now });
+                _context.Add(new Owner() { Name = name, Relationship = relationship, IdNumber = idNumber, Telephone = telephone, Phone = phone, Residence = residence, CreateId = User.FindFirstValue(ClaimTypes.NameIdentifier), CreateTime = DateTime.Now });
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -101,7 +113,7 @@ namespace MyProject.Controllers
             {
                 try
                 {
-                    owner.UpdateId = User.Identity.Name;
+                    owner.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     owner.UpdateTime = DateTime.Now;
                     _context.Update(owner);
                     await _context.SaveChangesAsync();
@@ -137,7 +149,14 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(owner);
+            //var house = await _context.House.FirstOrDefaultAsync(h => h.OwnerId == id);
+            //if (house is not null)
+            //    return Page();
+
+            var users = await _userContext.User.ToListAsync();
+            var ownerViewModel = new OwnerViewModel(owner, users, null);
+
+            return View(ownerViewModel);
         }
 
         // POST: Owners/Delete/5
@@ -152,6 +171,14 @@ namespace MyProject.Controllers
             var owner = await _context.Owner.FindAsync(id);
             if (owner != null)
             {
+                var house = await _context.House.FirstOrDefaultAsync(h => h.OwnerId == id);
+                if (house is not null)
+                {
+                    var users = await _userContext.User.ToListAsync();
+                    var ownerViewModel = new OwnerViewModel(owner, users, "請先修改或移除和此所有權人有關的客戶資料");
+                    return View("Delete", ownerViewModel);
+                }
+
                 _context.Owner.Remove(owner);
             }
             

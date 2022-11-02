@@ -1,7 +1,20 @@
-﻿@model MyProject.Models.RealEstateDetail
+﻿@model MyProject.ViewModels.RealEstateDetailViewModel
 
 @{
     ViewData["Title"] = "刪除";
+
+    var otherRightsTypes = Model.OtherRightsTypes is not null ? String.Join('、', Model.OtherRightsTypes) : null;
+    var settingOtherRightsTypes = Model.SettingOtherRightsTypes is not null ? String.Join('、', Model.SettingOtherRightsTypes) : null;
+    var restrictingRegistrationTypes = Model.RestrictingRegistrationTypes is not null ? String.Join('、', Model.RestrictingRegistrationTypes) : null;
+    var respectivelyManageBy826Types = Model.RespectivelyManageBy826Types is not null ? String.Join('、', Model.RespectivelyManageBy826Types) : null;
+    var developMethodRestrictionsTypes = Model.DevelopMethodRestrictionsTypes is not null ? String.Join('、', Model.DevelopMethodRestrictionsTypes) : null;
+    var buildFarmhouseTypes = Model.BuildFarmhouseTypes is not null ? String.Join('、', Model.BuildFarmhouseTypes) : null;
+    var nationalParkTypes = Model.NationalParkTypes is not null ? String.Join('、', Model.NationalParkTypes) : null;
+    var drinkingWaterSourceTypes = Model.DrinkingWaterSourceTypes is not null ? String.Join('、', Model.DrinkingWaterSourceTypes) : null;
+    var polutedAreaTypes = Model.PolutedAreaTypes is not null ? String.Join('、', Model.PolutedAreaTypes) : null;
+    var chooseManageTypes = Model.ChooseManageTypes is not null ? String.Join('、', Model.ChooseManageTypes) : null;
+    var surroundingsAppendiceTypes = Model.SurroundingsAppendiceTypes is not null ? String.Join('、', Model.SurroundingsAppendiceTypes) : null;
+    var surroundingss = Model.Surroundingss is not null ? String.Join('、', Model.Surroundingss) : null;
 }
 
 <h1>刪除</h1>
@@ -123,7 +136,7 @@
             @Html.DisplayNameFor(model => model.OtherRightsType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherRightsType)
+            @otherRightsTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsTrust)
@@ -159,7 +172,7 @@
             @Html.DisplayNameFor(model => model.SettingOtherRightsType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SettingOtherRightsType)
+            @settingOtherRightsTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsRestrictingRegistration)
@@ -171,7 +184,7 @@
             @Html.DisplayNameFor(model => model.RestrictingRegistrationType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RestrictingRegistrationType)
+            @restrictingRegistrationTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OtherRestrictingRegistration)
@@ -231,7 +244,7 @@
             @Html.DisplayNameFor(model => model.RespectivelyManageBy826Type)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RespectivelyManageBy826Type)
+            @respectivelyManageBy826Types
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.RespectivelyManageBy826Content)
@@ -333,7 +346,7 @@
             @Html.DisplayNameFor(model => model.DevelopMethodRestrictionsType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DevelopMethodRestrictionsType)
+            @developMethodRestrictionsTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OtherDevelopMethodRestriction)
@@ -357,7 +370,7 @@
             @Html.DisplayNameFor(model => model.BuildFarmhouseType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BuildFarmhouseType)
+            @buildFarmhouseTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FarmLandRegulation)
@@ -423,7 +436,7 @@
             @Html.DisplayNameFor(model => model.NationalParkType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NationalParkType)
+            @nationalParkTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NationalParkRestrictions)
@@ -441,7 +454,7 @@
             @Html.DisplayNameFor(model => model.DrinkingWaterSourceType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DrinkingWaterSourceType)
+            @drinkingWaterSourceTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DrinkingWaterSourceRestrictions)
@@ -471,7 +484,7 @@
             @Html.DisplayNameFor(model => model.PolutedAreaType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PolutedAreaType)
+            @polutedAreaTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PolutedAreaRestrictions)
@@ -633,7 +646,7 @@
             @Html.DisplayNameFor(model => model.ChooseManageType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ChooseManageType)
+            @chooseManageTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ManageMethod)
@@ -663,13 +676,13 @@
             @Html.DisplayNameFor(model => model.SurroundingsAppendiceType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SurroundingsAppendiceType)
+            @surroundingsAppendiceTypes
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Surroundings)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surroundings)
+            @surroundingss
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsCadastralMapRetest)
@@ -756,10 +769,10 @@
             @Html.DisplayFor(model => model.CreateTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateId)
+            @Html.DisplayNameFor(model => model.CreateName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateId)
+            @Html.DisplayFor(model => model.CreateName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UpdateTime)
@@ -768,10 +781,10 @@
             @Html.DisplayFor(model => model.UpdateTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateId)
+            @Html.DisplayNameFor(model => model.UpdateName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdateId)
+            @Html.DisplayFor(model => model.UpdateName)
         </dd>
     </dl>
     

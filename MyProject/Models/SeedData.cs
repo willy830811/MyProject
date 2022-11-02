@@ -150,7 +150,7 @@ namespace MyProject.Models
                             RegisterReason = 0,
                             Order = 1,
                             Area = 1.23F,
-                            Owner = context.Owner.FirstOrDefault(x => x.Name == "老王"),
+                            OwnerId = context.Owner.FirstOrDefault(x => x.Name == "老王").Id,
                             RegisterTime = Convert.ToDateTime("2022-01-01 00:00:00")
                         }
                     );
@@ -403,6 +403,7 @@ namespace MyProject.Models
                             UnitPrice = 0.1f,
                             Section = "哈哈",
                             Subsection = "哈哈",
+                            PlaceNumber = "123",
                             LandCount = 1,
                             TotalAreaInSquareMeter = 0.1f,
                             TotalAreaInPing = 0.1f,

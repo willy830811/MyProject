@@ -175,7 +175,7 @@
             @Html.DisplayFor(model => model.Phone)
         </dd>
         
-        @if (Model.LandInventoryItems.Count > 0)
+        @if (Model.LandInventoryItems?.Count > 0)
         {
             <dt class = "col-sm-2">
                 @Html.DisplayNameFor(model => model.LandInventories)
@@ -235,10 +235,10 @@
             @Html.DisplayFor(model => model.CreateTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateId)
+            @Html.DisplayNameFor(model => model.CreateName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateId)
+            @Html.DisplayFor(model => model.CreateName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UpdateTime)
@@ -247,10 +247,10 @@
             @Html.DisplayFor(model => model.UpdateTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateId)
+            @Html.DisplayNameFor(model => model.UpdateName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdateId)
+            @Html.DisplayFor(model => model.UpdateName)
         </dd>
     </dl>
 </div>

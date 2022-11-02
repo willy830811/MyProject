@@ -1,4 +1,4 @@
-﻿@model MyProject.Models.House
+﻿@model MyProject.ViewModels.HouseViewModel
 
 @{
     ViewData["Title"] = "刪除";
@@ -72,10 +72,40 @@
             @Html.DisplayFor(model => model.ShareDenominator)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Owner.Name)
+            @Html.DisplayNameFor(model => model.OwnerName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Owner.Name)
+            @Html.DisplayFor(model => model.OwnerName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OwnerRelationship)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OwnerRelationship)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OwnerIdNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OwnerIdNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OwnerTelephone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OwnerTelephone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OwnerPhone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OwnerPhone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OwnerResidence)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OwnerResidence)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.RegisterTime)
@@ -90,10 +120,10 @@
             @Html.DisplayFor(model => model.CreateTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateId)
+            @Html.DisplayNameFor(model => model.CreateName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateId)
+            @Html.DisplayFor(model => model.CreateName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UpdateTime)
@@ -102,10 +132,10 @@
             @Html.DisplayFor(model => model.UpdateTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateId)
+            @Html.DisplayNameFor(model => model.UpdateName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdateId)
+            @Html.DisplayFor(model => model.UpdateName)
         </dd>
     </dl>
     

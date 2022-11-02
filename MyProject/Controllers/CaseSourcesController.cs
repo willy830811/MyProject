@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +15,16 @@ using Newtonsoft.Json;
 
 namespace MyProject.Controllers
 {
+    [Authorize]
     public class CaseSourcesController : Controller
     {
         private readonly MyProjectContext _context;
+        private readonly ApplicationDbContext _userContext;
 
-        public CaseSourcesController(MyProjectContext context)
+        public CaseSourcesController(MyProjectContext context, ApplicationDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         // GET: CaseSources
@@ -57,7 +62,10 @@ namespace MyProject.Controllers
                     break;
             }
 
-            return View(await caseSources.AsNoTracking().ToListAsync());
+            var users = await _userContext.User.ToListAsync();
+            var caseSourceViewModels = caseSources.Select(item => new CaseSourceViewModel(item, users));
+
+            return View(await caseSourceViewModels.AsNoTracking().ToListAsync());
         }
 
         // GET: CaseSources/Details/5
@@ -75,40 +83,8 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            var caseSourceLandInventoryItemsViewModel = new CaseSourceLandInventoryItemsViewModel
-            {
-                Id = caseSource.Id,
-                CaseName = caseSource.CaseName,
-                TotalPrice = caseSource.TotalPrice,
-                UnitPrice = caseSource.UnitPrice,
-                Section = caseSource.Section,
-                Subsection = caseSource.Subsection,
-                PlaceNumber = caseSource.PlaceNumber,
-                LandCount = caseSource.LandCount,
-                TotalAreaInSquareMeter = caseSource.TotalAreaInSquareMeter,
-                TotalAreaInPing = caseSource.TotalAreaInPing,
-                BuildRate = caseSource.BuildRate,
-                VolumeRate = caseSource.VolumeRate,
-                Hold = caseSource.Hold,
-                SellingAreaInSquareMeter = caseSource.SellingAreaInSquareMeter,
-                SellingAreaInPing = caseSource.SellingAreaInPing,
-                UseSection = caseSource.UseSection,
-                UseStatus = caseSource.UseStatus,
-                Environment = caseSource.Environment,
-                Feature = caseSource.Feature,
-                IsCadastralMap = caseSource.IsCadastralMap,
-                IsAerialPhoto = caseSource.IsAerialPhoto,
-                IsTranscript = caseSource.IsTranscript,
-                IsUseSection = caseSource.IsUseSection,
-                IsUrbanPlanningManual = caseSource.IsUrbanPlanningManual,
-                IsCurrentPhotos = caseSource.IsCurrentPhotos,
-                ValueAddedTax = caseSource.ValueAddedTax,
-                Other = caseSource.Other,
-                Agent = caseSource.Agent,
-                Phone = caseSource.Phone,
-                LandInventoryItems = JsonConvert.DeserializeObject<List<LandInventoryItem>>(caseSource.LandInventories),
-                AppendixItems = caseSource.AppendixItems
-            };
+            var users = await _userContext.User.ToListAsync();
+            var caseSourceLandInventoryItemsViewModel = new CaseSourceLandInventoryItemsViewModel(caseSource, users);
 
             return View(caseSourceLandInventoryItemsViewModel);
         }
@@ -116,7 +92,8 @@ namespace MyProject.Controllers
         // GET: CaseSources/Create
         public IActionResult Create()
         {
-            return View();
+            var caseSourceLandInventoryItemsViewModel = new CaseSourceLandInventoryItemsViewModel();
+            return View(caseSourceLandInventoryItemsViewModel);
         }
 
         // POST: CaseSources/Create
@@ -130,7 +107,7 @@ namespace MyProject.Controllers
             {
                 var landInventories = JsonConvert.SerializeObject(landInventoryItems);
                 caseSource.LandInventories = landInventories;
-                caseSource.CreateId = User.Identity.Name;
+                caseSource.CreateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 caseSource.CreateTime = DateTime.Now;
                 _context.Add(caseSource);
                 await _context.SaveChangesAsync();
@@ -153,39 +130,8 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            var caseSourceLandInventoryItemsViewModel = new CaseSourceLandInventoryItemsViewModel
-            {
-                Id = caseSource.Id,
-                CaseName = caseSource.CaseName,
-                TotalPrice = caseSource.TotalPrice,
-                UnitPrice = caseSource.UnitPrice,
-                Section = caseSource.Section,
-                Subsection = caseSource.Subsection,
-                PlaceNumber = caseSource.PlaceNumber,
-                LandCount = caseSource.LandCount,
-                TotalAreaInSquareMeter = caseSource.TotalAreaInSquareMeter,
-                TotalAreaInPing = caseSource.TotalAreaInPing,
-                BuildRate = caseSource.BuildRate,
-                VolumeRate = caseSource.VolumeRate,
-                Hold = caseSource.Hold,
-                SellingAreaInSquareMeter = caseSource.SellingAreaInSquareMeter,
-                SellingAreaInPing = caseSource.SellingAreaInPing,
-                UseSection = caseSource.UseSection,
-                UseStatus = caseSource.UseStatus,
-                Environment = caseSource.Environment,
-                Feature = caseSource.Feature,
-                IsCadastralMap = caseSource.IsCadastralMap,
-                IsAerialPhoto = caseSource.IsAerialPhoto,
-                IsTranscript = caseSource.IsTranscript,
-                IsUseSection = caseSource.IsUseSection,
-                IsUrbanPlanningManual = caseSource.IsUrbanPlanningManual,
-                IsCurrentPhotos = caseSource.IsCurrentPhotos,
-                ValueAddedTax = caseSource.ValueAddedTax,
-                Other = caseSource.Other,
-                Agent = caseSource.Agent,
-                Phone = caseSource.Phone,
-                LandInventoryItems = JsonConvert.DeserializeObject<List<LandInventoryItem>>(caseSource.LandInventories)
-            };
+            var users = await _userContext.User.ToListAsync();
+            var caseSourceLandInventoryItemsViewModel = new CaseSourceLandInventoryItemsViewModel(caseSource, users);
 
             return View(caseSourceLandInventoryItemsViewModel);
         }
@@ -206,8 +152,10 @@ namespace MyProject.Controllers
             {
                 try
                 {
-                    caseSource.UpdateId = User.Identity.Name;
+                    caseSource.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     caseSource.UpdateTime = DateTime.Now;
+                    caseSource.LandInventories = JsonConvert.SerializeObject(landInventoryItems);
+
                     _context.Update(caseSource);
                     await _context.SaveChangesAsync();
                 }
@@ -258,7 +206,10 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(caseSource);
+            var users = await _userContext.User.ToListAsync();
+            var caseSourceLandInventoryItemsViewModel = new CaseSourceLandInventoryItemsViewModel(caseSource, users);
+
+            return View(caseSourceLandInventoryItemsViewModel);
         }
 
         // POST: CaseSources/Delete/5

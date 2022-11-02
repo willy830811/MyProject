@@ -37,7 +37,7 @@ namespace MyProject.Models
         public int? ShareDenominator { get; set; }
 
         [Display(Name = "所有權人")]
-        public Owner? Owner { get; set; }
+        public int? OwnerId { get; set; }
 
         [Display(Name = "登記日期")]
         public DateTime? RegisterTime { get; set; }

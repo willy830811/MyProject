@@ -1,28 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Models;
+using MyProject.ViewModels;
 
 namespace MyProject.Controllers
 {
+    [Authorize]
     public class PropertiesController : Controller
     {
         private readonly MyProjectContext _context;
+        private readonly ApplicationDbContext _userContext;
 
-        public PropertiesController(MyProjectContext context)
+        public PropertiesController(MyProjectContext context, ApplicationDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         // GET: Properties
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Property.ToListAsync());
+            var properties = await _context.Property.ToListAsync();
+
+            var users = await _userContext.User.ToListAsync();
+            var propertyViewModels = properties.Select(item => new PropertyViewModel(item, users));
+
+            return View(propertyViewModels);
         }
 
         // GET: Properties/Details/5
@@ -40,13 +51,17 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(@property);
+            var users = await _userContext.User.ToListAsync();
+            var propertyViewModel = new PropertyViewModel(@property, users);
+
+            return View(propertyViewModel);
         }
 
         // GET: Properties/Create
         public IActionResult Create()
         {
-            return View();
+            var propertyViewModel = new PropertyViewModel();
+            return View(propertyViewModel);
         }
 
         // POST: Properties/Create
@@ -58,7 +73,7 @@ namespace MyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                @property.CreateId = User.Identity.Name;
+                @property.CreateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 @property.CreateTime = DateTime.Now;
                 _context.Add(@property);
                 await _context.SaveChangesAsync();
@@ -80,7 +95,11 @@ namespace MyProject.Controllers
             {
                 return NotFound();
             }
-            return View(@property);
+
+            var users = await _userContext.User.ToListAsync();
+            var propertyViewModel = new PropertyViewModel(@property, users);
+
+            return View(propertyViewModel);
         }
 
         // POST: Properties/Edit/5
@@ -99,7 +118,7 @@ namespace MyProject.Controllers
             {
                 try
                 {
-                    @property.UpdateId = User.Identity.Name;
+                    @property.UpdateId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     @property.UpdateTime = DateTime.Now;
                     _context.Update(@property);
                     await _context.SaveChangesAsync();
@@ -135,7 +154,10 @@ namespace MyProject.Controllers
                 return NotFound();
             }
 
-            return View(@property);
+            var users = await _userContext.User.ToListAsync();
+            var propertyViewModel = new PropertyViewModel(@property, users);
+
+            return View(propertyViewModel);
         }
 
         // POST: Properties/Delete/5

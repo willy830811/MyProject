@@ -1,20 +1,7 @@
-﻿@model MyProject.Models.RealEstateDetail
+﻿@model MyProject.ViewModels.RealEstateDetailViewModel
 
 @{
     ViewData["Title"] = "新增";
-
-    var otherRightsType = new int[0];
-    var settingOtherRightsType =new int[0];
-    var restrictingRegistrationType = new int[0];
-    var respectivelyManageBy826Type = new int[0];
-    var developMethodRestrictionsType = new int[0];
-    var buildFarmhouseType = new int[0];
-    var nationalParkType = new int[0];
-    var drinkingWaterSourceType = new int[0];
-    var polutedAreaType = new int[0];
-    var chooseManageType = new int[0];
-    var surroundingsAppendiceType = new int[0];
-    var surroundings = new int[0];
 }
 
 <style>
@@ -127,7 +114,7 @@
                 <span>(一) </span>
                 <input asp-for="IsOwnership" type="checkbox" />
                 <span>所有權：</span>
-                @foreach(var c in System.Enum.GetValues(typeof(OwnershipType)))
+                @foreach (var c in System.Enum.GetValues(typeof(OwnershipType)))
                 {
                     <div class="form-group">
                         <input type="radio" asp-for="OwnershipType" value="@((int)c)" class="control-label" />
@@ -140,10 +127,10 @@
                 <span>(二) </span>
                 <input asp-for="IsOtherRights" type="checkbox" />
                 <span>他項權利：</span>
-                @foreach(var c in System.Enum.GetValues(typeof(OtherRightsType)))
+                @foreach (var c in System.Enum.GetValues(typeof(OtherRightsType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="otherRightsType" value="@((int)c)" class="control-label" @if(Array.IndexOf(otherRightsType, (int)c) > -1) { @Html.Raw("checked") }/>@c </label>
+                        <label><input type="checkbox" name="otherRightsType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>。</span>
@@ -162,7 +149,7 @@
                 </div>
                 <span>(依登記謄本及信託專簿記載)。</span>
             </div>
-            
+
             <div>
                 <span>(四) 基地權利</span>
                 <div class="form-group">
@@ -176,7 +163,7 @@
                 </div>
                 <span>。</span>
             </div>
-            
+
             <div>
                 <span>1.</span>
                 <div class="form-group">
@@ -184,15 +171,15 @@
                     <input type="radio" asp-for="IsSettingOtherRights" value="@false" /> 無
                 </div>
                 <span>他項權利設定(</span>
-                @foreach(var c in System.Enum.GetValues(typeof(OtherRightsType)))
+                @foreach (var c in System.Enum.GetValues(typeof(OtherRightsType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="settingOtherRightsType" value="@((int)c)" class="control-label" @if(Array.IndexOf(settingOtherRightsType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="settingOtherRightsType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>)。</span>
             </div>
-            
+
             <div>
                 <span>2.</span>
                 <div class="form-group">
@@ -200,10 +187,10 @@
                     <input type="radio" asp-for="IsRestrictingRegistration" value="@false" /> 無
                 </div>
                 <span>限制登記(</span>
-                @foreach(var c in System.Enum.GetValues(typeof(RestrictingRegistrationType)))
+                @foreach (var c in System.Enum.GetValues(typeof(RestrictingRegistrationType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="restrictingRegistrationType" value="@((int)c)" class="control-label" @if(Array.IndexOf(restrictingRegistrationType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="restrictingRegistrationType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>：</span>
@@ -230,7 +217,7 @@
                 </div>
                 <span>)。</span>
             </div>
-            
+
             <h5>四、目前管理與使用情況：</h5>
             <div>
                 <span>(一) </span>
@@ -257,10 +244,10 @@
                     <input type="radio" asp-for="IsRespectivelyManageBy826" value="@false" /> 無
                 </div>
                 <span>依民法第826條之1規定為</span>
-                @foreach(var c in System.Enum.GetValues(typeof(RespectivelyManageBy826Type)))
+                @foreach (var c in System.Enum.GetValues(typeof(RespectivelyManageBy826Type)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="respectivelyManageBy826Type" value="@((int)c)" class="control-label" @if(Array.IndexOf(respectivelyManageBy826Type, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="respectivelyManageBy826Type" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>等約定之登記。若有，其內容：</span>
@@ -319,9 +306,9 @@
                 </div>
                 <span>平方公尺。</span>
             </div>
-            
+
             <h5>五、使用管制內容：</h5>
-            
+
             <div>
                 <span>(一) 使用分區或編定</span>
             </div>
@@ -383,11 +370,11 @@
                     <span asp-validation-for="IsUrbanPlanningManual" class="text-danger"></span>
                 </div>
                 <span>都市計畫說明書有附帶規定以</span>
-                
-                @foreach(var c in System.Enum.GetValues(typeof(DevelopMethodRestrictionsType)))
+
+                @foreach (var c in System.Enum.GetValues(typeof(DevelopMethodRestrictionsType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="developMethodRestrictionsType" value="@((int)c)" class="control-label" @if(Array.IndexOf(developMethodRestrictionsType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="developMethodRestrictionsType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>方式：</span>
@@ -399,7 +386,7 @@
                 <input asp-for="IsBuildingRestrictedRegion" type="checkbox" />
                 <span>屬都市計畫法規定之禁限建地區。</span>
             </div>
-            
+
             <div>
                 <span>(五) </span>
                 <div class="form-group">
@@ -407,11 +394,11 @@
                     <input type="radio" asp-for="IsFarmLand" value="@false" /> 否
                 </div>
                 <span>屬</span>
-                
-                @foreach(var c in System.Enum.GetValues(typeof(BuildFarmhouseType)))
+
+                @foreach (var c in System.Enum.GetValues(typeof(BuildFarmhouseType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="buildFarmhouseType" value="@((int)c)" class="control-label" @if(Array.IndexOf(buildFarmhouseType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="buildFarmhouseType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>之農業用地。若是，其使用管制情形(非屬農業用地者免記載)：</span>
@@ -489,10 +476,10 @@
                     <input type="radio" asp-for="IsNationalPark" value="@false" /> 否
                 </div>
                 <span>屬國家公園區內之</span>
-                @foreach(var c in System.Enum.GetValues(typeof(NationalParkType)))
+                @foreach (var c in System.Enum.GetValues(typeof(NationalParkType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="nationalParkType" value="@((int)c)" class="control-label" @if(Array.IndexOf(nationalParkType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="nationalParkType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>。若是，其限制重點：</span>
@@ -510,10 +497,10 @@
                     <input type="radio" asp-for="IsDrinkingWaterSource" value="@false" /> 否
                 </div>
                 <span>屬飲用水管理條例公告之</span>
-                @foreach(var c in System.Enum.GetValues(typeof(DrinkingWaterSourceType)))
+                @foreach (var c in System.Enum.GetValues(typeof(DrinkingWaterSourceType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="drinkingWaterSourceType" value="@((int)c)" class="control-label" @if(Array.IndexOf(drinkingWaterSourceType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="drinkingWaterSourceType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>。若是，其限制重點：</span>
@@ -545,10 +532,10 @@
                     <input type="radio" asp-for="IsPolutedArea" value="@false" /> 否
                 </div>
                 <span>屬政府公告之</span>
-                @foreach(var c in System.Enum.GetValues(typeof(PolutedAreaType)))
+                @foreach (var c in System.Enum.GetValues(typeof(PolutedAreaType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="polutedAreaType" value="@((int)c)" class="control-label" @if(Array.IndexOf(polutedAreaType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="polutedAreaType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>。若是，其限制重點：</span>
@@ -563,7 +550,7 @@
 
             <div>
                 <span>(一) 交易種類：</span>
-                @foreach( var c in System.Enum.GetValues(typeof(TransactionType)) )
+                @foreach (var c in System.Enum.GetValues(typeof(TransactionType)))
                 {
                     <div class="form-group">
                         <input type="radio" asp-for="TransactionType" value="@((int)c)" class="control-label" />
@@ -678,7 +665,7 @@
                 <span>元整，</span>
                 <input asp-for="IsOtherFee" type="checkbox" />
                 <span>其他：</span>
-                 <div class="form-group">
+                <div class="form-group">
                     <input asp-for="OtherFee" class="form-control" />
                     <span asp-validation-for="OtherFee" class="text-danger"></span>
                 </div>
@@ -691,10 +678,10 @@
 
             <div>
                 <span>(五) </span>
-                @foreach(var c in System.Enum.GetValues(typeof(ChooseManageType)))
+                @foreach (var c in System.Enum.GetValues(typeof(ChooseManageType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="chooseManageType" value="@((int)c)" class="control-label" @if(Array.IndexOf(chooseManageType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="chooseManageType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>處理方式(如無，則免填)：</span>
@@ -727,24 +714,24 @@
                 </div>
                 <span>。</span>
             </div>
-                
+
             <h5>七、其他重要事項：</h5>
 
             <div>
                 <span>(一) 周邊環境，詳如</span>
-                @foreach(var c in System.Enum.GetValues(typeof(SurroundingsAppendiceType)))
+                @foreach (var c in System.Enum.GetValues(typeof(SurroundingsAppendiceType)))
                 {
                     <div class="form-group">
-                        <label><input type="checkbox" name="surroundingsAppendiceType" value="@((int)c)" class="control-label" @if(Array.IndexOf(surroundingsAppendiceType, (int)c) > -1) { @Html.Raw("checked") } />@c </label>
+                        <label><input type="checkbox" name="surroundingsAppendiceType" value="@((int)c)" class="control-label" checked="@false" />@c </label>
                     </div>
                 }
                 <span>，並於圖面標示周邊半徑300公尺範圍內之重要環境設施(包括：</span>
-                @foreach(var c in System.Enum.GetValues(typeof(Surroundings)))
+                @foreach (var c in System.Enum.GetValues(typeof(Surroundings)))
                 {
                     // 處理enum中之符號
                     var _c = c.ToString().Replace("_f", "(").Replace("_b", ")").Replace("_c", "、");
                     <div class="form-group">
-                        <label><input type="checkbox" name="surroundings" value="@((int)c)" class="control-label" @if(Array.IndexOf(surroundings, (int)c) > -1) { @Html.Raw("checked") } />@_c </label>
+                        <label><input type="checkbox" name="surroundings" value="@((int)c)" class="control-label" checked="@false" />@_c </label>
                     </div>
                 }
                 <span>)。</span>
@@ -838,7 +825,7 @@
                     <span asp-validation-for="ContractDate" class="text-danger"></span>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="新增" class="btn btn-primary" />
             </div>
