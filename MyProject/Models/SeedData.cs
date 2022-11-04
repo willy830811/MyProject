@@ -18,7 +18,8 @@ namespace MyProject.Models
                     UserName = "test",
                     Email = "test@gmail.com",
                     NormalizedUserName = "TEST",
-                    NormalizedEmail = "TEST@GMAIL.COM"
+                    NormalizedEmail = "TEST@GMAIL.COM",
+                    CnName = "老闆"
                 };
 
                 var password = "123456";
@@ -38,7 +39,8 @@ namespace MyProject.Models
                     UserName = "test1",
                     Email = "test1@gmail.com",
                     NormalizedUserName = "TEST1",
-                    NormalizedEmail = "TEST1@GMAIL.COM"
+                    NormalizedEmail = "TEST1@GMAIL.COM",
+                    CnName = "陳小美"
                 };
 
                 var password = "123456";
@@ -58,7 +60,8 @@ namespace MyProject.Models
                     UserName = "test2",
                     Email = "test2@gmail.com",
                     NormalizedUserName = "TEST2",
-                    NormalizedEmail = "TEST2@GMAIL.COM"
+                    NormalizedEmail = "TEST2@GMAIL.COM",
+                    CnName = "王大明"
                 };
 
                 var password = "123456";

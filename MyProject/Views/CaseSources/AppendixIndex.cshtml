@@ -9,41 +9,43 @@
 <h4>案源表</h4>
 <h6>案名: @ViewBag.CaseSourceName</h6>
 <hr />
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Format)
-            </th>
-            <th>
-                預覽
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Format)
-                </td>
-                <td>
-                    <img src="@String.Format("data:image/{0};base64,{1}", item.Format, item.Base64)" />
-                </td>
-                <td>
-                    <a asp-action="AppendixDelete" asp-route-caseSourceId="@ViewBag.CaseSourceId" asp-route-id="@item.Id">刪除</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Format)
+                </th>
+                <th>
+                    預覽
+                </th>
+                <th class="final"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Format)
+                    </td>
+                    <td>
+                        <img src="@String.Format("data:image/{0};base64,{1}", item.Format, item.Base64)" />
+                    </td>
+                    <td class="final">
+                        <a asp-action="AppendixDelete" asp-route-caseSourceId="@ViewBag.CaseSourceId" asp-route-id="@item.Id">刪除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @using (Html.BeginForm("AppendixCreate", "CaseSources", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

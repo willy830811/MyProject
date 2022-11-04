@@ -12,151 +12,153 @@
     <span> |</span>
     <a asp-action="Index" asp-controller="Owners">管理所有權人</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Section)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subsection)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Number)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegisterReason)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.ShareDenominator)*@權利範圍
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerRelationship)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerIdNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerTelephone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerResidence)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegisterTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Region)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Section)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Subsection)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Number)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegisterReason)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Order)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Area)
-                </td>
-                <td>
-                    <p>@Html.DisplayFor(modelItem => item.ShareNumerator) / @Html.DisplayFor(modelItem => item.ShareDenominator)</p>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OwnerName)
-                </td>
                 <th>
-                    @Html.DisplayFor(modelItem => item.OwnerRelationship)
+                    @Html.DisplayNameFor(model => model.City)
                 </th>
                 <th>
-                    @Html.DisplayFor(modelItem => item.OwnerIdNumber)
+                    @Html.DisplayNameFor(model => model.Region)
                 </th>
                 <th>
-                    @Html.DisplayFor(modelItem => item.OwnerTelephone)
+                    @Html.DisplayNameFor(model => model.Section)
                 </th>
                 <th>
-                    @Html.DisplayFor(modelItem => item.OwnerPhone)
+                    @Html.DisplayNameFor(model => model.Subsection)
                 </th>
                 <th>
-                    @Html.DisplayFor(modelItem => item.OwnerResidence)
+                    @Html.DisplayNameFor(model => model.Number)
                 </th>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegisterTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateName)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">詳情</a> |
-                    @if (isAdmin)
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">編輯</a>
-                        <span> |</span>
-                        <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
-                        <span> |</span>
-                        <a asp-action="Access" asp-route-id="@item.Id" asp-route-ownerName="@item.OwnerName">權限管理</a>
-                    }
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegisterReason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Area)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ShareDenominator)*@權利範圍
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwnerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwnerRelationship)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwnerIdNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwnerTelephone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwnerPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwnerResidence)
+                </th>
+                <th class="datetime">
+                    @Html.DisplayNameFor(model => model.RegisterTime)
+                </th>
+                <th class="datetime">
+                    @Html.DisplayNameFor(model => model.CreateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateId)
+                </th>
+                <th class="datetime">
+                    @Html.DisplayNameFor(model => model.UpdateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdateId)
+                </th>
+                <th class="final"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Section)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subsection)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegisterReason)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Area)
+                    </td>
+                    <td>
+                        <span>@Html.DisplayFor(modelItem => item.ShareNumerator) / @Html.DisplayFor(modelItem => item.ShareDenominator)</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OwnerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OwnerRelationship)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OwnerIdNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OwnerTelephone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OwnerPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OwnerResidence)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegisterTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UpdateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UpdateName)
+                    </td>
+                    <td class="final">
+                        <a asp-action="Details" asp-route-id="@item.Id">詳情</a> |
+                        @if (isAdmin)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">編輯</a>
+                            <span> |</span>
+                            <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
+                            <span> |</span>
+                            <a asp-action="Access" asp-route-id="@item.Id" asp-route-ownerName="@item.OwnerName">權限管理</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 @if (Model.Count() == 0)
 {
     <p style="text-align:center">無資料</p>

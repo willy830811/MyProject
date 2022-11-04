@@ -53,7 +53,7 @@ namespace MyProject.Controllers
                 var houseUsersByUserId = await _context.HouseUser.Where(x => x.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
                 var houses = await _context.House.ToListAsync();
                 var availableHouses = houses.Where(x => houseUsersByUserId.FindIndex(y => y.HouseId == x.Id) != -1).ToList();
-                var houseViewModels = (List<HouseViewModel>)availableHouses.Select(
+                var houseViewModels = availableHouses.Select(
                     item => new HouseViewModel(
                         item,
                         users,

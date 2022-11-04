@@ -9,105 +9,107 @@
 <p>
     <a asp-action="Create">新增</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ObjectName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Section)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subsection)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PlaceNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RightsScope)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RealEstateBroker)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContractDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ObjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Section)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subsection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlaceNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RightsScope)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RealEstateBroker)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContractDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ObjectName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Region)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Section)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subsection)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlaceNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Area)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RightsScope)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RealEstateBroker)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContractDate)
+                </th>
+                <th class="datetime">
+                    @Html.DisplayNameFor(model => model.CreateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateName)
+                </th>
+                <th class="datetime">
+                    @Html.DisplayNameFor(model => model.UpdateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdateName)
+                </th>
+                <th class="final"></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Section)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subsection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Area)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RightsScope)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RealEstateBroker)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateName)
+                </td>
+                <td class="final">
+                    <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">詳情</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>

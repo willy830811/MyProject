@@ -1,18 +1,43 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+.table {
+    table-layout: fixed;
+}
+
+thead th, tbody td {
+    width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+    thead th.datetime, tbody td.datetime {
+        width: 210px;
+    }
+
+    thead th.final, tbody td.final {
+        width: 150px;
+        white-space: initial;
+        text-overflow: initial;
+        overflow: initial;
+        position: sticky;
+        right: 0;
+        background-color: white
+    }
