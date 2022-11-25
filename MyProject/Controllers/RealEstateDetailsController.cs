@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Models;
+using MyProject.Models.Items;
 using MyProject.ViewModels;
+using Newtonsoft.Json;
 
 namespace MyProject.Controllers
 {
@@ -69,11 +71,24 @@ namespace MyProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ObjectName,City,Region,Section,Subsection,PlaceNumber,Area,RightsScope,AppendicesNames,IsLandOwner,LandOwner,IsOtherObligee,OtherObligee,IsRegisteredManager,RegisteredManager,IsOwnership,OwnershipType,IsOtherRights,OtherRightsType,IsTrust,TrustContent,IsBaseRightsSettingBurden,BaseRightsSettingBurdenStatus,IsSettingOtherRights,SettingOtherRightsType,IsRestrictingRegistration,RestrictingRegistrationType,OtherRestrictingRegistration,IsOtherBaseRightsItemBy254,OtherBaseRightsItemBy254,IsOtherBaseRightsItemRelated,OtherBaseRightsItemRelated,IsUseByConvention,UseByConventionContent,IsRespectivelyManage,IsRespectivelyManageBy826,RespectivelyManageBy826Type,RespectivelyManageBy826Content,IsRent,IsLend,RentLendStatus,IsOccupiedWithoutRights,OccupiedWithoutRightsStatus,IsPublicWay,PublicWayPlaceAppendice,PublicWayArea,UrbanLandSection,NonUrbanLandSection,NonUrbanLandType,UnKnownLandRegulationStatus,BuildRate,VolumeRate,IsUrbanPlanningManual,DevelopMethodRestrictionsType,OtherDevelopMethodRestriction,IsBuildingRestrictedRegion,IsFarmLand,BuildFarmhouseType,FarmLandRegulation,IsMountLand,MountLandRestrictions,IsBanningBuildByKeepSoilLaw,BanningBuildByKeepSoilLawRestrictions,IsRiverRegion,RiverRegionRestrictions,IsDrainFacilityRegion,DrainFacilityRegionRestrictions,IsNationalPark,NationalParkType,NationalParkRestrictions,IsDrinkingWaterSource,DrinkingWaterSourceType,DrinkingWaterSourceRestrictions,IsWaterProtectionAreaByLaw,WaterProtectionAreaByLawRestrictions,IsPolutedArea,PolutedAreaType,PolutedAreaRestrictions,TransactionType,TransactionPrice,PaymentMethod,IsLandValueAddedTax,LandValueAddedTax,IsLandTax,LandTax,IsStampDuty,StampDuty,IsOtherTax,OtherTax,IsConstructionBenefitFee,ConstructionBenefitFee,IsRegistrationFee,RegistrationFee,IsSurveyFee,SurveyFee,IsOtherProcessingFee,OtherProcessingFee,IsContractFee,ContractFee,IsOwnershipTransferAgencyFee,OwnershipTransferAgencyFee,IsOtherFee,OtherFee,ChooseManageType,ManageMethod,IsBreachOfContractPunishment,BreachOfContractPunishment,OtherTransactionItem,SurroundingsAppendiceType,Surroundings,IsCadastralMapRetest,IsCadastralMapRetestAnnouced,IsOutOfBoundsBuilding,OutOfBoundsBuildingStatus,IsCompulsoryAcquisition,CompulsoryAcquisitionArea,IsElectricityPower,IsTapWater,IsGas,IsDrainer,NonInfrastructureReason,RealEstateBroker,ContractDate")] RealEstateDetail realEstateDetail, 
-            string[] otherRightsType, string[] settingOtherRightsType, string[] restrictingRegistrationType, string[] respectivelyManageBy826Type, string[] developMethodRestrictionsType, string[] buildFarmhouseType, string[] nationalParkType, string[] drinkingWaterSourceType, string[] polutedAreaType, string[] chooseManageType, string[] surroundingsAppendiceType, string[] surroundings)
+        public async Task<IActionResult> Create([Bind("Id,ObjectName,City,Region,Section,Subsection,PlaceNumber,Area,RightsScope,AppendicesNames,IsLandOwner,LandOwner,IsOtherObligee,OtherObligee,IsRegisteredManager,RegisteredManager,IsOwnership,OwnershipType,IsOtherRights,OtherRightsType,IsTrust,TrustContent,IsBaseRightsSettingBurden,BaseRightsSettingBurdenStatus,IsSettingOtherRights,SettingOtherRightsType,IsRestrictingRegistration,RestrictingRegistrationType,OtherRestrictingRegistration,IsOtherBaseRightsItemBy254,OtherBaseRightsItemBy254,IsOtherBaseRightsItemRelated,OtherBaseRightsItemRelated,IsUseByConvention,UseByConventionContent,IsRespectivelyManage,IsRespectivelyManageBy826,RespectivelyManageBy826Type,RespectivelyManageBy826Content,IsRent,IsLend,RentLendStatus,IsOccupiedWithoutRights,OccupiedWithoutRightsStatus,IsPublicWay,PublicWayPlaceAppendice,PublicWayArea,UrbanLandSection,NonUrbanLandSection,NonUrbanLandType,UnKnownLandRegulationStatus,BuildRate,VolumeRate,IsUrbanPlanningManual,DevelopMethodRestrictionsType,OtherDevelopMethodRestriction,IsBuildingRestrictedRegion,IsFarmLand,BuildFarmhouseType,FarmLandRegulation,IsMountLand,MountLandRestrictions,IsBanningBuildByKeepSoilLaw,BanningBuildByKeepSoilLawRestrictions,IsRiverRegion,RiverRegionRestrictions,IsDrainFacilityRegion,DrainFacilityRegionRestrictions,IsNationalPark,NationalParkType,NationalParkRestrictions,IsDrinkingWaterSource,DrinkingWaterSourceType,DrinkingWaterSourceRestrictions,IsWaterProtectionAreaByLaw,WaterProtectionAreaByLawRestrictions,IsPolutedArea,PolutedAreaType,PolutedAreaRestrictions,TransactionType,TransactionPrice,PaymentMethod,IsLandValueAddedTax,LandValueAddedTax,IsLandTax,LandTax,IsStampDuty,StampDuty,IsOtherTax,OtherTax,IsConstructionBenefitFee,ConstructionBenefitFee,IsRegistrationFee,RegistrationFee,IsSurveyFee,SurveyFee,IsOtherProcessingFee,OtherProcessingFee,IsContractFee,ContractFee,IsOwnershipTransferAgencyFee,OwnershipTransferAgencyFee,IsOtherFee,OtherFee,ChooseManageType,ManageMethod,IsBreachOfContractPunishment,BreachOfContractPunishment,OtherTransactionItem,SurroundingsAppendiceType,Surroundings,IsCadastralMapRetest,IsCadastralMapRetestAnnouced,IsOutOfBoundsBuilding,OutOfBoundsBuildingStatus,IsCompulsoryAcquisition,CompulsoryAcquisitionArea,IsElectricityPower,IsTapWater,IsGas,IsDrainer,NonInfrastructureReason,RealEstateBroker,ContractDate")] RealEstateDetail realEstateDetail,
+            List<RealEstateDetailLandInventoryItem> landInventoryItems,
+            string[] otherRightsType,
+            string[] settingOtherRightsType,
+            string[] restrictingRegistrationType,
+            string[] respectivelyManageBy826Type,
+            string[] developMethodRestrictionsType,
+            string[] buildFarmhouseType,
+            string[] nationalParkType,
+            string[] drinkingWaterSourceType,
+            string[] polutedAreaType,
+            string[] chooseManageType,
+            string[] surroundingsAppendiceType,
+            string[] surroundings)
         {
             if (ModelState.IsValid)
             {
+                realEstateDetail.LandInventories = JsonConvert.SerializeObject(landInventoryItems);
                 realEstateDetail.OtherRightsType = String.Join(',', otherRightsType);
                 realEstateDetail.SettingOtherRightsType = String.Join(',', settingOtherRightsType);
                 realEstateDetail.RestrictingRegistrationType = String.Join(',', restrictingRegistrationType);
@@ -122,7 +137,19 @@ namespace MyProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ObjectName,City,Region,Section,Subsection,PlaceNumber,Area,RightsScope,AppendicesNames,IsLandOwner,LandOwner,IsOtherObligee,OtherObligee,IsRegisteredManager,RegisteredManager,IsOwnership,OwnershipType,IsOtherRights,OtherRightsType,IsTrust,TrustContent,IsBaseRightsSettingBurden,BaseRightsSettingBurdenStatus,IsSettingOtherRights,SettingOtherRightsType,IsRestrictingRegistration,RestrictingRegistrationType,OtherRestrictingRegistration,IsOtherBaseRightsItemBy254,OtherBaseRightsItemBy254,IsOtherBaseRightsItemRelated,OtherBaseRightsItemRelated,IsUseByConvention,UseByConventionContent,IsRespectivelyManage,IsRespectivelyManageBy826,RespectivelyManageBy826Type,RespectivelyManageBy826Content,IsRent,IsLend,RentLendStatus,IsOccupiedWithoutRights,OccupiedWithoutRightsStatus,IsPublicWay,PublicWayPlaceAppendice,PublicWayArea,UrbanLandSection,NonUrbanLandSection,NonUrbanLandType,UnKnownLandRegulationStatus,BuildRate,VolumeRate,IsUrbanPlanningManual,DevelopMethodRestrictionsType,OtherDevelopMethodRestriction,IsBuildingRestrictedRegion,IsFarmLand,BuildFarmhouseType,FarmLandRegulation,IsMountLand,MountLandRestrictions,IsBanningBuildByKeepSoilLaw,BanningBuildByKeepSoilLawRestrictions,IsRiverRegion,RiverRegionRestrictions,IsDrainFacilityRegion,DrainFacilityRegionRestrictions,IsNationalPark,NationalParkType,NationalParkRestrictions,IsDrinkingWaterSource,DrinkingWaterSourceType,DrinkingWaterSourceRestrictions,IsWaterProtectionAreaByLaw,WaterProtectionAreaByLawRestrictions,IsPolutedArea,PolutedAreaType,PolutedAreaRestrictions,TransactionType,TransactionPrice,PaymentMethod,IsLandValueAddedTax,LandValueAddedTax,IsLandTax,LandTax,IsStampDuty,StampDuty,IsOtherTax,OtherTax,IsConstructionBenefitFee,ConstructionBenefitFee,IsRegistrationFee,RegistrationFee,IsSurveyFee,SurveyFee,IsOtherProcessingFee,OtherProcessingFee,IsContractFee,ContractFee,IsOwnershipTransferAgencyFee,OwnershipTransferAgencyFee,IsOtherFee,OtherFee,ChooseManageType,ManageMethod,IsBreachOfContractPunishment,BreachOfContractPunishment,OtherTransactionItem,SurroundingsAppendiceType,Surroundings,IsCadastralMapRetest,IsCadastralMapRetestAnnouced,IsOutOfBoundsBuilding,OutOfBoundsBuildingStatus,IsCompulsoryAcquisition,CompulsoryAcquisitionArea,IsElectricityPower,IsTapWater,IsGas,IsDrainer,NonInfrastructureReason,RealEstateBroker,ContractDate,CreateTime,CreateId")] RealEstateDetailViewModel realEstateDetail,
-            string[] otherRightsType, string[] settingOtherRightsType, string[] restrictingRegistrationType, string[] respectivelyManageBy826Type, string[] developMethodRestrictionsType, string[] buildFarmhouseType, string[] nationalParkType, string[] drinkingWaterSourceType, string[] polutedAreaType, string[] chooseManageType, string[] surroundingsAppendiceType, string[] surroundings)
+            List<RealEstateDetailLandInventoryItem> landInventoryItems,
+            string[] otherRightsType,
+            string[] settingOtherRightsType,
+            string[] restrictingRegistrationType,
+            string[] respectivelyManageBy826Type,
+            string[] developMethodRestrictionsType,
+            string[] buildFarmhouseType,
+            string[] nationalParkType,
+            string[] drinkingWaterSourceType,
+            string[] polutedAreaType,
+            string[] chooseManageType,
+            string[] surroundingsAppendiceType,
+            string[] surroundings)
         {
             if (id != realEstateDetail.Id)
             {
@@ -133,6 +160,7 @@ namespace MyProject.Controllers
             {
                 try
                 {
+                    realEstateDetail.LandInventories = JsonConvert.SerializeObject(landInventoryItems);
                     realEstateDetail.OtherRightsType = String.Join(',', otherRightsType);
                     realEstateDetail.SettingOtherRightsType = String.Join(',', settingOtherRightsType);
                     realEstateDetail.RestrictingRegistrationType = String.Join(',', restrictingRegistrationType);
@@ -165,6 +193,22 @@ namespace MyProject.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(realEstateDetail);
+        }
+
+        public IActionResult AddRow(string? json)
+        {
+            var landInventoryItems = JsonConvert.DeserializeObject<List<RealEstateDetailLandInventoryItem>>(json);
+            landInventoryItems.Add(new RealEstateDetailLandInventoryItem());
+            
+            return ViewComponent("RealEstateDetailLandInventories", landInventoryItems);
+        }
+
+        public IActionResult RemoveRow(string? json, int index)
+        {
+            var landInventoryItems = JsonConvert.DeserializeObject<List<RealEstateDetailLandInventoryItem>>(json);
+            landInventoryItems.RemoveAt(index);
+
+            return ViewComponent("RealEstateDetailLandInventories", landInventoryItems);
         }
 
         // GET: RealEstateDetails/Delete/5
@@ -205,6 +249,53 @@ namespace MyProject.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> AppendixIndex(int id)
+        {
+            var realEstateDetail = await _context.RealEstateDetail.Include(d => d.AppendixItems).FirstOrDefaultAsync(x => x.Id == id);
+            ViewBag.RealEstateDetailId = id;
+            //ViewBag.RealEstateDetailName = realEstateDetail.CaseName;
+
+            return View(realEstateDetail.AppendixItems);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AppendixCreate(int realEstateDetailId, string name, IFormFile file)
+        {
+            if (file is not null)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    string s = Convert.ToBase64String(fileBytes);
+
+                    _context.Add(new RealEstateDetailAppendixItem { RealEstateDetailId = realEstateDetailId, Name = name, Base64 = s });
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AppendixIndex), new { Id = realEstateDetailId });
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> AppendixDelete(int realEstateDetailId, int id)
+        {
+            if (_context.RealEstateDetailAppendixItem == null)
+            {
+                return Problem("");
+            }
+            var appendixItem = await _context.RealEstateDetailAppendixItem.FindAsync(id);
+            if (appendixItem != null)
+            {
+                _context.RealEstateDetailAppendixItem.Remove(appendixItem);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AppendixIndex), new { Id = realEstateDetailId });
         }
 
         public async Task<ContentResult?> CreatePdf(int? id)

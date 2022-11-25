@@ -233,11 +233,11 @@ namespace MyProject.Controllers
 
         public async Task<IActionResult> AppendixIndex(int id)
         {
-            var caseSouce = await _context.CaseSource.Include(d => d.AppendixItems).FirstOrDefaultAsync(x => x.Id == id);
+            var caseSource = await _context.CaseSource.Include(d => d.AppendixItems).FirstOrDefaultAsync(x => x.Id == id);
             ViewBag.CaseSourceId = id;
-            ViewBag.CaseSourceName = caseSouce.CaseName;
+            ViewBag.CaseSourceName = caseSource.CaseName;
 
-            return View(caseSouce.AppendixItems);
+            return View(caseSource.AppendixItems);
         }
 
         [HttpPost]

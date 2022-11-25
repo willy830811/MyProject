@@ -30,5 +30,7 @@ namespace MyProject.Data
         public DbSet<CaseSource> CaseSource { get; set; }
 
         public DbSet<AppendixItem> AppendixItem { get; set; }
+
+        public DbSet<RealEstateDetailAppendixItem> RealEstateDetailAppendixItem { get; set; }
     }
 }

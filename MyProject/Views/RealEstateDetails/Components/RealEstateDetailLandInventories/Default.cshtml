@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model MyProject.ViewModels.RealEstateDetailViewModel
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].SectionName" class="control-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].PlaceNumber" class="control-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].AreaInSquareMeter" class="control-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].AreaInPing" class="control-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].Hold" class="control-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].PresentValue" class="control-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].UseSection" class="control-label"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.LandInventoryItems[0].Note" class="control-label"></label>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@if (Model is not null && Model.LandInventoryItems is not null && Model.LandInventoryItems.Count > 1)
+{
+    @for (int i = 0; i < Model.LandInventoryItems.Count(); i++)
+    {
+        <tr id=@("LandInventoryItem" + i) class="alert alert-light">
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].SectionName" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].PlaceNumber" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].AreaInSquareMeter" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].AreaInPing" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].Hold" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].PresentValue" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].UseSection" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[i].Note" class="form-control" />
+            </td>
+            <td>
+                <a class="btn btn-primary" onclick="realEstateDetailRemoveRow(@i)">－</a>
+            </td>
+        </tr>
+    }
+}
+else
+{
+        <tr id=@("LandInventoryItem0") class="alert alert-light">
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].SectionName" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].PlaceNumber" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].AreaInSquareMeter" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].AreaInPing" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].Hold" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].PresentValue" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].UseSection" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model.LandInventoryItems[0].Note" class="form-control" />
+            </td>
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

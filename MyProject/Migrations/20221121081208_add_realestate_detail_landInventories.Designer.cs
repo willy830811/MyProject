@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20221121081208_add_realestate_detail_landInventories")]
+    partial class add_realestate_detail_landInventories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,36 +270,6 @@ namespace MyProject.Migrations
                     b.HasIndex("CaseSourceId");
 
                     b.ToTable("AppendixItem");
-                });
-
-            modelBuilder.Entity("MyProject.Models.Items.RealEstateDetailAppendixItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("AppendixType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Base64")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Format")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RealEstateDetailId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RealEstateDetailId");
-
-                    b.ToTable("RealEstateDetailAppendixItem");
                 });
 
             modelBuilder.Entity("MyProject.Models.Owner", b =>
@@ -616,6 +588,12 @@ namespace MyProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AppendicesNames")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("Area")
+                        .HasColumnType("real");
+
                     b.Property<string>("BanningBuildByKeepSoilLawRestrictions")
                         .HasColumnType("nvarchar(max)");
 
@@ -632,6 +610,9 @@ namespace MyProject.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("ChooseManageType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompulsoryAcquisitionArea")
@@ -847,6 +828,9 @@ namespace MyProject.Migrations
                     b.Property<string>("NonUrbanLandType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ObjectName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("OccupiedWithoutRightsStatus")
                         .HasColumnType("nvarchar(max)");
 
@@ -892,6 +876,9 @@ namespace MyProject.Migrations
                     b.Property<string>("PaymentMethod")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PlaceNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PolutedAreaRestrictions")
                         .HasColumnType("nvarchar(max)");
 
@@ -905,6 +892,9 @@ namespace MyProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RealEstateBroker")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegisteredManager")
@@ -925,7 +915,13 @@ namespace MyProject.Migrations
                     b.Property<string>("RestrictingRegistrationType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RightsScope")
+                        .HasColumnType("int");
+
                     b.Property<string>("RiverRegionRestrictions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Section")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SettingOtherRightsType")
@@ -933,6 +929,9 @@ namespace MyProject.Migrations
 
                     b.Property<float?>("StampDuty")
                         .HasColumnType("real");
+
+                    b.Property<string>("Subsection")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surroundings")
                         .HasColumnType("nvarchar(max)");
@@ -989,23 +988,7 @@ namespace MyProject.Migrations
                     b.Navigation("CaseSource");
                 });
 
-            modelBuilder.Entity("MyProject.Models.Items.RealEstateDetailAppendixItem", b =>
-                {
-                    b.HasOne("MyProject.Models.RealEstateDetail", "RealEstateDetail")
-                        .WithMany("AppendixItems")
-                        .HasForeignKey("RealEstateDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RealEstateDetail");
-                });
-
             modelBuilder.Entity("MyProject.Models.CaseSource", b =>
-                {
-                    b.Navigation("AppendixItems");
-                });
-
-            modelBuilder.Entity("MyProject.Models.RealEstateDetail", b =>
                 {
                     b.Navigation("AppendixItems");
                 });

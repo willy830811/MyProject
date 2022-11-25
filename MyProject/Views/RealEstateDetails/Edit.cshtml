@@ -17,67 +17,17 @@
     <div class="col-md-10">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div>
-                <span>物件名稱：</span>
-                <div class="form-group">
-                    <input asp-for="ObjectName" class="form-control" />
-                    <span asp-validation-for="ObjectName" class="text-danger"></span>
-                </div>
-            </div>
 
             <h5>一、標示及權利範圍：</h5>
 
-            <div>
-                <span>(一) 坐落：</span>
-                <div class="form-group">
-                    <input asp-for="City" class="form-control" />
-                    <span asp-validation-for="City" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Region" class="form-control" />
-                    <span asp-validation-for="Region" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Section" class="form-control" />
-                    <span asp-validation-for="Section" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Subsection" class="form-control" />
-                    <span asp-validation-for="Subsection" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="PlaceNumber" class="form-control" />
-                    <span asp-validation-for="PlaceNumber" class="text-danger"></span>
-                </div>
-                <span>地號。</span>
+            <div id="event" class="form-group">
+                @await Component.InvokeAsync("RealEstateDetailLandInventories", "realEstateDetail")
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary" onclick="realEstateDetailAddRow()">＋</a>
             </div>
 
-            <div>
-                <span>(二) 面積：</span>
-                <div class="form-group">
-                    <input asp-for="Area" class="form-control" />
-                    <span asp-validation-for="Area" class="text-danger"></span>
-                </div>
-                <span>平方公尺。</span>
-            </div>
-
-            <div>
-                <span>(三) 權利範圍：</span>
-                <div class="form-group">
-                    <input asp-for="RightsScope" class="form-control" />
-                    <span asp-validation-for="RightsScope" class="text-danger"></span>
-                </div>
-                <span>。</span>
-            </div>
-
-            <div>
-                <span>(四) 地籍圖及土地相關位置略圖等，如附件</span>
-                <div class="form-group">
-                    <input asp-for="AppendicesNames" class="form-control" />
-                    <span asp-validation-for="AppendicesNames" class="text-danger"></span>
-                </div>
-                <span>。</span>
-            </div>
+            
 
             <h5>二、</h5>
 

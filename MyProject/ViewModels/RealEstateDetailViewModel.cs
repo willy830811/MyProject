@@ -1,4 +1,6 @@
 ﻿using MyProject.Models;
+using MyProject.Models.Items;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,6 +20,8 @@ namespace MyProject.ViewModels
 
         [Display(Name = "更新者")]
         public string? UpdateName { get; set; }
+
+        public List<RealEstateDetailLandInventoryItem>? LandInventoryItems { get; set; }
 
         //public List<MultipleChoiceItem> OtherRightsTypeMulti { get; set; }
         //public string[] OtherRightsTypeArr { get; set; }
@@ -48,15 +52,6 @@ namespace MyProject.ViewModels
         public RealEstateDetailViewModel(RealEstateDetail parent, List<ApplicationUser> users)
         {
             Id = parent.Id;
-            ObjectName = parent.ObjectName;
-            City = parent.City;
-            Region = parent.Region;
-            Section = parent.Section;
-            Subsection = parent.Subsection;
-            PlaceNumber = parent.PlaceNumber;
-            Area = parent.Area;
-            RightsScope = parent.RightsScope;
-            AppendicesNames = parent.AppendicesNames;
             IsLandOwner = parent.IsLandOwner;
             LandOwner = parent.LandOwner;
             IsOtherObligee = parent.IsOtherObligee;
@@ -186,6 +181,9 @@ namespace MyProject.ViewModels
             ChooseManageTypes = parent.ChooseManageType.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).Select(o => (ChooseManageType)o).ToArray();
             SurroundingsAppendiceTypes = parent.SurroundingsAppendiceType.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).Select(o => (SurroundingsAppendiceType)o).ToArray();
             Surroundingss = parent.Surroundings.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).Select(o => (Surroundings)o).ToArray();
+
+            LandInventoryItems = parent.LandInventories is not null ? JsonConvert.DeserializeObject<List<RealEstateDetailLandInventoryItem>>(parent.LandInventories) : null;
+            AppendixItems = parent.AppendixItems;
 
             CreateTime = parent.CreateTime;
             CreateId = parent.CreateId;

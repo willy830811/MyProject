@@ -59,4 +59,63 @@
             }
         })
     }
+
+    function realEstateDetailAddRow() {
+        var count = $("#event tr[id*='LandInventoryItem']").length;
+        var landInventoryItemsJson = "";
+
+        for (i = 0; i < count; i++) {
+            var item = "";
+
+            $("#event tr[id='LandInventoryItem" + i + "'] input").each(function () {
+
+                item += '"' + $(this).attr('name').split('.')[1] + '":"' + $(this).val() + '",';
+            });
+
+            item = '{' + item.slice(0, -1) + '},';
+
+            landInventoryItemsJson += item;
+        }
+
+        landInventoryItemsJson = '[' + landInventoryItemsJson.slice(0, -1) + ']';
+        console.log(landInventoryItemsJson);
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AddRow", "RealEstateDetails")',
+            data: { json: landInventoryItemsJson },
+            success: function (result) {
+                $("#event").empty();
+                $("#event").html(result);
+            }
+        })
+    }
+
+    function realEstateDetailRemoveRow(index) {
+        var count = $("#event tr[id*='LandInventoryItem']").length;
+        var landInventoryItemsJson = "";
+
+        for (i = 0; i < count; i++) {
+            var item = "";
+
+            $("#event tr[id='LandInventoryItem" + i + "'] input").each(function () {
+                item += '"' + $(this).attr('name').split('.')[1] + '":"' + $(this).val() + '",';
+            });
+
+            item = '{' + item.slice(0, -1) + '},';
+
+            landInventoryItemsJson += item;
+        }
+
+        landInventoryItemsJson = '[' + landInventoryItemsJson.slice(0, -1) + ']';
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("RemoveRow", "RealEstateDetails")',
+            data: { json: landInventoryItemsJson, index: index },
+            success: function (result) {
+                $("#event").empty();
+                $("#event").html(result);
+            }
+        })
+    }
 </script>

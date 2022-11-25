@@ -269,15 +269,6 @@ namespace MyProject.Models
                     context.RealEstateDetail.AddRange(
                         new RealEstateDetail
                         {
-                            ObjectName = "高級農田",
-                            City = "台北市",
-                            Region = "大安區",
-                            Section = "仁愛路",
-                            Subsection = "一段",
-                            PlaceNumber = "234號",
-                            Area = 123.45f,
-                            RightsScope = 123,
-                            AppendicesNames = "就是附件",
                             IsLandOwner = true,
                             LandOwner = "王大媽",
                             IsOtherObligee = true,

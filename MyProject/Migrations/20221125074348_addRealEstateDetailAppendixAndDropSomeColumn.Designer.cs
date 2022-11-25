@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyProject.Data;
 
@@ -11,9 +12,10 @@ using MyProject.Data;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(MyProjectContext))]
-    partial class MyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20221125074348_addRealEstateDetailAppendixAndDropSomeColumn")]
+    partial class addRealEstateDetailAppendixAndDropSomeColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -992,7 +994,7 @@ namespace MyProject.Migrations
             modelBuilder.Entity("MyProject.Models.Items.RealEstateDetailAppendixItem", b =>
                 {
                     b.HasOne("MyProject.Models.RealEstateDetail", "RealEstateDetail")
-                        .WithMany("AppendixItems")
+                        .WithMany("AppendixList")
                         .HasForeignKey("RealEstateDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1007,7 +1009,7 @@ namespace MyProject.Migrations
 
             modelBuilder.Entity("MyProject.Models.RealEstateDetail", b =>
                 {
-                    b.Navigation("AppendixItems");
+                    b.Navigation("AppendixList");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using MyProject.Models.Items;
+using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
 using System.Xml.Linq;
@@ -9,32 +10,9 @@ namespace MyProject.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "物件名稱")]
-        public string? ObjectName { get; set; }
+        public string? LandInventories { get; set; }
 
-        [Display(Name = "縣市")]
-        public string? City { get; set; }
-
-        [Display(Name = "區域")]
-        public string? Region { get; set; }
-
-        [Display(Name = "大地段")]
-        public string? Section { get; set; }
-
-        [Display(Name = "小地段")]
-        public string? Subsection { get; set; }
-
-        [Display(Name = "地號")]
-        public string? PlaceNumber { get; set; }
-
-        [Display(Name = "面積")]
-        public float? Area { get; set; }
-
-        [Display(Name = "權利範圍")]
-        public int? RightsScope { get; set; }
-
-        [Display(Name = "附件名稱")]
-        public string? AppendicesNames { get; set; }
+        public List<RealEstateDetailAppendixItem> AppendixItems { get; set; }
 
         [Display(Name = "土地所有權人?")]
         public bool IsLandOwner { get; set; } = false;
